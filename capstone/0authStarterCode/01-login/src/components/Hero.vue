@@ -13,3 +13,12 @@ export default {
   name: "HeroContent"
 };
 </script>
+
+<style>
+
+/* Below is for Phone View */
+@media only screen and (max-width: 767px){
+  
+
+}
+</style>
