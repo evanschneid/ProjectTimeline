@@ -9,5 +9,5 @@ WHERE datname = 'project_time_db';
 
 DROP DATABASE project_time_db;
 
-DROP USER final_capstone_owner;
-DROP USER final_capstone_appuser;
+--DROP USER final_capstone_owner;
+--DROP USER final_capstone_appuser;
