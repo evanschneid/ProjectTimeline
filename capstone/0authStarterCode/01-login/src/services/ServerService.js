@@ -5,11 +5,11 @@ export default {
     getAllProjects() {
         return axios.get("/projects");
     },
-    getProject() {
+    getProject(id) {
         return axios.get("/projects/${id}");
     },
     addProject() {
-        return axios.push("/addProject", project);
+        return axios.post("/projects", project);
     },
     updateProject() {
         return axios.put("/editProject", project);
