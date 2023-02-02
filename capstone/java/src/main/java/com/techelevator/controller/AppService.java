@@ -10,11 +10,15 @@ import com.techelevator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/")
 public class AppService {
+
+        final String url = "http://localhost9000";
 
         @Autowired
         private JdbcUserDao userDao;
@@ -32,6 +36,11 @@ public class AppService {
         public User login(@RequestBody User user) {
             return userDao.login(user);
         }*/
+
+    @GetMapping(url + "/login")
+    public void redirectToGoogle(HttpServletResponse response) throws IOException {
+        response.sendRedirect("https://www.google.com");
+    }
 
         @GetMapping("/projects")
         public List<Project> getAllProjects() {
