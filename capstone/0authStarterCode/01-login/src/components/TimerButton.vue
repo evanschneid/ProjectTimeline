@@ -1,15 +1,44 @@
 <template>
+  
   <div>
     <p class="stop-watch">{{leadingZero(hours)}} : {{ leadingZero(minutes)}} : {{ leadingZero(seconds) }}</p>
     <!-- v-if added if we want to have the timer running on top of the button-->
-    <button class= "start" @click="startTimer" v-if ="!started">Start</button>
+    <v-btn class= "start" @click="startTimer" v-if ="!started">Start</v-btn>
     <!-- Stop can be used as a break for the user, does not reset timer, just stops so the user can do non project related things -->
-    <button class= "stop" @click="stopTimer" v-else>Pause</button>
+    <v-btn  class= "stop" @click="stopTimer" v-else>Pause</v-btn>
     <!-- Submit resets the timer. currently has no function other than resetting the timer to 0:0:0, but can be used to pop up an input later on  that will keep a record of the length
     and then the user can add a description about what work was done during the length of time. -->
-    <button class = "submit" @click="submitTimer">Submit</button>
+    
+    <v-dialog v-model="dialog" max-width = "600">
+      <template v-slot:activator="{ on, attrs }">
+      <v-btn v-bind="attrs" v-on="on" class ="submit" @click="submitTimer">Submit</v-btn> <!-- --> 
+      </template>
+      <v-card>
+        <v-card-title>
+          <h2> Add New Work Log</h2>
+        </v-card-title>
+        <v-card-text>
+          Time Started: {{this.startTime}}
+        </v-card-text>
+        <v-card-text>
+          Time Ended: {{this.endTime}}
+        </v-card-text>
+        <v-card-text>
+          Time Worked: {{this.totalTime}} hours
+        </v-card-text>
+        <v-card-text>
+          <v-form class="px-3">
+              <v-textarea label="Comments" v-model="content"></v-textarea>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    
+    
+    </v-dialog>  
+    
+ </div>
 
-  </div>
+  
 </template>
 
 <script>
@@ -22,6 +51,8 @@ export default {
       seconds: 0,
       timer: null,
       started: false,
+      startTime:'',
+      endTime:'',
       totalTime: 0
     };
   },
@@ -29,6 +60,7 @@ export default {
     //method used to start the timer when a user presses the button
     startTimer() {
       //started boolean changed to true in order to use v-if in template section
+      this.startTime = this.getTime();
       this.started = true;  
       //set interval used to repeatedly run the function in 1000 milisecond intervals
       this.timer = setInterval(() => {
@@ -59,6 +91,7 @@ export default {
     //all time variables are set back to 0 and a timeLog that saves the length time worked
     //to the nearest quater of an hour
     submitTimer() {
+      this.endTime = this.getTime();
       this.started = false;
       clearInterval(this.timer);
       this.totalTime = this.hours + (this.minutes - (this.minutes % 15) + (this.minutes % 15 >= 8 ? 15 : 0))/60;
@@ -69,6 +102,9 @@ export default {
     //when the time values are less than 10, there is a leading 0, just as a clock
      leadingZero(value) {
       return value < 10 ? `0${value}` : value;
+    },
+    getTime() {
+      return new Date().toLocaleString();
     }
   },
 };
@@ -151,8 +187,4 @@ export default {
 .stop-watch {
     font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
-
-
-
-
 </style>
