@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.techelevator.dao.UserDao;
-import com.techelevator.security.jwt.JWTFilter;
-import com.techelevator.security.jwt.TokenProvider;
+import com.techelevator.Old.security.jwt.JWTFilter;
+import com.techelevator.Old.security.jwt.TokenProvider;
 
 @RestController
 @CrossOrigin
