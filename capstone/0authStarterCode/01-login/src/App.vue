@@ -14,17 +14,20 @@
         <a href="https://auth0.com">Auth0</a>
       </p>
     </footer>
+    
   </div>
 </template>
 
 <script lang="ts">
 import NavBar from "./components/NavBar.vue";
 import Error from "./components/Error.vue";
+import projTile from "./components/Dashboard/ProjectTile.vue";
 
 export default {
   components: {
     NavBar,
-    Error
+    Error,
+    projTile
   }
 };
 </script>
