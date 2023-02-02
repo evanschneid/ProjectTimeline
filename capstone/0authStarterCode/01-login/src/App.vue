@@ -20,12 +20,11 @@
 <script lang="ts">
 import Error from "./components/Error.vue";
 import FooterNavBar from './components/FooterNavBar.vue';
-import LandingPageNav from './components/Landing Page/LandingPageNav.vue';
+// import projTile from "./components/Dashboard/ProjectTile.vue";
 
 export default {
   components: {
     Error,
-    LandingPageNav,
     FooterNavBar
   }
 };
