@@ -7,18 +7,18 @@ import com.techelevator.model.Project;
 import com.techelevator.model.Report;
 import com.techelevator.model.Task;
 import com.techelevator.model.User;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+//@RequestMapping("/")
 public class AppService {
 
-        final String url = "http://localhost9000";
+        final String url = "http://localhost:9000";
 
         @Autowired
         private JdbcUserDao userDao;
@@ -37,8 +37,9 @@ public class AppService {
             return userDao.login(user);
         }*/
 
-    @GetMapping(url + "/login")
+    @GetMapping("/login")
     public void redirectToGoogle(HttpServletResponse response) throws IOException {
+        System.out.println("TESTING");
         response.sendRedirect("https://www.google.com");
     }
 
