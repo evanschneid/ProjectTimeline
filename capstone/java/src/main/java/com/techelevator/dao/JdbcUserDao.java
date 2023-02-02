@@ -22,24 +22,17 @@ public class JdbcUserDao implements UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+
     @Override
-    public int findIdByUsername(String username) {
-        if (username == null) throw new IllegalArgumentException("Username cannot be null");
+    public void insertUser(User user) {
 
-        int userId;
-        try {
-            userId = jdbcTemplate.queryForObject("select user_id from users where username = ?", int.class, username);
-        } catch (EmptyResultDataAccessException e) {
-            throw new UsernameNotFoundException("User " + username + " was not found.");
-        }
-
-        return userId;
     }
 
-	@Override
-	public User getUserById(int userId) {
+    @Override
+	public User getUserById(int id) {
 		String sql = "SELECT * FROM users WHERE user_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
 		if (results.next()) {
 			return mapRowToUser(results);
 		} else {
@@ -48,7 +41,27 @@ public class JdbcUserDao implements UserDao {
 	}
 
     @Override
-    public List<User> findAll() {
+    public void updateUser(User user) {
+
+    }
+
+    @Override
+    public void deleteUser(int id) {
+
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public boolean createUser() {
+        return false;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String sql = "select * from users";
 
@@ -61,7 +74,50 @@ public class JdbcUserDao implements UserDao {
         return users;
     }
 
-    @Override
+    private User mapRowToUser(SqlRowSet rs) {
+        User user = new User();
+        user.setId(rs.getInt("user_id"));
+        //user.setUsername(rs.getString("username"));
+        //user.setPassword(rs.getString("password_hash"));
+        //user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
+        user.setActivated(true);
+        return user;
+    }
+
+
+}
+
+
+
+
+//Previous Methods *******************************************************************
+
+/*@Override
+    public int findIdByUsername(String username) {
+        if (username == null) throw new IllegalArgumentException("Username cannot be null");
+
+        int userId;
+        try {
+            userId = jdbcTemplate.queryForObject("select user_id from users where username = ?", int.class, username);
+        } catch (EmptyResultDataAccessException e) {
+            throw new UsernameNotFoundException("User " + username + " was not found.");
+        }
+
+        return userId;
+    }*/
+
+//    @Override
+//    public boolean create(String username, String role) {
+//        String insertUserSql = "insert into users (username,password_hash,role) values (?,?,?)";
+//        //String password_hash = new BCryptPasswordEncoder().encode(password);
+//        String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
+//
+//        return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
+//    }
+
+
+/*
+@Override
     public User findByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
 
@@ -73,22 +129,10 @@ public class JdbcUserDao implements UserDao {
         throw new UsernameNotFoundException("User " + username + " was not found.");
     }
 
-    @Override
-    public boolean create(String username, String password, String role) {
-        String insertUserSql = "insert into users (username,password_hash,role) values (?,?,?)";
-        String password_hash = new BCryptPasswordEncoder().encode(password);
-        String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
+ */
 
-        return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
-    }
+ /*
 
-    private User mapRowToUser(SqlRowSet rs) {
-        User user = new User();
-        user.setId(rs.getInt("user_id"));
-        user.setUsername(rs.getString("username"));
-        user.setPassword(rs.getString("password_hash"));
-        user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
-        user.setActivated(true);
-        return user;
-    }
 }
+
+     */
