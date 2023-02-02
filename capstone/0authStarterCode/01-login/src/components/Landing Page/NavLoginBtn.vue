@@ -1,15 +1,14 @@
 <template>
   <div class="nav-container">
     <!-- <nav class="navbar navbar-expand-md navbar-light bg-light"> -->
-      <!-- <div class="container"> -->
+      <div class="container">
         <div class="navbar-nav d-md-none" v-if="!isAuthenticated && !isLoading">
-            <button id="qsLoginBtn" class="btn btn-primary btn-block" @click="login">Log in</button>
+            <button  @click="login">Log in</button>
         </div>
-        <!-- <div>
-            <button><font-awesome-icon icon="fa-house" /></i>log in</button>
-        </div> -->
-
-      <!-- </div> -->
+        <!-- <a id="qsLogoutBtn" href="#" class="dropdown-item" @click.prevent="logout">
+                  <font-awesome-icon class="mr-3" icon="power-off" />Log out
+                </a>  -->
+      </div>
     <!-- </nav> -->
   </div>
 </template>
@@ -44,7 +43,6 @@ export default {
 
 @media only screen and (min-width: 768px){
     .nav-container {
-        background-color: white;
         overflow: hidden;
         position: fixed;
         top: 0;
@@ -54,7 +52,6 @@ export default {
 
 @media only screen and (max-width: 767px){
     .nav-container {
-        background-color: white;
         overflow: hidden;
         position: sticky;
         bottom: 0;
@@ -62,11 +59,11 @@ export default {
         
     }
 
-    .navbar-nav {
-        background-color: black;
-        border: 500px;
+    #qsLoginBtn {
+        background-color: white;
+        height: 4em;
+        width: 100%;
     }
-
 
 }
 </style>

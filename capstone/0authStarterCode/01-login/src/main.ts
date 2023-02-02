@@ -10,13 +10,13 @@ import hljs from 'highlight.js/lib/core';
 import json from 'highlight.js/lib/languages/json';
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import "highlight.js/styles/github.css";
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faList, faTable } from '@fortawesome/free-solid-svg-icons';
 
 hljs.registerLanguage('json', json);
 
 const app = createApp(App);
 
-library.add(faLink, faUser, faPowerOff, faHouse);
+library.add(faLink, faUser, faPowerOff, faHouse, faList, faTable);
 
 app
   .use(hljsVuePlugin)

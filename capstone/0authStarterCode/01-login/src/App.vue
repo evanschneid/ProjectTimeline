@@ -20,7 +20,6 @@
 <script lang="ts">
 import Error from "./components/Error.vue";
 import FooterNavBar from './components/FooterNavBar.vue';
-// import projTile from "./components/Dashboard/ProjectTile.vue";
 
 export default {
   components: {
