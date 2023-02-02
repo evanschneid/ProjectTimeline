@@ -5,6 +5,7 @@ import { createAuthGuard } from "@auth0/auth0-vue";
 import { App } from 'vue';
 import { faDashboard } from "@fortawesome/free-solid-svg-icons";
 
+
 export function createRouter(app: App): Router {
   return createVueRouter({
     routes: [
