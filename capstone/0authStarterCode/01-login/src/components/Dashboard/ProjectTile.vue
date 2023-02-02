@@ -1,10 +1,10 @@
 <template>
   <div>  <!-- body & header -->
-      <button class="projTile" v-for="projectID in projList" v-bind:key="projectID"> <!-- need to add v-on:click -->
+      <v-card class="projTile" v-for="projectID in projList" v-bind:key="projectID"> <!-- need to add v-on:click -->
         <p>Project #: {{projectID}}</p>
         <p>{{projectTitle}}</p>
         <p>Due Date: {{projectDueDate}}</p>
-      </button>
+      </v-card>
   </div>
 </template>
 

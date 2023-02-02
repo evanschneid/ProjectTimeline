@@ -5,13 +5,10 @@
     <p class="lead">
       Start organizing your projects now
     </p>
-    <projTile />
-    {{projTile}}
   </div>
 </template>
 
 <script lang="ts">
-import projTile from '../components/Dashboard/ProjectTile.vue';
 
 export default {
   name: "HeroContent"
