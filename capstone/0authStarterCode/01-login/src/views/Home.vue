@@ -29,4 +29,9 @@ export default {
 .next-steps .fa-link {
     margin-right: 5px;
 }
+
+body {
+  display: grid;
+  
+}
 </style>
