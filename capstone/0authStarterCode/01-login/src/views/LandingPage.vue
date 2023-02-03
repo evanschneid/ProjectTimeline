@@ -1,6 +1,7 @@
 <template>
   <div class="nav-container">
     <hero />
+    
   </div>
 </template>
 

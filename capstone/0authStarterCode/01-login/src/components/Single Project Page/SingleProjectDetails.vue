@@ -1,15 +1,20 @@
 <template>
   <div>
     <head>Project Details</head>
-    <v-card>
-      
+    <v-card max-width="400" class="mx-auto">
+      <v-app-bar dark color="pink">
+        <v-toolbar-title>Selected Project</v-toolbar-title>
+        <v-spacer></v-spacer>
+
+      </v-app-bar>
     </v-card>
+    <v-card>
 
       <v-card class="projTile"
       v-for="project in projCards"
       v-bind:key="project">
           <project-tile />
-      </v-card>
+    </v-card>
   </div>
 </template>
 
