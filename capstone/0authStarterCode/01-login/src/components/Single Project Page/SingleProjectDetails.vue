@@ -1,5 +1,6 @@
 <template>
   <div>
+    <head>Project Details</head>
     <v-card>
       
     </v-card>
