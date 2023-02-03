@@ -1,6 +1,6 @@
 <template>
   <div class="nav-container">
-      <div>
+      <div class="login-btn-container">
           <nav-login-btn />
       </div> 
       <div class="main-btn-container" v-if="isAuthenticated"> 
@@ -49,9 +49,6 @@ export default {
         position: sticky;
         bottom: 0;
         width: 100%;
- 
-        /* margin-top: 5%;
-        border-top: 5%; */
     }
 
     .main-btn-list {
