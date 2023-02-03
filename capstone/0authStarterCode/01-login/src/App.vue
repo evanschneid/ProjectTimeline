@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="d-flex flex-column h-100">
-    <nav-bar />
     <div class="container flex-grow-1">
       <error />
       <div class="mt-5">
@@ -14,20 +13,18 @@
         <a href="https://auth0.com">Auth0</a>
       </p>
     </footer>
-    
+    <footer-nav-bar />
   </div>
 </template>
 
 <script lang="ts">
-import NavBar from "./components/NavBar.vue";
 import Error from "./components/Error.vue";
-import projTile from "./components/Dashboard/ProjectTile.vue";
+import FooterNavBar from './components/FooterNavBar.vue';
 
 export default {
   components: {
-    NavBar,
     Error,
-    projTile
+    FooterNavBar
   }
 };
 </script>
