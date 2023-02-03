@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <button class="homeBtn"><font-awesome-icon icon="fa-table" size="2x" /></button>
+            <button class="homeBtn"><font-awesome-icon icon="fa-table" size="3x" /></button>
         </div>
     </div>
 </template>
@@ -27,6 +27,7 @@ export default {
         background-color: white;
         height: 4em;
         width: 100%;
+        border-radius: 10px;
     }
 
 

@@ -27,6 +27,7 @@ export default {
         background-color: white;
         height: 4em;
         width: 100%;
+        border-radius: 10px;
     }
 
 

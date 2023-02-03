@@ -56,7 +56,6 @@ export default {
         position: sticky;
         bottom: 0;
         width: 100%;
-        
     }
 
     #qsLoginBtn {
