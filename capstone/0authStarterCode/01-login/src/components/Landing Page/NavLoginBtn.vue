@@ -7,7 +7,7 @@
         </div>
         <a id="qsLogoutBtn" href="#" class="dropdown-item" @click.prevent="logout">
                   <font-awesome-icon class="mr-3" icon="power-off" />Log out
-                </a>  
+                </a>
       </div>
     <!-- </nav> -->
   </div>
@@ -15,6 +15,8 @@
 
 <script>
 import { useAuth0 } from '@auth0/auth0-vue';
+import axios from 'axios';
+
 export default {
     name: "NavBar",
     setup() {
@@ -24,8 +26,12 @@ export default {
             isAuthenticated: auth0.isAuthenticated,
             isLoading: auth0.isLoading,
             user: auth0.user,
-            login() {
-                auth0.loginWithRedirect();
+            async login() {
+                await auth0.loginWithRedirect();
+                if (auth0.isAuthenticated) {
+                    const { email } = auth0.user;
+                    await axios.post('http://localhost:9000/user', { email });
+                }
             },
             logout() {
                 auth0.logout({
