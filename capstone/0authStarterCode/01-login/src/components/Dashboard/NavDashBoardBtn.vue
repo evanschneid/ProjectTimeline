@@ -1,7 +1,7 @@
 <template>
   <div>
         <div>
-            <button class="homeBtn"><font-awesome-icon icon="fa-house" size="2x" /></button>
+            <button class="homeBtn"><font-awesome-icon icon="fa-house" size="3x" /></button>
         </div>
   </div>
 </template>
