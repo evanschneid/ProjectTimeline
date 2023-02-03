@@ -5,9 +5,9 @@
         <div class="navbar-nav d-md-none" v-if="!isAuthenticated && !isLoading">
             <button  @click="login">Log in</button>
         </div>
-        <!-- <a id="qsLogoutBtn" href="#" class="dropdown-item" @click.prevent="logout">
+        <a id="qsLogoutBtn" href="#" class="dropdown-item" @click.prevent="logout">
                   <font-awesome-icon class="mr-3" icon="power-off" />Log out
-                </a>  -->
+                </a>  
       </div>
     <!-- </nav> -->
   </div>

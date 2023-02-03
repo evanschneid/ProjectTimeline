@@ -1,7 +1,8 @@
 <template>
     <div>
         <div>
-            <button class="homeBtn"><font-awesome-icon icon="fa-list" size="3x" /></button>
+            <router-link v-bind:to="{name: 'tasks'}"><button class="homeBtn"><font-awesome-icon icon="fa-list" size="3x" /></button></router-link>
+            
         </div>
     </div>
 </template>
