@@ -1,14 +1,6 @@
 <template>
   <div class="nav-container">
     <hero />
-    <!-- <hr /> -->
-    <!-- <main>
-      <h2>Projects</h2>
-      <proj-tile />
-      <h2>Tasks</h2>
-      <task-tile />
-    </main> -->
-    <!-- <home-content /> -->
   </div>
 </template>
 
