@@ -9,15 +9,16 @@
 </template>
 
 <script>
-import ProjectTile from './ProjectTile.vue'
+import ProjectTile from '../Dashboard/ProjectTile.vue'
+
 export default {
-    name: "projDetails",
+  components: { ProjectTile },
+  name: "projDetails",
   data() {
     return {
       projCards:{}      
-    },
-  
-  components: { ProjectTile },
+    }
+  }
 
 }
 </script>
