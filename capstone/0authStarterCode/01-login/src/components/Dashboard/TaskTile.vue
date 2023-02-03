@@ -1,17 +1,17 @@
 <template>
   <div>  <!-- body & header -->
-      <v-card class="taskTile" v-for="task in taskCard" v-bind:key="task"> <!-- need to add v-on:click -->
+      <v-card class="taskTile"  v-bind:key="task"> <!-- need to add v-on:click -->
         <v-card-text>
           <p>Task #: {{taskCard.taskID}}</p>
-          <h2>{{taskCard.taskTitle}}</h2>
+          <h4>{{taskCard.taskTitle}}</h4>
           <p>Due date: {{taskCard.taskDueDate}}</p>
         </v-card-text>
       </v-card>
 
       <form>
         {{taskCard}}<br>
-        Task No.: <input type="text" v-model="taskCard.taskID" />
-        Task Title.: <input type="text" v-model="taskCard.taskTitle" />
+        Task No.: <input type="text" v-model="taskCard.taskID" /><br>
+        Task Title.: <input type="text" v-model="taskCard.taskTitle" /><br>
         Due Date: <input type="text" v-model="taskCard.taskDueDate" />
       </form>
   </div>

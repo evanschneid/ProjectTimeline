@@ -1,17 +1,17 @@
 <template>
   <div>  <!-- body & header -->
-      <v-card class="projTile" v-for="project in projCard" v-bind:key="project"> <!-- need to add v-on:click -->
+      <v-card class="projTile" v-bind:key="project"> <!-- need to add v-on:click -->
         <v-card-text>
           <p>Project #: {{projCard.projectID}}</p>
-          <h2>{{projCard.projectTitle}}</h2>
+          <h4>{{projCard.projectTitle}}</h4>
           <p>Due date: {{projCard.projectDueDate}}</p>
         </v-card-text>
       </v-card>
 
       <form>
         {{projCard}}<br>
-        Proj No.: <input type="text" v-model="projCard.projectID" />
-        Proj Title.: <input type="text" v-model="projCard.projectTitle" />
+        Proj No.: <input type="text" v-model="projCard.projectID" /><br>
+        Proj Title.: <input type="text" v-model="projCard.projectTitle" /><br>
         Due Date: <input type="text" v-model="projCard.projectDueDate" />
       </form>
   </div>
@@ -46,12 +46,12 @@ export default {
   margin: 5px;
   border: 5px;
   border-style: solid;
-  border-color: #78B2C6;
+  border-color: #F2D678;
   border-radius: 10%;
   width: 150px;
   height: 150px;
   background-color: #335974;
-  color: #78B2C6;
+  color: #F2D678;
 }
 
 #titleText {
