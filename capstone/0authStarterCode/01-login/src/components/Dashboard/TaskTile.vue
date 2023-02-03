@@ -2,7 +2,7 @@
   <div>  <!-- body & header -->
       <v-card class="taskTile"  v-bind:key="task"> <!-- need to add v-on:click -->
         <v-card-text>
-          <p>Task #: {{taskCard.taskID}}</p>
+          <!-- <p>Task #: {{taskCard.taskID}}</p> -->
           <h4>{{taskCard.taskTitle}}</h4>
           <p>Due date: {{taskCard.taskDueDate}}</p>
         </v-card-text>

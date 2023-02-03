@@ -23,7 +23,7 @@ export default {
 
 <style lang="css" scoped>
 
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 767px) {
   .nav-container {
     grid-template-columns: 1fr;
     padding: 20px;

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <v-card>
+      
+    </v-card>
+
       <v-card class="projTile"
       v-for="project in projCards"
       v-bind:key="project">
