@@ -2,17 +2,8 @@
   <div class="nav-container">
     <!-- <nav class="navbar navbar-expand-md navbar-light bg-light"> -->
       <div class="container">
-        
-        
         <div class="navbar-nav d-md-none" v-if="!isAuthenticated && !isLoading">
             <button  @click="login">Log in</button>
-            <!-- <h1> {{user.name}}</h1>  -->
-            <!-- <img
-                  :src="user.picture"
-                  alt="User's profile picture"
-                  class="nav-user-profile d-inline-block rounded-circle mr-3"
-                  width="50" v-if="isAuthenticated"
-                /> -->
         </div>
         
       </div>
