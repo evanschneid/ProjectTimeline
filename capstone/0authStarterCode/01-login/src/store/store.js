@@ -1,3 +1,4 @@
+import { setSourceMapRange } from 'typescript'
 import { createApp } from 'vue'
 import { createStore } from 'vuex'
 
@@ -5,13 +6,20 @@ import { createStore } from 'vuex'
 const store = createStore({
   state () {
     return {
+      user: {
+
+      },
       count: 0
     }
   },
   mutations: {
     increment (state) {
       state.count++
+    },
+    setUser (state, user) {
+      state.user = user
     }
+
   }
 })
 

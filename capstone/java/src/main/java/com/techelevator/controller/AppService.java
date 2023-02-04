@@ -6,45 +6,18 @@ import com.techelevator.dao.JdbcUserDao;
 import com.techelevator.model.Project;
 import com.techelevator.model.Report;
 import com.techelevator.model.Task;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import com.techelevator.model.User;
-//import org.springframework.beans.factory.annotation.Autowired;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-import java.net.http.HttpClient;
-import org.json.JSONObject;
-import java.util.List;
-import java.util.List;
-import java.util.ArrayList;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.Map;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-//@RequestMapping("/")
 public class AppService {
-
-        //final String url = "http://localhost:9000";
 
         @Autowired
         private JdbcUserDao userDao;
@@ -69,33 +42,51 @@ public class AppService {
         response.sendRedirect("https://www.google.com");
     }
 
+    @Autowired
+    private JdbcUserDao jdbcUserDao;
 
-
-
-        @GetMapping("/projects")
-        public List<Project> getAllProjects() {
-            return projectDao.getAllProjects();
+    @PostMapping("/user")
+    public ResponseEntity<String> createUser(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        User user = jdbcUserDao.findByEmail(email);
+        if (user == null) {
+            // Create a new user
+            user = new User();
+            user.setUserEmail(email);
+            user.setManager(true);
+            user.setActivated(true);
+            jdbcUserDao.save(user);
+            return ResponseEntity.ok("New user created with email: " + email);
+        } else {
+            return ResponseEntity.ok("User already exists with email: " + email);
         }
+    }
 
-        @GetMapping("/projects/{id}")
-        public Project getProjectById(@PathVariable int id) {
-            return projectDao.getProjectById(id);
-        }
 
-        @GetMapping("/tasks")
-        public List<Task> getAllTasks() {
-            return taskDao.getAllTasks();
-        }
+    @GetMapping("/projects")
+    public List<Project> getAllProjects() {
+        return projectDao.getAllProjects();
+    }
 
-        @GetMapping("/worklog")
-        public List<Report> getAllReports() {
-            return reportDao.getAllReports();
-        }
+    @GetMapping("/projects/{id}")
+    public Project getProjectById(@PathVariable int id) {
+        return projectDao.getProjectById(id);
+    }
 
-        @GetMapping("/worklog/{id}")
-        public Report getWorklogById(@PathVariable int id) {
-            return reportDao.getReportById(id);
-        }
+    @GetMapping("/tasks")
+    public List<Task> getAllTasks() {
+        return taskDao.getAllTasks();
+    }
+
+    @GetMapping("/worklog")
+    public List<Report> getAllReports() {
+        return reportDao.getAllReports();
+    }
+
+    @GetMapping("/worklog/{id}")
+    public Report getWorklogById(@PathVariable int id) {
+        return reportDao.getReportById(id);
+    }
 
     
 

@@ -1,10 +1,10 @@
 BEGIN TRANSACTION;
 
-INSERT INTO Users (userid, isManager, userEmail)
+INSERT INTO Users (isManager, userEmail, isActivated)
 VALUES
-    (1, true, 'manager1@example.com'),
-    (2, false, 'user1@example.com'),
-    (3, false, 'user2@example.com');
+    (true, 'manager1@example.com', true),
+    (false, 'user1@example.com', false),
+    (false, 'user2@example.com', true);
 
 INSERT INTO Project (projectid, projectTitle, projectDescription, projectImg, projectIsCompleted, projectDueDate, projectCompletionDate, userId, isShared)
 VALUES

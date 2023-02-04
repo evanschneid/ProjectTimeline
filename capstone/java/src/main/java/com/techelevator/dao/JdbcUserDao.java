@@ -1,11 +1,14 @@
 package com.techelevator.dao;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -54,6 +57,32 @@ public class JdbcUserDao implements UserDao {
     public User findByUsername(String username) {
         return null;
     }
+
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE useremail = ?";
+        List<User> users = jdbcTemplate.query(sql, new Object[] { email }, (rs, rowNum) -> {
+            User user = new User();
+            user.setId((rs.getInt("userid")));
+            user.setUserEmail(rs.getString("useremail"));
+            user.setManager(rs.getBoolean("ismanager"));
+            return user;
+        });
+        if (users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
+    }
+
+    public void save(User user) {
+        String sql = "INSERT INTO users (useremail, ismanager, isactivated) VALUES (?,?,?)";
+        jdbcTemplate.update(sql, user.getUserEmail(), user.isManager(), user.isActivated());
+    }
+
+
+
+
+
 
     @Override
     public boolean createUser() {
