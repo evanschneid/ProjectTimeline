@@ -17,9 +17,28 @@
 //import HomeContent from "../components/HomeContent.vue";
 import projTile from "../components/Dashboard/ProjectTile.vue";
 import TaskTile from '../components/Dashboard/TaskTile.vue';
+import axios from 'axios'
+import { useAuth0 } from '@auth0/auth0-vue';
 
 export default {
   name: "home-view",
+  setup() {
+  const auth0 = useAuth0()
+  //axios.post('http://localhost:9000/user', { email: '1@email.com' } )
+  axios.post('http://localhost:9000/user', { email: auth0.user.value.email} )
+
+      axios.get(`http://localhost:9000/user?email=${auth0.user.value.email}`)
+      .then(response => {
+      const { ismanager, isactivated } = response.data;
+      console.log(response.data)
+      console.log(`isManager: ${ismanager}`);
+      console.log(`isActivated: ${isactivated}`);
+      })
+      .catch(error => {
+      console.error(error);
+      });
+
+  },
   components: {
     //Hero,
     //HomeContent,

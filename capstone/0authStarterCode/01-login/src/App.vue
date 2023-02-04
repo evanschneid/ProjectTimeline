@@ -10,6 +10,7 @@
 import { useAuth0 } from '@auth0/auth0-vue';
 import FooterNavBar from './components/FooterNavBar.vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 export default {
   components: {
@@ -21,7 +22,7 @@ export default {
     
     if (auth0.isAuthenticated) {
       router.push('/projects');
-    }
+    } 
   }
 };
 </script>

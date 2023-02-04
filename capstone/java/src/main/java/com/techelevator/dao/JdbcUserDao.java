@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -31,6 +32,22 @@ public class JdbcUserDao implements UserDao {
     public void insertUser(User user) {
 
     }
+
+
+
+    public User getUserByEmail(String email) {
+        String sql = "SELECT ismanager, isactivated FROM users WHERE useremail = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, email);
+        if (results.next()) {
+            User user = new User();
+            user.setManager(results.getBoolean("ismanager"));
+            user.setActivated(results.getBoolean("isactivated"));
+            return user;
+        } else {
+            return null;
+        }
+    }
+
 
     @Override
 	public User getUserById(int id) {
@@ -78,6 +95,8 @@ public class JdbcUserDao implements UserDao {
         String sql = "INSERT INTO users (useremail, ismanager, isactivated) VALUES (?,?,?)";
         jdbcTemplate.update(sql, user.getUserEmail(), user.isManager(), user.isActivated());
     }
+
+
 
 
 
