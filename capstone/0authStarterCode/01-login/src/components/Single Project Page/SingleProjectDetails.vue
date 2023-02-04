@@ -1,6 +1,7 @@
 <template>
   <div>
-    <head>Project Details</head>
+    <div v-for="project in projList" v-bind:key="project">
+
     <v-card max-width="400" class="mx-auto">
       <v-app-bar dark color="pink">
         <v-toolbar-title>Selected Project</v-toolbar-title>
@@ -9,12 +10,14 @@
       </v-app-bar>
     </v-card>
     <v-card>
-
-      <v-card class="projTile"
-      v-for="project in projCards"
-      v-bind:key="project">
-          <project-tile />
-    </v-card>
+      <div class="topBar">Selected Project 2</div>
+      <font-awesome-icon icon="fa-regular fa-star" />
+      <v-card class="projDesc">
+        <h2>DESCRIPTION</h2>
+      <v-btn variant="outlined" id="taskBtn">
+        Project Tasks
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -26,7 +29,7 @@ export default {
   name: "projDetails",
   data() {
     return {
-      projCards:{}      
+      projList:[]     
     }
   }
 
@@ -34,6 +37,21 @@ export default {
 </script>
 
 <style>
+
+.projDesc {
+  display: flex;
+  flex-basis: 60%;
+  justify-content: flex-end;
+}
+
+.fa-solid fa-star {
+  display: flex;
+}
+
+#taskBtn {
+  width: 100%;
+  height: 75px;
+}
 
 .projTile {
   display: flex;
