@@ -1,6 +1,6 @@
 <template>
   <div class="nav-container">
-    <hero />
+    <!-- <hero /> -->
     <!-- <hr /> -->
     <main>
       <h2>Projects</h2>
@@ -13,16 +13,16 @@
 </template>
 
 <script lang="ts">
-import Hero from "../components/Hero.vue";
-import HomeContent from "../components/HomeContent.vue";
+//import Hero from "../components/Hero.vue";
+//import HomeContent from "../components/HomeContent.vue";
 import projTile from "../components/Dashboard/ProjectTile.vue";
 import TaskTile from '../components/Dashboard/TaskTile.vue';
 
 export default {
   name: "home-view",
   components: {
-    Hero,
-    HomeContent,
+    //Hero,
+    //HomeContent,
     projTile,
     TaskTile
   },

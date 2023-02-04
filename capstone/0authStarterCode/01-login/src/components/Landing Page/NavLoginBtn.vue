@@ -2,12 +2,19 @@
   <div class="nav-container">
     <!-- <nav class="navbar navbar-expand-md navbar-light bg-light"> -->
       <div class="container">
+        
+        
         <div class="navbar-nav d-md-none" v-if="!isAuthenticated && !isLoading">
             <button  @click="login">Log in</button>
+            <!-- <h1> {{user.name}}</h1>  -->
+            <!-- <img
+                  :src="user.picture"
+                  alt="User's profile picture"
+                  class="nav-user-profile d-inline-block rounded-circle mr-3"
+                  width="50" v-if="isAuthenticated"
+                /> -->
         </div>
-        <a id="qsLogoutBtn" href="#" class="dropdown-item" @click.prevent="logout">
-                  <font-awesome-icon class="mr-3" icon="power-off" />Log out
-                </a>
+        
       </div>
     <!-- </nav> -->
   </div>
@@ -15,6 +22,8 @@
 
 <script lang="ts">
 import { useAuth0 } from '@auth0/auth0-vue';
+import axios from 'axios';
+
 
 export default {
   name: "NavBar",
@@ -27,14 +36,8 @@ export default {
       user: auth0.user,
       login() {
         auth0.loginWithRedirect();
-      },
-      logout() {
-        auth0.logout({
-          logoutParams: {
-            returnTo: window.location.origin
-          }
-        });
-      }
+            },
+      
     }
   }
 };
@@ -42,14 +45,14 @@ export default {
 
 <style>
 
-@media only screen and (min-width: 768px){
+/* @media only screen and (min-width: 768px){
     .nav-container {
         overflow: hidden;
         position: fixed;
         top: 0;
         width: 100%;
     }
-}
+} */
 
 @media only screen and (max-width: 767px){
     .nav-container {
