@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-container">
+  <div id="footer">
       <div class="login-btn-container">
           <nav-login-btn />
       </div> 
@@ -43,10 +43,10 @@ export default {
 <style>
 @media only screen and (max-width: 767px){
 
-    .nav-container {
+    #footer {
         background-color: #78b2c6;
         overflow: hidden;
-        position: sticky;
+        position: fixed;
         bottom: 0;
         width: 100%;
     }
@@ -61,7 +61,8 @@ export default {
     }
 
     .main-btn {
-        border: 3px solid #78b2c6;
+        border: 1px solid black;
+        border-radius: 10px;
         flex: auto;
         list-style: none;
         height: auto;
