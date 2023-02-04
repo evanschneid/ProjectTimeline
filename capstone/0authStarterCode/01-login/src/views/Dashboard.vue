@@ -1,6 +1,6 @@
 <template>
   <div class="nav-container">
-    <hero />
+    <!-- <hero /> -->
     <!-- <hr /> -->
     <main>
       <h2>Projects</h2>
@@ -13,16 +13,77 @@
 </template>
 
 <script lang="ts">
-import Hero from "../components/Hero.vue";
-import HomeContent from "../components/HomeContent.vue";
+//import Hero from "../components/Hero.vue";
+//import HomeContent from "../components/HomeContent.vue";
 import projTile from "../components/Dashboard/ProjectTile.vue";
 import TaskTile from '../components/Dashboard/TaskTile.vue';
+import axios from 'axios'
+import { useAuth0 } from '@auth0/auth0-vue';
+import router from 'vue-router'; 
+import { useRouter } from 'vue-router';
 
 export default {
   name: "home-view",
+  setup() {
+      const auth0 = useAuth0()
+
+
+      axios.post('http://localhost:9000/user', { email: auth0.user.value.email} )
+
+      //Moving on for now but when a new user registers it needs to do a get request. The get request will fail.
+      //The code should restart the browswer and do the get request again. 
+      //This time the get request will work and pull their credentials from the database
+      
+      axios.get(`http://localhost:9000/user?email=${auth0.user.value.email}`)
+      .then(response => {
+      const { ismanager, isactivated } = response.data;
+      if(response.data == null){
+        window.location.reload();
+      }
+      
+      console.log(response.data)
+      console.log(`isManager: ${ismanager}`);
+      console.log(`isActivated: ${isactivated}`);
+      
+      if (!isactivated) {
+        console.log("User is not activated, logging out");
+        auth0.logout({ logoutParams: {
+                returnTo: window.location.origin
+                }})
+        //const router = useRouter();
+        //router.push('http://localhost:3000');
+      } else if (!ismanager) {
+          console.log("User is not a manager, getting projects/id");
+      } else {
+          console.log("User is a manager, getting ALL projects");
+          axios.get('http://localhost:9000/projects')
+          .then(response => {
+          console.log(response.data);
+          })
+          .catch(error => {
+          console.error(error);
+          });
+      }
+      })
+      .catch(error => {
+      console.error(error);
+      });
+
+      
+      
+  
+      
+      
+    
+
+
+      
+      
+
+  },
   components: {
-    Hero,
-    HomeContent,
+    //Hero,
+    //HomeContent,
     projTile,
     TaskTile
   },

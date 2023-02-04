@@ -8,12 +8,15 @@ import com.techelevator.model.Report;
 import com.techelevator.model.Task;
 import com.techelevator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.client.RestTemplate;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -62,6 +65,18 @@ public class AppService {
         }
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<Map<String, Object>> getUserByEmail(@RequestParam("email") String email) {
+        User user = jdbcUserDao.getUserByEmail(email);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            Map<String, Object> response = new HashMap<>();
+            response.put("ismanager", user.isManager());
+            response.put("isactivated", user.isActivated());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
 
     @GetMapping("/projects")
     public List<Project> getAllProjects() {

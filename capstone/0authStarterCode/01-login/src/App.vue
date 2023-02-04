@@ -18,15 +18,40 @@
   </div>
   <footer-nav-bar />
 </template>
-
 <script lang="ts">
-import Error from "./components/Error.vue";
+import { useAuth0 } from '@auth0/auth0-vue';
 import FooterNavBar from './components/FooterNavBar.vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 export default {
   components: {
-    Error,
     FooterNavBar
+  },
+  setup() {
+    const auth0 = useAuth0();
+    const router = useRouter();
+    
+    if (auth0.isAuthenticated) {
+      router.push('/projects');
+    } 
   }
 };
 </script>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+
+#app {
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.mt-5 {
+  margin-top: 0%;
+}
+</style>

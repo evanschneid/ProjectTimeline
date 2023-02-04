@@ -26,7 +26,7 @@ app
       domain: authConfig.domain,
       clientId: authConfig.clientId,
       authorizationParams: {
-        redirect_uri: window.location.origin,
+        redirect_uri: 'http://localhost:3000/projects',
       }
     })
   )
