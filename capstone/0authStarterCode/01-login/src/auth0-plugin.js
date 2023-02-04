@@ -17,12 +17,15 @@
   *  Vue.js Instance Initialization
   */
  
- export const useAuth0 = ({
-   onRedirectCallback = () =>
-     window.history.replaceState({}, document.title, window.location.pathname),
-   redirectUri = window.location.origin,
-   ...pluginOptions
- }) => {
+  export const useAuth0 = ({
+    onRedirectCallback = (appState) => {
+      window.history.replaceState({}, document.title, window.location.pathname);
+      window.location.href = 'http://localhost:3000/projects';
+    },
+    redirectUri = window.location.origin,
+    ...pluginOptions
+  }) => {
+  
    if (instance) return instance;
  
    instance = new Vue({

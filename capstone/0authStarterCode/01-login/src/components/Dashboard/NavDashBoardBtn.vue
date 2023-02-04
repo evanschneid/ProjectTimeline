@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style>
-@media only screen and (max-width: 767px){
+
     .nav-container {
         background-color: white;
         overflow: hidden;
@@ -31,5 +31,5 @@ export default {
     }
 
 
-}
+
 </style>
