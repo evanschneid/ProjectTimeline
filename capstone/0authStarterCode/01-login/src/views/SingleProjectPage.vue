@@ -2,39 +2,63 @@
   <div>
       <h1>TESTING SINGLE PROJECT</h1>
 
-      <project-tile />
+      {{currentProject}}
+      <!-- <project-tile />
       
       <form>
         {{projCard}}<br>
         Proj No.: <input type="text" v-model="projCard.projectID" /><br>
         Proj Title.: <input type="text" v-model="projCard.projectTitle" /><br>
         Due Date: <input type="text" v-model="projCard.projectDueDate" />
-      </form>
+      </form> -->
   </div>
 </template>
 
 <script>
-import ProjectTile from '../components/Dashboard/ProjectTile.vue';
+
+// import service from '../services/ServerService.js';
 
 export default {
-  components: { ProjectTile },
 
-  data() {
+  created() {
+     this.currentProject = this.$route.params.id;
+
+  // service.getProject(id).then(
+  //   (response) => {
+  //     this.currentProject = response.data;
+  //       }
+  // )
+  }, 
+  
+  data () {
     return {
-      currentProject: {}
+      projectID : -1,
+       currentProject: {}
     }
-  },
-  created () {
-  this.projectID = this.$route.params.id;
-
-  service.getProject(id).then(
-    (response) => {
-      this.currentProject = response.data;
-        }
-  )
+  }
 }
 
-}
+// import ProjectTile from '../components/Dashboard/ProjectTile.vue';
+
+// export default {
+//   components: { ProjectTile },
+
+//   data() {
+//     return {
+//       currentProject: {}
+//     }
+//   },
+//   created () {
+//   this.projectID = this.$route.params.id;
+
+//   service.getProject(id).then(
+//     (response) => {
+//       this.currentProject = response.data;
+//         }
+//   )
+// }
+
+// }
 </script>
 
 <style>

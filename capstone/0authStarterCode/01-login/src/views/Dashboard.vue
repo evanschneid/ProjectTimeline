@@ -8,6 +8,8 @@
       <h2>Tasks</h2>
       <task-tile />
     </main>
+
+    
     <!-- <home-content /> -->
   </div>
 </template>
