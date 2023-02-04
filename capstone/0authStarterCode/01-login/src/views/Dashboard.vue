@@ -55,7 +55,14 @@ export default {
       } else if (!ismanager) {
           console.log("User is not a manager, getting projects/id");
       } else {
-          console.log("User is a manager, getting projects/");
+          console.log("User is a manager, getting ALL projects");
+          axios.get('http://localhost:9000/projects')
+          .then(response => {
+          console.log(response.data);
+          })
+          .catch(error => {
+          console.error(error);
+          });
       }
       })
       .catch(error => {
