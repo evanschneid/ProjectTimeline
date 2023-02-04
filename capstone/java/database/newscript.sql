@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
     userId serial PRIMARY KEY,
     isManager boolean,
-    userEmail varchar(255)
+    userEmail varchar(255),
+    isActivated boolean
 );
 
 CREATE TABLE Project (
