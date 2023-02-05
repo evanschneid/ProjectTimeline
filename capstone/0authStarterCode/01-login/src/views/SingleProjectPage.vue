@@ -3,16 +3,16 @@
       <h1>TESTING SINGLE PROJECT</h1>
 
       {{currentProject}}
-    <v-card>
-      <div class="topBar">Selected Project 2</div>
+    <!-- <v-card> -->
+      <div class="current-project">Selected Project 2</div>
       <font-awesome-icon icon="fa-regular fa-star" />
-      <v-card class="projDesc">
+      <div class="projDesc">
         <h2>DESCRIPTION</h2>
-      </v-card>
-      <v-btn variant="outlined" id="taskBtn">
+      </div>
+      <button variant="outlined" id="taskBtn">
         Project Tasks
-      </v-btn>
-    </v-card>
+      </button>
+    <!-- </v-card> -->
     
       <!-- <project-tile />
       
@@ -74,4 +74,12 @@ export default {
 
 <style>
 
+.current-project {
+  display: inline-flex;
+  width: 100%;
+  height: 45px;
+  border: 2px solid;
+  border-radius: 5%;
+  text-align: center;
+}
 </style>

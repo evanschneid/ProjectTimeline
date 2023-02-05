@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
 
     getAllProjects() {
-        return axios.get("/projects");
+        return axios.get('/projects');
     },
     getProject(id) {
         return axios.get(`/projects/${id}`);

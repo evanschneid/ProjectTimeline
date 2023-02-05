@@ -2,11 +2,11 @@
   <div class="nav-container">
     <!-- <hero /> -->
     <!-- <hr /> -->
-    <div class="projTile" v-for="project in projList" v-bind:key="project.id"> <!-- need to add v-on:click -->
+    <!-- <div class="projTile" v-for="project in projList" v-bind:key="project.id">
         <p>P# {{project.id}}</p>
         <h4>{{project.projectTitle}}</h4>
         <p>Due date: {{project.projectDueDate}}</p>
-    </div>
+    </div>  -->
     <main>
       <h2>Projects</h2>
       <div class="proj-sort-group">
