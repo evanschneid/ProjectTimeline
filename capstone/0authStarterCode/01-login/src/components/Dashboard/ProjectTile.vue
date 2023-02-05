@@ -2,7 +2,6 @@
   <div>  <!-- body & header -->
       <v-card class="projTile" v-bind:key="project"> <!-- need to add v-on:click -->
         <v-card-text>
-          <!-- <p>Project #: {{projCard.projectID}}</p> -->
           <h4>{{projCard.projectTitle}}</h4>
           <p>Due date: {{projCard.projectDueDate}}</p>
         </v-card-text>
@@ -24,7 +23,7 @@ export default {
   name: "projTile",
   data() {
     return {
-      projCard:{}      
+      projCard:[] 
     }
   },
   // created () {

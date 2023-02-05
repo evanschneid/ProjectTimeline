@@ -2,36 +2,13 @@
   <div>
     <div v-for="project in projList" v-bind:key="project.id">
 
-    <!-- <v-card max-width="400" class="mx-auto">
-      <v-app-bar dark color="pink">
-        <v-toolbar-title>Selected Project</v-toolbar-title>
-        <v-spacer></v-spacer>
 
-      </v-app-bar>
-    </v-card>
-    <div>
-      <form>
-        {{projCard}}<br>
-        Proj No.: <input type="text" v-model="projCard.projectID" /><br>
-        Proj Title.: <input type="text" v-model="projCard.projectTitle" /><br>
-        Due Date: <input type="text" v-model="projCard.projectDueDate" />
-      </form>
-    </div> -->
-    <v-card>
-      <div class="topBar">Selected Project 2</div>
-      <font-awesome-icon icon="fa-regular fa-star" />
-      <v-card class="projDesc">
-        <h2>DESCRIPTION</h2>
-      <v-btn variant="outlined" id="taskBtn">
-        Project Tasks
-      </v-btn>
     </div>
   </div>
 </template>
 
 <script>
 import ProjectTile from '../Dashboard/ProjectTile.vue';
-import service from '../services/ServerService.js';
 
 export default {
   components: { ProjectTile },
@@ -43,13 +20,7 @@ export default {
   },
 
 created () {
-  this.projectID = this.$route.params.id;
-
-  service.getProject(id).then(
-    (response) => {
-      this.projectID = response.data;
-        }
-  )
+  
 }
 
 }

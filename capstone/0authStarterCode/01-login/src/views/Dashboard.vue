@@ -2,14 +2,19 @@
   <div class="nav-container">
     <!-- <hero /> -->
     <!-- <hr /> -->
+    <div class="projTile" v-for="project in projList" v-bind:key="project.id"> <!-- need to add v-on:click -->
+        <p>P# {{project.id}}</p>
+        <h4>{{project.projectTitle}}</h4>
+        <p>Due date: {{project.projectDueDate}}</p>
+    </div>
     <main>
       <h2>Projects</h2>
       <proj-tile />
       <h2>Tasks</h2>
       <task-tile />
-    </main>
-
     
+    </main>
+       
     <!-- <home-content /> -->
   </div>
 </template>
@@ -23,9 +28,26 @@ import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-vue';
 import router from 'vue-router'; 
 import { useRouter } from 'vue-router';
+import service from '../services/ServerService.js'
 
 export default {
   name: "home-view",
+
+  data() {
+    return {
+      projList: []
+    }
+  },
+
+  created() {
+    service.getAllProjects().then(
+      (response) => {
+        this.projList = response.data;
+        console.log(response.data)
+      }
+    )
+  },
+
   setup() {
       const auth0 = useAuth0()
 
@@ -113,6 +135,21 @@ export default {
     padding: 10px;
     width: 100%;
   }
+}
+
+.projTile {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 5px;
+  border: 5px;
+  border-style: solid;
+  border-color: #F2D678;
+  border-radius: 10%;
+  width: 150px;
+  height: 150px;
+  background-color: #335974;
+  color: #F2D678;
 }
 
 .next-steps .fa-link {

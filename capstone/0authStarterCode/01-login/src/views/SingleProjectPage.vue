@@ -3,6 +3,17 @@
       <h1>TESTING SINGLE PROJECT</h1>
 
       {{currentProject}}
+    <v-card>
+      <div class="topBar">Selected Project 2</div>
+      <font-awesome-icon icon="fa-regular fa-star" />
+      <v-card class="projDesc">
+        <h2>DESCRIPTION</h2>
+      </v-card>
+      <v-btn variant="outlined" id="taskBtn">
+        Project Tasks
+      </v-btn>
+    </v-card>
+    
       <!-- <project-tile />
       
       <form>
