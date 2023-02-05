@@ -9,6 +9,11 @@
     </div>
     <main>
       <h2>Projects</h2>
+      <div class="proj-sort-group">
+        <button class="sort-projects-btn">All</button>
+        <button class="sort-projects-btn">Upcoming</button>
+        <button class="sort-projects-btn">Completed</button>
+      </div>
       <proj-tile />
       <h2>Tasks</h2>
       <task-tile />
@@ -122,6 +127,19 @@ export default {
     padding: 20px;
     width: 100%;
     margin: 0px;
+  }
+  .proj-sort-group {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .sort-projects-btn {
+    border: solid;
+    border-radius: 10px;
+    border-color: #335974;
+    background-color: transparent;
+    transition-duration: 0.5s;
+    cursor: pointer;    
   }
 }
 
