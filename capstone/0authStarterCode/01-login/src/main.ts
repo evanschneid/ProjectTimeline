@@ -12,6 +12,7 @@ import hljsVuePlugin from "@highlightjs/vue-plugin";
 import "highlight.js/styles/github.css";
 import { faHouse, faList, faTable, faStar } from '@fortawesome/free-solid-svg-icons';
 
+
 hljs.registerLanguage('json', json);
 
 const app = createApp(App);

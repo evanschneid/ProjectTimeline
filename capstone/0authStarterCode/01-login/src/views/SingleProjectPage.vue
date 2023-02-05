@@ -2,6 +2,7 @@
   <div>
       <h1>TESTING SINGLE PROJECT</h1>
 
+
       {{currentProject}}
     <!-- <v-card> -->
       <div class="current-project">Selected Project 2</div>
