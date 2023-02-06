@@ -30,6 +30,7 @@ export default {
     service.getAllProjects().then(
       (response) => {
         this.projCard = response.data;
+        console.log(response.data);
       }
     )
   }
