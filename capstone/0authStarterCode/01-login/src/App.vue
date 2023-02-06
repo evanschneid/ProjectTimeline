@@ -49,6 +49,7 @@ body, html {
   height: 100vh;
   overflow: scroll;
   background-color: #78b2c6;
+  overflow: auto;
 }
 
 

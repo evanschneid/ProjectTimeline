@@ -6,7 +6,8 @@
         <!-- <input type="text" v-model="search" placeholder="Search Project..." /> -->
         <!-- <div class="searchBar" v-for="item in filteredList" :key="item.user"></div> -->
 
-        <v-row>
+
+        <!-- <v-row> testing date picker here. evan will clean this out once the date range is working 
             <v-col
             cols="12"
             sm="6"
@@ -28,7 +29,7 @@
             ></v-text-field>
             model: {{ dates }}
             </v-col>
-        </v-row>
+        </v-row> -->
 
         <v-text-field
             v-model="search"
@@ -58,9 +59,9 @@
             v-for="(item, i) in filteredProjectList"
             :key="i"
             >
-            <td>{{ item.user }}</td>
+            <td>{{ item.id }}</td>
             <td>{{ item.project }}</td>
-            <td>{{ item.hours }}</td>
+            <td>{{ item.totalTime }}</td>
             </tr>
         </tbody>
         </template>
@@ -69,7 +70,7 @@
 </template>
 
 <script>
-
+import ServerService from '../../services/ServerService'
 export default {
 //   name: "worklogReports",
 //   data() {
@@ -110,69 +111,82 @@ export default {
     data () {
       return {
         search: '',
-        dates: ['2019-09-10', '2019-09-20'],
-        worklogs: [
-          {
-            user: 'Manager 1',
-            project: 'Project 1',
-            hours: 15
-          },
-          {
-            user: 'Manager 1',
-            project: 'Project 2',
-            hours: 15
-          },
-          {
-            user: 'Manager 1',
-            project: 'Project 3',
-            hours: 10
-          },
-          {
-            user: 'User 1',
-            project: 'Project 1',
-            hours: 35
-          },
-          {
-            user: 'User 1',
-            project: 'Project 3',
-            hours: 5
-          },
-          {
-            user: 'User 2',
-            project: 'Project 2',
-            hours: 20
-          },
-          {
-            user: 'User 2',
-            project: 'Project 3',
-            hours: 20
-          },
-          {
-            user: 'User 3',
-            project: 'Project 1',
-            hours: 40
-          },
-          {
-            user: 'User 4',
-            project: 'Project 1',
-            hours: 10
-          },
-          {
-            user: 'User 4',
-            project: 'Project 2',
-            hours: 20
-          },
-          {
-            user: 'User 4',
-            project: 'Project 3',
-            hours: 10
-          }
-        ],
+        // dates: ['2019-09-10', '2019-09-20'],
+        // worklogs: [
+        //   {
+        //     user: 'Manager 1',
+        //     project: 'Project 1',
+        //     hours: 15
+        //   },
+        //   {
+        //     user: 'Manager 1',
+        //     project: 'Project 2',
+        //     hours: 15
+        //   },
+        //   {
+        //     user: 'Manager 1',
+        //     project: 'Project 3',
+        //     hours: 10
+        //   },
+        //   {
+        //     user: 'User 1',
+        //     project: 'Project 1',
+        //     hours: 35
+        //   },
+        //   {
+        //     user: 'User 1',
+        //     project: 'Project 3',
+        //     hours: 5
+        //   },
+        //   {
+        //     user: 'User 2',
+        //     project: 'Project 2',
+        //     hours: 20
+        //   },
+        //   {
+        //     user: 'User 2',
+        //     project: 'Project 3',
+        //     hours: 20
+        //   },
+        //   {
+        //     user: 'User 3',
+        //     project: 'Project 1',
+        //     hours: 40
+        //   },
+        //   {
+        //     user: 'User 4',
+        //     project: 'Project 1',
+        //     hours: 10
+        //   },
+        //   {
+        //     user: 'User 4',
+        //     project: 'Project 2',
+        //     hours: 20
+        //   },
+        //   {
+        //     user: 'User 4',
+        //     project: 'Project 3',
+        //     hours: 10
+        //   }
+        // ],
+        worklogs: [],
       }
     },
+    created() {
+      ServerService.getAllReports().then(response => {
+          if (response.data !== undefined) {
+            this.worklogs = response.data; 
+            console.log(response.data)
+          } else {
+            console.log("No Reports");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
 }
 </script>
-
 <style>
 
 </style>

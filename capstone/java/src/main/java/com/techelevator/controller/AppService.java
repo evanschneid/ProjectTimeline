@@ -74,6 +74,7 @@ public class AppService {
             Map<String, Object> response = new HashMap<>();
             response.put("ismanager", user.isManager());
             response.put("isactivated", user.isActivated());
+            response.put("userid", user.getId());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
@@ -83,9 +84,19 @@ public class AppService {
         return projectDao.getAllProjects();
     }
 
-    @GetMapping("/projects/{id}")
-    public Project getProjectById(@PathVariable int id) {
-        return projectDao.getProjectById(id);
+//    @GetMapping("/projects/{id}")
+//    public Project getProjectById(@PathVariable int id) {
+//        return projectDao.getProjectById(id);
+//    }
+    @CrossOrigin
+    @GetMapping("/projects/{userid}")
+    public List<Project> getProjectByUserId(@PathVariable int userid) {
+        return projectDao.getProjectsByUserId(userid);
+    }
+
+    @GetMapping("/tasks/{projectid}")
+    public List<Task> getAllTasksByProjectId(@PathVariable int projectid) {
+        return taskDao.getTaskByProjectId(projectid);
     }
 
     @GetMapping("/tasks")
