@@ -1,33 +1,47 @@
 <template>
   <div>
-    <v-card>
-      
-    </v-card>
+    <div v-for="project in projList" v-bind:key="project.id">
 
-      <v-card class="projTile"
-      v-for="project in projCards"
-      v-bind:key="project">
-          <project-tile />
-      </v-card>
+
+    </div>
   </div>
 </template>
 
 <script>
-import ProjectTile from '../Dashboard/ProjectTile.vue'
+import ProjectTile from '../Dashboard/ProjectTile.vue';
 
 export default {
   components: { ProjectTile },
   name: "projDetails",
   data() {
     return {
-      projCards:{}      
+      projList: []   
     }
-  }
+  },
+
+created () {
+  
+}
 
 }
 </script>
 
 <style>
+
+.projDesc {
+  display: flex;
+  flex-basis: 60%;
+  justify-content: flex-end;
+}
+
+.fa-solid fa-star {
+  display: flex;
+}
+
+#taskBtn {
+  width: 100%;
+  height: 75px;
+}
 
 .projTile {
   display: flex;

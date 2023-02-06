@@ -1,39 +1,37 @@
 <template>
   <div>  <!-- body & header -->
-      <v-card class="projTile" v-bind:key="project"> <!-- need to add v-on:click -->
-        <v-card-text>
-          <!-- <p>Project #: {{projCard.projectID}}</p> -->
-          <h4>{{projCard.projectTitle}}</h4>
-          <p>Due date: {{projCard.projectDueDate}}</p>
-        </v-card-text>
-      </v-card>
+      <div class="projTile" 
+      v-for="project in projCard" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
+          <h4>{{project.projectTitle}}</h4>
+          <p>Due date: {{project.projectDueDate}}</p>
+      </div>
 
-      <form>
+      <!-- <form>
         {{projCard}}<br>
         Proj No.: <input type="text" v-model="projCard.projectID" /><br>
         Proj Title.: <input type="text" v-model="projCard.projectTitle" /><br>
         Due Date: <input type="text" v-model="projCard.projectDueDate" />
-      </form>
+      </form> -->
   </div>
 </template>
 
 <script>
-// import service from './services/ServerService.js';
+// import service from '../service/ServerService.js'
 
 export default {
   name: "projTile",
   data() {
     return {
-      projCard:{}      
+      projCard:[] 
     }
   },
-  // created () {
-  //   service.getAllProjects().then(
-  //     (response) => {
-  //       this.projCard = response.data;
-  //     }
-  //   )
-  // }
+  created () {
+    // service.getAllProjects().then(
+    //   (response) => {
+    //     this.projCard = response.data;
+    //   }
+    // )
+  }
 }
 </script>
 

@@ -4,12 +4,23 @@
     <!-- <hr /> -->
     <main>
       <logo-image />
-      <timer-button />
       <h2>Projects</h2>
-      <proj-tile />
+      <div class="proj-sort-group">
+        <button class="sort-projects-btn">All</button>
+        <button class="sort-projects-btn">Upcoming</button>
+        <button class="sort-projects-btn">Completed</button>
+      </div>
+      <div class="projTile" v-for="project in projList" v-bind:key="project.id">
+        <p>P# {{project.id}}</p>
+        <h4>{{project.projectTitle}}</h4>
+        <p>Due date: {{project.projectDueDate}}</p>
+    </div> 
+      <!-- <proj-tile /> -->
       <h2>Tasks</h2>
       <task-tile />
+    
     </main>
+       
     <!-- <home-content /> -->
   </div>
 </template>
@@ -23,12 +34,28 @@ import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-vue';
 import router from 'vue-router'; 
 import { useRouter } from 'vue-router';
-import TimerButton from '../components/TimerButton.vue';
 import LogoImage from '../components/LogoImage.vue';
 
+import service from '../services/ServerService.js'
 
 export default {
   name: "home-view",
+
+  data() {
+    return {
+      projList: []
+    }
+  },
+
+  created() {
+    service.getAllProjects().then(
+      (response) => {
+        this.projList = response.data;
+        console.log(response.data)
+      }
+    )
+  },
+
   setup() {
       const auth0 = useAuth0()
 
@@ -79,7 +106,6 @@ export default {
     //HomeContent,
     projTile,
     TaskTile,
-    TimerButton,
     LogoImage
   },
 };
@@ -94,6 +120,19 @@ export default {
     width: 100%;
     margin: 0px;
   }
+  .proj-sort-group {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .sort-projects-btn {
+    border: solid;
+    border-radius: 10px;
+    border-color: #335974;
+    background-color: transparent;
+    transition-duration: 0.5s;
+    cursor: pointer;    
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -106,6 +145,21 @@ export default {
     padding: 10px;
     width: 100%;
   }
+}
+
+.projTile {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 5px;
+  border: 5px;
+  border-style: solid;
+  border-color: #F2D678;
+  border-radius: 10%;
+  width: 150px;
+  height: 150px;
+  background-color: #335974;
+  color: #F2D678;
 }
 
 .next-steps .fa-link {
