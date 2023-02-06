@@ -1,11 +1,12 @@
 <template>
   <div>  <!-- body & header -->
-      <div class="projTile" 
-      v-for="project in projTile" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
-          <h4>{{project.projectDescription}}</h4>
-          <p>Due date: {{project.projectDueDate}}</p>
+      <div class="projTile-container">
+        <div class="projTile" 
+        v-for="project in projCard" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
+            <h4>{{project.projectTitle}}</h4>
+            <p>Due date: {{project.projectDueDate}}</p>
+        </div>
       </div>
-
       <!-- <form>
         {{projCard}}<br>
         Proj No.: <input type="text" v-model="projCard.projectID" /><br>
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-// import service from '../service/ServerService.js'
+import service from '../../services/ServerService.js'
 
 export default {
   name: "projTile",
@@ -26,31 +27,43 @@ export default {
     }
   },
   created () {
-    // service.getAllProjects().then(
-    //   (response) => {
-    //     this.projCard = response.data;
-    //   }
-    // )
+    service.getAllProjects().then(
+      (response) => {
+        this.projCard = response.data;
+      }
+    )
   }
 }
 </script>
 
 <style>
 
-.projTile {
+.projTile-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  
+}
+
+.projTile-container::-webkit-scrollbar {width: 0;}
+
+
+.projTile {
+  display: inline-block;
   padding: 10px;
   margin: 5px;
   border: 5px;
   border-style: solid;
   border-color: #F2D678;
   border-radius: 10%;
-  width: 150px;
+  flex: 0 0 auto;
+  width: 45%;
   height: 150px;
   background-color: #335974;
   color: #F2D678;
 }
+
+
 
 #titleText {
   color: #78B2C6;
