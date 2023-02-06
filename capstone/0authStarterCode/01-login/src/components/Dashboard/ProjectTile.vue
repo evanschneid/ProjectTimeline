@@ -1,5 +1,5 @@
 <template>
-  <div>  <!-- body & header -->
+  <div>
       <div class="projTile-container">
         <div class="projTile" 
         v-for="project in projCard" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
@@ -45,7 +45,7 @@ export default {
   
 }
 
-.projTile-container::-webkit-scrollbar {width: 0;}
+/* .projTile-container::-webkit-scrollbar {width: 0;} */
 
 
 .projTile {
