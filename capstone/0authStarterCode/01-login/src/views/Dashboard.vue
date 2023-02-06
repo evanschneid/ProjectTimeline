@@ -3,6 +3,8 @@
     <!-- <hero /> -->
     <!-- <hr /> -->
     <main>
+      <logo-image />
+      <timer-button />
       <h2>Projects</h2>
       <proj-tile />
       <h2>Tasks</h2>
@@ -21,6 +23,9 @@ import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-vue';
 import router from 'vue-router'; 
 import { useRouter } from 'vue-router';
+import TimerButton from '../components/TimerButton.vue';
+import LogoImage from '../components/LogoImage.vue';
+
 
 export default {
   name: "home-view",
@@ -68,27 +73,17 @@ export default {
       .catch(error => {
       console.error(error);
       });
-
-      
-      
-  
-      
-      
-    
-
-
-      
-      
-
   },
   components: {
     //Hero,
     //HomeContent,
     projTile,
-    TaskTile
+    TaskTile,
+    TimerButton,
+    LogoImage
   },
 };
-</script>
+</script>,
 
 <style lang="css" scoped>
 

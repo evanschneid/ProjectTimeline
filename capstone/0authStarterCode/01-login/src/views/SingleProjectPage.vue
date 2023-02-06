@@ -1,12 +1,17 @@
 <template>
   <div>
+      <logo-image />
       <h1>TESTING SINGLE PROJECT</h1>
   </div>
 </template>
 
 <script>
-export default {
+import LogoImage from '../components/LogoImage.vue';
 
+export default {
+  components: {
+      LogoImage
+  },
 }
 </script>
 
