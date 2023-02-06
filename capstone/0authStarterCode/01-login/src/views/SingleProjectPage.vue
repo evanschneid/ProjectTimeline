@@ -1,5 +1,6 @@
 <template>
   <div>
+      <logo-image />
       <h1>TESTING SINGLE PROJECT</h1>
 
 
@@ -27,10 +28,13 @@
 </template>
 
 <script>
-
+import LogoImage from '../components/LogoImage.vue';
 // import service from '../services/ServerService.js';
 
 export default {
+  components: {
+      LogoImage
+  },
 
   created() {
      this.currentProject = this.$route.params.id;

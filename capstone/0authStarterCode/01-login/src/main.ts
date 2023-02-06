@@ -10,6 +10,10 @@ import hljs from 'highlight.js/lib/core';
 import json from 'highlight.js/lib/languages/json';
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import "highlight.js/styles/github.css";
+import 'vuetify/styles'
+import { createVuetify } from "vuetify"
+import * as components from "vuetify/components"
+import * as directives from "vuetify/directives"
 import { faHouse, faList, faTable, faStar } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -17,6 +21,12 @@ hljs.registerLanguage('json', json);
 
 const app = createApp(App);
 
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
+library.add(faLink, faUser, faPowerOff, faHouse, faList, faTable);
 library.add(faLink, faUser, faPowerOff, faHouse, faList, faTable, faStar);
 
 app
@@ -31,5 +41,6 @@ app
       }
     })
   )
+  .use(vuetify)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");
