@@ -10,10 +10,10 @@
         <button class="sort-projects-btn">Completed</button>
       </div>
       <div class="projTile" v-for="project in projList" v-bind:key="project.id">
-        <p>P# {{project.id}}</p>
-        <h4>{{project.projectTitle}}</h4>
+        <!-- <p>P# {{project.id}}</p> -->
+        <h5>{{project.projectDescription}}</h5>
         <p>Due date: {{project.projectDueDate}}</p>
-    </div> 
+      </div> 
       <!-- <proj-tile /> -->
       <h2>Tasks</h2>
       <task-tile />
@@ -121,12 +121,15 @@ export default {
 
 <style lang="css" scoped>
 
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 767px) {
   .nav-container {
     grid-template-columns: 1fr;
     padding: 20px;
     width: 100%;
     margin: 0px;
+  }
+  .main-logo {
+    width: 100%;
   }
   .proj-sort-group {
     display: flex;
@@ -168,6 +171,7 @@ export default {
   height: 150px;
   background-color: #335974;
   color: #F2D678;
+  
 }
 
 .next-steps .fa-link {

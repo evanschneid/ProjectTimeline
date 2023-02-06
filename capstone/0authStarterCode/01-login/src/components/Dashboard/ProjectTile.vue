@@ -1,8 +1,8 @@
 <template>
   <div>  <!-- body & header -->
       <div class="projTile" 
-      v-for="project in projCard" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
-          <h4>{{project.projectTitle}}</h4>
+      v-for="project in projTile" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
+          <h4>{{project.projectDescription}}</h4>
           <p>Due date: {{project.projectDueDate}}</p>
       </div>
 
