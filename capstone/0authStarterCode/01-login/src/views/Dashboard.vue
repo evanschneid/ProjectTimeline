@@ -3,6 +3,7 @@
     <!-- <hero /> -->
     <!-- <hr /> -->
     <main>
+      <logo-image />
       <h2>Projects</h2>
       <div class="proj-sort-group">
         <button class="sort-projects-btn">All</button>
@@ -33,6 +34,8 @@ import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-vue';
 import router from 'vue-router'; 
 import { useRouter } from 'vue-router';
+import LogoImage from '../components/LogoImage.vue';
+
 import service from '../services/ServerService.js'
 
 export default {
@@ -97,27 +100,16 @@ export default {
       .catch(error => {
       console.error(error);
       });
-
-      
-      
-  
-      
-      
-    
-
-
-      
-      
-
   },
   components: {
     //Hero,
     //HomeContent,
     projTile,
-    TaskTile
+    TaskTile,
+    LogoImage
   },
 };
-</script>
+</script>,
 
 <style lang="css" scoped>
 

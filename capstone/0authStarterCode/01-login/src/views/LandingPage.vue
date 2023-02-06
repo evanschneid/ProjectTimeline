@@ -1,56 +1,68 @@
 <template>
-  <div class="nav-container">
-    <hero />
-    
+<div>
+  <div class="background">
+        <div class="landing-page-container">
+      <div id="main-logo"><logo-image /></div>
+      <div class="welcome-text"><welcome-text /></div>
+      <div class="desc-text"><landing-page-desc /></div>
+    </div>
   </div>
+
+</div>
 </template>
 
 <script lang="ts">
-import Hero from "../components/Hero.vue";
-import HomeContent from "../components/HomeContent.vue";
-import projTile from "../components/Dashboard/ProjectTile.vue";
-import TaskTile from '../components/Dashboard/TaskTile.vue';
+import WelcomeText from '../components/Landing Page/WelcomeText.vue';
+import LandingPageDesc from '../components/Landing Page/LandingPageDesc.vue';
+import LogoImage from '../components/LogoImage.vue';
 
 export default {
   name: "home-view",
   components: {
-    Hero,
-    HomeContent,
-    projTile,
-    TaskTile
+    WelcomeText,
+    LandingPageDesc,
+    LogoImage
   },
 };
-</script>
+</script>,
+    WelcomeText
 
-<style lang="css" scoped>
+<style>
 
 @media only screen and (max-width: 767px) {
-  .nav-container {
-    grid-template-columns: 1fr;
-    padding: 20px;
-    width: 100%;
-    margin: 0px;
+  .background {
+    height: 100%;
+    background-color: #78b2c6;
   }
-}
 
-@media only screen and (min-width: 768px) {
-  .nav-container {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-areas: 
-    "header header header header"
-    "sidebar content content content"
-    "footer footer footer footer";
-    padding: 10px;
-    width: 100%;
+  #btn {
+    height: 100vh;
   }
+
+  .landing-page-container {
+
+    display: flex;
+    justify-self: stretch;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+
+    padding: 1em;
+  }
+
+  #main-logo {
+    width: 75vw;
+
+  }
+
+  .welcome-text {
+
+  }
+
+  .desc-text {
+    margin-top: 10em;
+  }
+
 }
 
-.next-steps .fa-link {
-    margin-right: 5px;
-}
-
-body {
-  display: grid;
-  
-}
 </style>
