@@ -12,6 +12,6 @@ export default {
 
 <style>
 #main-logo {
-
+  align-self: center;
 }
 </style>

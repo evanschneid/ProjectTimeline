@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="app" class="d-flex flex-column h-100">
+    <div id="app">
       <div class="container flex-grow-1">
       <error />
       <div class="mt-5"> 
@@ -47,7 +47,8 @@ body, html {
 
 #app {
   height: 100vh;
-  overflow: hidden;
+  overflow: scroll;
+  background-color: #78b2c6;
 }
 
 

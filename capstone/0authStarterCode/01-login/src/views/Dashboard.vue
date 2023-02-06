@@ -2,9 +2,12 @@
   <div class="nav-container">
     <!-- <hero /> -->
     <!-- <hr /> -->
-    <main>
+    <div class="logo-container">
       <logo-image />
+    </div>
+    <main>
       <h2>Projects</h2>
+      <add-project />
       <div class="proj-sort-group">
         <button class="sort-projects-btn">All</button>
         <button class="sort-projects-btn">Upcoming</button>
@@ -15,7 +18,6 @@
         <h4>{{project.projectTitle}}</h4>
         <p>Due date: {{project.projectDueDate}}</p>
     </div> 
-      <!-- <proj-tile /> -->
       <h2>Tasks</h2>
       <task-tile />
     
@@ -35,7 +37,7 @@ import { useAuth0 } from '@auth0/auth0-vue';
 import router from 'vue-router'; 
 import { useRouter } from 'vue-router';
 import LogoImage from '../components/LogoImage.vue';
-
+import AddProject from '../components/AddProject.vue';
 import service from '../services/ServerService.js'
 
 export default {
@@ -106,19 +108,28 @@ export default {
     //HomeContent,
     projTile,
     TaskTile,
-    LogoImage
+    LogoImage,
+    AddProject
   },
 };
 </script>,
 
 <style lang="css" scoped>
 
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 767px) {
   .nav-container {
     grid-template-columns: 1fr;
     padding: 20px;
     width: 100%;
     margin: 0px;
+  }
+  .logo-container {
+    display: flex;
+    justify-self: stretch;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding: 1em;
   }
   .proj-sort-group {
     display: flex;

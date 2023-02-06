@@ -5,7 +5,6 @@
           <h4>{{project.projectTitle}}</h4>
           <p>Due date: {{project.projectDueDate}}</p>
       </div>
-
       <!-- <form>
         {{projCard}}<br>
         Proj No.: <input type="text" v-model="projCard.projectID" /><br>
@@ -16,7 +15,7 @@
 </template>
 
 <script>
-// import service from '../service/ServerService.js'
+import service from '../../services/ServerService.js'
 
 export default {
   name: "projTile",
@@ -26,11 +25,11 @@ export default {
     }
   },
   created () {
-    // service.getAllProjects().then(
-    //   (response) => {
-    //     this.projCard = response.data;
-    //   }
-    // )
+    service.getAllProjects().then(
+      (response) => {
+        this.projCard = response.data;
+      }
+    )
   }
 }
 </script>
@@ -46,7 +45,7 @@ export default {
   border-style: solid;
   border-color: #F2D678;
   border-radius: 10%;
-  width: 150px;
+  width: 45%;
   height: 150px;
   background-color: #335974;
   color: #F2D678;

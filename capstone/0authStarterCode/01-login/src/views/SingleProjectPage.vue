@@ -1,6 +1,8 @@
 <template>
   <div>
+    <div class="logo-container">
       <logo-image />
+    </div>
       <h1>TESTING SINGLE PROJECT</h1>
 
 
@@ -78,7 +80,14 @@ export default {
 </script>
 
 <style>
-
+  .logo-container {
+    display: flex;
+    justify-self: stretch;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding: 1em;
+  }
 .current-project {
   display: inline-flex;
   width: 100%;

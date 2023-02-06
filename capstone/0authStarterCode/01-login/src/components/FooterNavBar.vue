@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-container">
+  <div id="footer">
       <div class="login-btn-container" v-if="!isAuthenticated">
           <nav-login-btn />
       </div> 
@@ -50,10 +50,10 @@ export default {
 }
 </script>
 <style>
-.nav-container {
+#footer {
     background-color: #78b2c6;
     overflow: hidden;
-    position: sticky;
+    position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
@@ -88,5 +88,6 @@ export default {
     align-items: center;
     margin: 0;
 }
+
 
 </style>
