@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class Report {
@@ -9,15 +10,17 @@ public class Report {
     private LocalDateTime clockIn;
     private LocalDateTime clockOut;
     private int projectID;
-    private int totalTime;
+    private long totalTime;
     private String addedComment;
+
+    private String projectTitle;
 
     // Constructors
 
     public Report() {
     }
 
-    public Report(int id, int userId, LocalDateTime clockIn, LocalDateTime clockOut, int projectID, int totalTime, String addedComment) {
+    public Report(int id, int userId, LocalDateTime clockIn, LocalDateTime clockOut, int projectID, long totalTime, String addedComment, String projectTitle) {
         this.id = id;
         this.userId = userId;
         this.clockIn = clockIn;
@@ -25,9 +28,19 @@ public class Report {
         this.projectID = projectID;
         this.totalTime = totalTime;
         this.addedComment = addedComment;
+        this.projectTitle = projectTitle;
     }
 
     // Getters and Setters
+
+
+    public String getProjectTitle() {
+        return projectTitle;
+    }
+
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
+    }
 
     public int getId() {
         return id;
@@ -69,11 +82,11 @@ public class Report {
         this.projectID = projectID;
     }
 
-    public int getTotalTime() {
+    public long getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(int totalTime) {
+    public void setTotalTime(long totalTime) {
         this.totalTime = totalTime;
     }
 

@@ -16,7 +16,7 @@
         <thead>
             <tr>
             <th class="text-left">
-                User
+                UserId
             </th>
             <th class="text-left">
                 Project Name
@@ -32,8 +32,8 @@
             :key="item.user"
             >
             <td>{{ item.id }}</td>
-            <td>{{ item.project }}</td>
-            <td>{{ item.totalTime }}</td>
+            <td>{{ item.projectTitle }}</td>
+            <td>{{ item.totalTime / 60 }} </td>
             </tr>
         </tbody>
         </template>
@@ -61,7 +61,10 @@ export default {
         .catch(error => {
           console.error(error);
         });
+      
+    
     }
+
 }
 </script>
 <style>
