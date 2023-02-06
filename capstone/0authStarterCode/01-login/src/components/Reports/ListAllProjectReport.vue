@@ -31,83 +31,39 @@
             v-for="item in worklogs"
             :key="item.user"
             >
-            <td>{{ item.user }}</td>
+            <td>{{ item.id }}</td>
             <td>{{ item.project }}</td>
-            <td>{{ item.hours }}</td>
+            <td>{{ item.totalTime }}</td>
             </tr>
         </tbody>
         </template>
     </v-table>
   </v-card>
 </template>
-
 <script>
+import ServerService from '../../services/ServerService'
 export default {
     data () {
       return {
-        searh: '',
-        worklogs: [
-          {
-            user: 'Manager 1',
-            project: 'Project 1',
-            hours: 15
-          },
-          {
-            user: 'Manager 1',
-            project: 'Project 2',
-            hours: 15
-          },
-          {
-            user: 'Manager 1',
-            project: 'Project 3',
-            hours: 10
-          },
-          {
-            user: 'User 1',
-            project: 'Project 1',
-            hours: 35
-          },
-          {
-            user: 'User 1',
-            project: 'Project 3',
-            hours: 5
-          },
-          {
-            user: 'User 2',
-            project: 'Project 2',
-            hours: 20
-          },
-          {
-            user: 'User 2',
-            project: 'Project 3',
-            hours: 20
-          },
-          {
-            user: 'User 3',
-            project: 'Project 1',
-            hours: 40
-          },
-          {
-            user: 'User 4',
-            project: 'Project 1',
-            hours: 10
-          },
-          {
-            user: 'User 4',
-            project: 'Project 2',
-            hours: 20
-          },
-          {
-            user: 'User 4',
-            project: 'Project 3',
-            hours: 10
-          }
-        ],
+        search: '',
+        worklogs: [],
       }
     },
+    created() {
+      ServerService.getAllReports().then(response => {
+          if (response.data !== undefined) {
+            this.worklogs = response.data; 
+            console.log(response.data)
+          } else {
+            console.log("No Reports");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
 }
 </script>
-
 <style>
 
 </style>

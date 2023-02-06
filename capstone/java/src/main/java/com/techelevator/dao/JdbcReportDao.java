@@ -53,7 +53,14 @@ public class JdbcReportDao implements ReportDao {
 
     @Override
     public List<Report> getAllReports() {
-        return null;
+        String sql = "SELECT * FROM worklog";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        List<Report> reportList = new ArrayList<>();
+        while (results.next()) {
+            Report report = mapRowToWorkLog(results);
+            reportList.add(report);
+        }
+        return reportList;
     }
 
     @Override
@@ -73,7 +80,7 @@ public class JdbcReportDao implements ReportDao {
         workLog.setClockIn(results.getTimestamp("clockin").toLocalDateTime());
         workLog.setClockOut(results.getTimestamp("clockout").toLocalDateTime());
         workLog.setProjectID(results.getInt("projectid"));
-        workLog.setTotalTime(results.getInt("totaltime"));
+        //workLog.setTotalTime(results.getInt("totaltime"));
         return workLog;
     }
 
