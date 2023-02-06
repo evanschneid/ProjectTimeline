@@ -47,7 +47,7 @@ body, html {
 
 #app {
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
 }
 
 

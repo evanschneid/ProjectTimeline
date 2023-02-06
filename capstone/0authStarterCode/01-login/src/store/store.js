@@ -1,26 +1,31 @@
-import { setSourceMapRange } from 'typescript'
-import { createApp } from 'vue'
-import { createStore } from 'vuex'
+import Vuex from 'vuex'
 
-// Create a new store instance.
-const store = createStore({
-  state () {
-    return {
-      user: {
 
+export default new Vuex.Store({
+      state: {
+        count: 0,
+        user: {},
+        isManager: null,
+        isActivated: null,
+        id: null,
       },
-      count: 0
-    }
-  },
-  mutations: {
-    increment (state) {
+mutations: {
+    increment(state) {
       state.count++
     },
-    setUser (state, user) {
-      state.user = user
-    }
-
-  }
+    setUser(state, user) {
+     state.user = user
+    },
+    setIsManager(state, isManager) {
+      state.isManager = isManager
+    },
+    setIsActivated(state, isActivated) {
+      state.isActivated = isActivated
+    },
+    setId(state, id) {
+      state.id = id
+    },
+    },
 })
 
 const app = createApp({ /* your root component */ })

@@ -36,12 +36,13 @@ public class JdbcUserDao implements UserDao {
 
 
     public User getUserByEmail(String email) {
-        String sql = "SELECT ismanager, isactivated FROM users WHERE useremail = ?";
+        String sql = "SELECT ismanager, isactivated, userid FROM users WHERE useremail = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, email);
         if (results.next()) {
             User user = new User();
             user.setManager(results.getBoolean("ismanager"));
             user.setActivated(results.getBoolean("isactivated"));
+            user.setId(results.getInt("userid"));
             return user;
         } else {
             return null;

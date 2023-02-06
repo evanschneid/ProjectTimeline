@@ -20,7 +20,7 @@ public class JdbcTaskDao implements TaskDao {
     @Override
     public List<Task> getAllTasks() {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT * FROM tasks";
+        String sql = "SELECT * FROM task";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             Task task = mapRowToTask(results);
@@ -40,6 +40,17 @@ public class JdbcTaskDao implements TaskDao {
         }
     }
 
+    public List<Task> getTaskByProjectId(int projectId) {
+        String sql = "SELECT * FROM task WHERE projectid = ?";
+        List<Task> taskList = new ArrayList<>();
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, projectId);
+        while (results.next()) {
+            Task task = mapRowToTask(results);
+            taskList.add(task);
+        }
+        return taskList;
+    }
+
     @Override
     public void insertTask(Task task) {
 
@@ -55,13 +66,15 @@ public class JdbcTaskDao implements TaskDao {
 
     }
 
-    private Task mapRowToTask(SqlRowSet rs) {
+    private Task mapRowToTask(SqlRowSet result) {
         Task task = new Task();
-        task.setId(rs.getInt("task_id"));
-        /*task.setName(rs.getString("name"));
-        task.setDescription(rs.getString("description"));
-        task.setDeadline(rs.getDate("deadline"));
-        task.setProjectId(rs.getInt("project_id"));*/
+        task.setId(result.getInt("taskid"));
+        task.setTaskTitle(result.getString("tasktitle"));
+        task.setTaskDescription(result.getString("taskdescription"));
+        task.setTaskIsCompleted(result.getBoolean("taskiscompleted"));
+        task.setTaskDueDate(result.getDate("taskduedate"));
+        task.setTaskCompletionDate(result.getDate("taskcompletiondate"));
+        task.setProjectID(result.getInt("projectid"));
         return task;
     }
 }
