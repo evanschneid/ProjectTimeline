@@ -26,12 +26,18 @@ public class JdbcProjectDao implements ProjectDao {
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
-//        while (results.next()) {
-//            for (int i = 1; i <= results.getMetaData().getColumnCount(); i++) {
-//                System.out.print(results.getObject(i) + " ");
-//            }
-//            System.out.println();
-//        }
+        while (results.next()) {
+            Project project = mapRowToProject(results);
+            projects.add(project);
+        }
+
+        return projects;
+    }
+
+    public List<Project> getProjectsByUserId(int userId) {
+        List<Project> projects = new ArrayList<>();
+        String sql = "select * from project where userid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 
         while (results.next()) {
             Project project = mapRowToProject(results);
@@ -40,6 +46,7 @@ public class JdbcProjectDao implements ProjectDao {
 
         return projects;
     }
+
 
     @Override
     public Project getProjectById(int id) {

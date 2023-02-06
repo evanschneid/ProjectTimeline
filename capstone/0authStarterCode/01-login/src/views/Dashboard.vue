@@ -37,6 +37,7 @@ import { useRouter } from 'vue-router';
 import LogoImage from '../components/LogoImage.vue';
 
 import service from '../services/ServerService.js'
+import ServerService from '../services/ServerService.js';
 
 export default {
   name: "home-view",
@@ -47,16 +48,9 @@ export default {
     }
   },
 
-  created() {
-    service.getAllProjects().then(
-      (response) => {
-        this.projList = response.data;
-        console.log(response.data)
-      }
-    )
-  },
+  
 
-  setup() {
+  created() {
       const auth0 = useAuth0()
 
 
@@ -68,7 +62,7 @@ export default {
       
       axios.get(`http://localhost:9000/user?email=${auth0.user.value.email}`)
       .then(response => {
-      const { ismanager, isactivated } = response.data;
+      const { ismanager, isactivated, userid } = response.data;
       if(response.data == null){
         window.location.reload();
       }
@@ -76,6 +70,7 @@ export default {
       console.log(response.data)
       console.log(`isManager: ${ismanager}`);
       console.log(`isActivated: ${isactivated}`);
+      console.log(`userId: ${userid}`);
       
       if (!isactivated) {
         console.log("User is not activated, logging out");
@@ -84,13 +79,36 @@ export default {
                 }})
         //const router = useRouter();
         //router.push('http://localhost:3000');
-      } else if (!ismanager) {
+      } 
+      
+      if (!ismanager) {
+          
+          
           console.log("User is not a manager, getting projects/id");
+          console.log(`userId: ${userid}`);
+          
+          ServerService.getAllProjectsByUserId(`${userid}`).then(response => {
+          
+          if (response.data !== undefined) {
+            //console.log(` userId: ${userid}`);
+            console.log(response.data);
+            this.projList = response.data;
+
+          } else {
+            console.log("No projects to show");
+          }
+          })
+          .catch(error => {
+          console.error(error);
+          });
       } else {
           console.log("User is a manager, getting ALL projects");
-          axios.get('http://localhost:9000/projects')
+          ServerService.getAllProjects()
+          
           .then(response => {
+          this.projList = response.data;
           console.log(response.data);
+          
           })
           .catch(error => {
           console.error(error);
