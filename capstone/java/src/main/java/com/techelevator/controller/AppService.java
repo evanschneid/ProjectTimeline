@@ -94,6 +94,11 @@ public class AppService {
         return projectDao.getProjectsByUserId(userid);
     }
 
+    @GetMapping("/tasks/{projectid}")
+    public List<Task> getAllTasksByProjectId(@PathVariable int projectid) {
+        return taskDao.getTaskByProjectId(projectid);
+    }
+
     @GetMapping("/tasks")
     public List<Task> getAllTasks() {
         return taskDao.getAllTasks();

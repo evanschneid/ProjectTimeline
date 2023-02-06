@@ -41,7 +41,8 @@ export default {
 
   data() {
     return {
-      projList: []
+      projList: [],
+      taskList: []
     }
   },
 
@@ -56,14 +57,15 @@ export default {
 
       const auth0 = useAuth0()
 
-
-      axios.post('http://localhost:9000/user', { email: auth0.user.value.email} )
+      ServerService.verifyThroughEmail({ email: auth0.user.value.email})
+      //axios.post('http://localhost:9000/user', { email: auth0.user.value.email} )
 
       //Moving on for now but when a new user registers it needs to do a get request. The get request will fail.
       //The code should restart the browswer and do the get request again. 
       //This time the get request will work and pull their credentials from the database
       
-      axios.get(`http://localhost:9000/user?email=${auth0.user.value.email}`)
+      ServerService.getUserByEmail(`${auth0.user.value.email}`)
+      //axios.get(`http://localhost:9000/user?email=${auth0.user.value.email}`)
       .then(response => {
       const { ismanager, isactivated, userid } = response.data;
       if(response.data == null){
@@ -86,7 +88,7 @@ export default {
       
       if (!ismanager) {
           
-          
+          //Get Projects for user
           console.log("User is not a manager, getting projects/id");
           console.log(`userId: ${userid}`);
           
@@ -104,12 +106,33 @@ export default {
           .catch(error => {
           console.error(error);
           });
+
+          //Get Tasks for User
+          ServerService.getAllTasksByUserId(`${userid}`).then(response => {
+          this.taskList = response.data; 
+          console.log(response.data)
+          })
+          
+
       } else {
+          //Get All Projects
+          
           console.log("User is a manager, getting ALL projects");
           ServerService.getAllProjects()
           
           .then(response => {
           this.projList = response.data;
+          console.log(response.data);
+          
+          })
+          .catch(error => {
+          console.error(error);
+          });
+
+          //Get All Tasks
+          console.log('Getting ALL Tasks')
+          ServerService.getAllTasks().then(response => {
+          this.taskList = response.data;
           console.log(response.data);
           
           })
