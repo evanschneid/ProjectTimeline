@@ -5,6 +5,14 @@ const http = axios.create({
   
 export default {
 
+    verifyThroughEmail(data){
+        return http.post('http://localhost:9000/user', data)
+    },
+
+    getUserByEmail(data){
+        return http.get(`http://localhost:9000/user?email=${data}`)
+    },
+    
     getAllProjects() {
         return http.get('/projects');
     },
@@ -19,7 +27,14 @@ export default {
     },
     getAllProjectsByUserId(id){
         return http.get(`/projects/${id}`)
+    },
+    getAllTasksByUserId(id){
+        return http.get(`/tasks/${id}`)
+    },
+    getAllTasks(){
+        return http.get('/tasks')
     }
+
 
     
 }
