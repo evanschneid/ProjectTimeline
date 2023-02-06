@@ -1,17 +1,20 @@
 import axios from 'axios';
-
+const http = axios.create({
+    baseURL: "http://localhost:9000"
+  });
+  
 export default {
 
     getAllProjects() {
-        return axios.get('/projects');
+        return http.get('/projects');
     },
     getProject(id) {
-        return axios.get(`/projects/${id}`);
+        return http.get(`/projects/${id}`);
     },
     addProject(project) {
-        return axios.post(`/projects`, project);
+        return http.post(`/projects`, project);
     },
     updateProject(project) {
-        return axios.put(`/editProject`, project);
+        return http.put(`/editProject`, project);
     }
 }

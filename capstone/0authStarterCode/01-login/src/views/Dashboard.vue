@@ -2,7 +2,6 @@
   <div class="nav-container">
     <!-- <hero /> -->
     <!-- <hr /> -->
-     
     <main>
       <h2>Projects</h2>
       <div class="proj-sort-group">
@@ -10,13 +9,12 @@
         <button class="sort-projects-btn">Upcoming</button>
         <button class="sort-projects-btn">Completed</button>
       </div>
-
       <div class="projTile" v-for="project in projList" v-bind:key="project.id">
         <p>P# {{project.id}}</p>
         <h4>{{project.projectTitle}}</h4>
         <p>Due date: {{project.projectDueDate}}</p>
-    </div>
-      <proj-tile />
+    </div> 
+      <!-- <proj-tile /> -->
       <h2>Tasks</h2>
       <task-tile />
     
@@ -43,7 +41,6 @@ export default {
   data() {
     return {
       projList: []
-      // console.log(projList);
     }
   },
 
