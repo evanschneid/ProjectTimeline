@@ -5,8 +5,8 @@
       <error />
       <div class="mt-5"> 
         <router-view />
-      </div>
-    </div>
+      </div>   
+    </div>    
     </div>
     <!-- <footer class="bg-light text-center p-3">
       <div class="logo"></div>
@@ -15,8 +15,8 @@
         <a href="https://auth0.com">Auth0</a>
       </p>
     </footer> -->
+    <footer-nav-bar />
   </div>
-  <footer-nav-bar />
 </template>
 <script lang="ts">
 import { useAuth0 } from '@auth0/auth0-vue';
