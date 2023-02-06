@@ -10,19 +10,12 @@
         <button class="sort-projects-btn">Upcoming</button>
         <button class="sort-projects-btn">Completed</button>
       </div>
-      <div class="projTile" v-for="project in projList" v-bind:key="project.id">
-        <p>P# {{project.id}}</p>
-        <h4>{{project.projectTitle}}</h4>
-        <p>Due date: {{project.projectDueDate}}</p>
-    </div> 
-      <!-- <proj-tile /> -->
+        <div class="test">
+          <proj-tile />
+        </div>
+      
       <h2>Tasks</h2>
-      <!-- <task-tile /> -->
-      <div class="taskTile" v-for="task in taskList" v-bind:key="task.id">
-        <p>P# {{task.id}}</p>
-        <h4>{{task.taskTitle}}</h4>
-        <!-- <p>Due date: {{project.projectDueDate}}</p> -->
-      </div> 
+        <task-tile />
     </main>
        
     <!-- <home-content /> -->
@@ -54,6 +47,14 @@ export default {
   },
 
   created() {
+
+    service.getAllProjects().then(
+      (response) => {
+        this.projList = response.data;
+        // console.log(response.data)
+      }
+    )
+
       const auth0 = useAuth0()
 
       ServerService.verifyThroughEmail({ email: auth0.user.value.email})
@@ -156,12 +157,15 @@ export default {
 
 <style lang="css" scoped>
 
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 767px) {
   .nav-container {
     grid-template-columns: 1fr;
     padding: 20px;
     width: 100%;
     margin: 0px;
+  }
+  .main-logo {
+    width: 100%;
   }
   .proj-sort-group {
     display: flex;
@@ -176,6 +180,13 @@ export default {
     transition-duration: 0.5s;
     cursor: pointer;    
   }
+
+  .test {
+    display: flex;
+  
+  overflow-x: auto;
+  }
+    
 }
 
 @media only screen and (min-width: 768px) {
@@ -188,21 +199,6 @@ export default {
     padding: 10px;
     width: 100%;
   }
-}
-
-.projTile {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
-  margin: 5px;
-  border: 5px;
-  border-style: solid;
-  border-color: #F2D678;
-  border-radius: 10%;
-  width: 150px;
-  height: 150px;
-  background-color: #335974;
-  color: #F2D678;
 }
 
 .next-steps .fa-link {
