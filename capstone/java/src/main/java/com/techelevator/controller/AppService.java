@@ -88,15 +88,21 @@ public class AppService {
 //    public Project getProjectById(@PathVariable int id) {
 //        return projectDao.getProjectById(id);
 //    }
+
+
+
+    //Projects ********************************************************************
+
     @CrossOrigin
     @GetMapping("/projects/{userid}")
     public List<Project> getProjectByUserId(@PathVariable int userid) {
         return projectDao.getProjectsByUserId(userid);
     }
 
-    @GetMapping("/tasks/{projectid}")
-    public List<Task> getAllTasksByProjectId(@PathVariable int projectid) {
-        return taskDao.getTaskByProjectId(projectid);
+    @GetMapping("/projects/{userid}/{projectid}")
+    public ResponseEntity<List<Project>> getAllProjectByProjectId(@PathVariable int userid, @PathVariable int projectid) {
+        List<Project> projects = projectDao.getAllProjectsByProjectId(userid, projectid);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
     @PostMapping("/projects")
@@ -111,6 +117,12 @@ public class AppService {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    //Tasks *******************************************
+
+    @GetMapping("/tasks/{projectid}")
+    public List<Task> getAllTasksByProjectId(@PathVariable int projectid) {
+        return taskDao.getTaskByProjectId(projectid);
+    }
 
     @GetMapping("/tasks")
     public List<Task> getAllTasks() {

@@ -37,10 +37,6 @@ public class JdbcProjectDao implements ProjectDao {
         return projects;
     }
 
-    public void addProject(Project project) {
-        String sql = "INSERT INTO project (projecttitle, projectdescription, projectimg, projectiscompleted, projectduedate) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate());
-    }
     public List<Project> getProjectsByUserId(int userId) {
         List<Project> projects = new ArrayList<>();
         String sql = "select * from project where userid = ?";
@@ -53,6 +49,28 @@ public class JdbcProjectDao implements ProjectDao {
 
         return projects;
     }
+
+    public List<Project> getAllProjectsByProjectId(int userId, int projectId) {
+        List<Project> projects = new ArrayList<>();
+        String sql = "SELECT * FROM project WHERE userid = ? AND projectid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, projectId);
+
+        while (results.next()) {
+            Project project = mapRowToProject(results);
+            projects.add(project);
+        }
+
+        return projects;
+    }
+
+    public void addProject(Project project) {
+        String sql = "INSERT INTO project (projecttitle, projectdescription, projectimg, projectiscompleted, projectduedate) VALUES (?,?,?,?,?)";
+        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate());
+    }
+
+
+
+
 
 
 
@@ -67,6 +85,8 @@ public class JdbcProjectDao implements ProjectDao {
             return null;
         }
     }
+
+
 
     @Override
     public void insertProject(Project project) {

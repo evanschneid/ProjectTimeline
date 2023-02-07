@@ -16,14 +16,8 @@ export default {
     getAllProjects() {
         return http.get('/projects');
     },
-    
-    // getProject(id) {
-    //     return http.get(`/projects/${id}`);
-    // },
 
-    getAllReports(){
-        return http.get('/worklog');
-    },
+    //Projects
 
     addProject(project) {
         return http.post(`/projects`, project);
@@ -35,12 +29,28 @@ export default {
     getAllProjectsByUserId(id){
         return http.get(`/projects/${id}`)
     },
+
+    getAllProjectByProjectId(userid, projectid){
+        return http.get(`/projects/${userid}/${projectid}`)
+    },
+
+    //Tasks
+
     getAllTasksByUserId(id){
         return http.get(`/tasks/${id}`)
     },
     getAllTasks(){
         return http.get('/tasks')
-    }
+    },
+
+    //Worklogs
+    
+    getAllReports(){
+        return http.get('/worklog');
+    },
+
+    
+    
 
 
     
