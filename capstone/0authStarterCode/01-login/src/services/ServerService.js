@@ -17,9 +17,9 @@ export default {
         return http.get('/projects');
     },
     
-    // getProject(id) {
-    //     return http.get(`/projects/${id}`);
-    // },
+    getProject(id) {
+        return http.get(`/projects/${id}`);
+    },
 
     getAllReports(){
         return http.get('/worklog');

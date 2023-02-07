@@ -4,11 +4,12 @@
       <logo-image />
     </div>
       <h1>TESTING SINGLE PROJECT</h1>
-
-
+      <!-- <single-project-details/> -->
+        <h1 class="current-project">{{currentProject.projectTitle}}</h1>
+        console.log(currentProject.projectTitle);
       {{currentProject}}
     <!-- <v-card> -->
-      <div class="current-project">{{currentProject.id}}</div>
+      <!-- 
       <font-awesome-icon icon="fa-regular fa-star" />
       <div class="projDesc">
         <h2>DESCRIPTION</h2>
@@ -16,17 +17,26 @@
       <button variant="outlined" id="taskBtn">
         Project Tasks
       </button>
-      <button>Update</button>
+      <button>Update</button> -->
   </div>
 </template>
 
 <script>
 import LogoImage from '../components/LogoImage.vue';
+import SingleProjectDetails from '../components/Single Project Page/SingleProjectDetails.vue';
 import service from '../services/ServerService.js';
 
 export default {
   components: {
-      LogoImage
+      LogoImage,
+    SingleProjectDetails
+  },
+
+  data () {
+    return {
+      // projectID : -1,
+      currentProject: {}
+    }
   },
 
   created() {
@@ -35,16 +45,18 @@ export default {
     service.getProject(idPassed).then(
       (response) => {
         this.currentProject = response.data;
+        console.log(response.data)
+
       }
-    )
+    ) 
+    // service.getAllProjectByUserId(idPassed).then(
+    //   (response) => {
+    //     this.currentProject = response.data;
+    //   }
+    // )
   }, 
   
-  data () {
-    return {
-      // projectID : -1,
-      currentProject: {}
-    }
-  },
+  
 
   methods: {
     updateProject() {
@@ -75,5 +87,6 @@ export default {
   border: 2px solid;
   border-radius: 5%;
   text-align: center;
+  
 }
 </style>
