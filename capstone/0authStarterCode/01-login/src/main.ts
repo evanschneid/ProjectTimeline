@@ -15,11 +15,16 @@ import { createVuetify } from "vuetify"
 import * as components from "vuetify/components"
 import * as directives from "vuetify/directives"
 import { faHouse, faList, faTable, faStar } from '@fortawesome/free-solid-svg-icons';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 
 hljs.registerLanguage('json', json);
 
 const app = createApp(App);
+
+app.component('Datepicker', Datepicker);
+
 
 const vuetify = createVuetify({
   components,

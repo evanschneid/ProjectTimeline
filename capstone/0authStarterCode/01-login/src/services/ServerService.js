@@ -16,12 +16,19 @@ export default {
     getAllProjects() {
         return http.get('/projects');
     },
+    
     // getProject(id) {
     //     return http.get(`/projects/${id}`);
     // },
+
+    getAllReports(){
+        return http.get('/worklog');
+    },
+
     addProject(project) {
         return http.post(`/projects`, project);
     },
+    
     updateProject(project) {
         return http.put(`/editProject`, project);
     },

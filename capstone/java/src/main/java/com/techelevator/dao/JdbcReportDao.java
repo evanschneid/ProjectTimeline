@@ -42,10 +42,10 @@ public class JdbcReportDao implements ReportDao {
     @Override
     public List<Report> getReportsByProjectId(int projectId) {
         List<Report> reports = new ArrayList<>();
-        String sqlGetReportsByProjectId = "SELECT * FROM reports WHERE project_id = ?";
+        String sqlGetReportsByProjectId = "SELECT * FROM worklog WHERE projectid = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetReportsByProjectId, projectId);
         while (results.next()) {
-            Report report = mapRowToReport(results);
+            Report report = mapRowToWorkLog(results);
             reports.add(report);
         }
         return reports;
@@ -53,7 +53,14 @@ public class JdbcReportDao implements ReportDao {
 
     @Override
     public List<Report> getAllReports() {
-        return null;
+        String sql = "SELECT * FROM worklog";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        List<Report> reportList = new ArrayList<>();
+        while (results.next()) {
+            Report report = mapRowToWorkLog(results);
+            reportList.add(report);
+        }
+        return reportList;
     }
 
     @Override
@@ -66,14 +73,16 @@ public class JdbcReportDao implements ReportDao {
 
     }
 
-    private Report mapRowToReport(SqlRowSet results) {
-        Report report = new Report();
-        report.setId(results.getInt("id"));
-        /*report.setProjectId(results.getInt("project_id"));
-        report.setTitle(results.getString("title"));
-        report.setDescription(results.getString("description"));*/
-        report.setUserId(results.getInt("user_id"));
-        return report;
+    private Report mapRowToWorkLog(SqlRowSet results) {
+        Report workLog = new Report();
+        workLog.setId(results.getInt("logid"));
+        workLog.setUserId(results.getInt("userid"));
+        workLog.setClockIn(results.getTimestamp("clockin").toLocalDateTime());
+        workLog.setClockOut(results.getTimestamp("clockout").toLocalDateTime());
+        workLog.setProjectID(results.getInt("projectid"));
+        //workLog.setTotalTime(results.getInt("totaltime"));
+        return workLog;
     }
+
 
 }

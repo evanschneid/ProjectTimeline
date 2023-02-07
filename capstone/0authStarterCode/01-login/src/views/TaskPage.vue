@@ -1,6 +1,8 @@
 <template>
   <div>
-    <logo-image />
+    <div class="logo-container">
+      <logo-image />
+    </div>
       <div>
       <div v-for="task in taskList" v-bind:key="task.id">
         <p>Task# {{task.id}}</p>
@@ -86,5 +88,12 @@ export default {
 </script>,
 
 <style>
-
+  .logo-container {
+    display: flex;
+    justify-self: stretch;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding: 1em;
+  }
 </style>

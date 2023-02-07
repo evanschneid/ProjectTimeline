@@ -1,12 +1,13 @@
 package com.techelevator.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Report {
     private int id;
     private int userId;
-    private Date clockIn;
-    private Date clockOut;
+    private LocalDateTime clockIn;
+    private LocalDateTime clockOut;
     private int projectID;
     private int totalTime;
     private String addedComment;
@@ -16,7 +17,7 @@ public class Report {
     public Report() {
     }
 
-    public Report(int id, int userId, Date clockIn, Date clockOut, int projectID, int totalTime, String addedComment) {
+    public Report(int id, int userId, LocalDateTime clockIn, LocalDateTime clockOut, int projectID, int totalTime, String addedComment) {
         this.id = id;
         this.userId = userId;
         this.clockIn = clockIn;
@@ -44,19 +45,19 @@ public class Report {
         this.userId = userId;
     }
 
-    public Date getClockIn() {
+    public LocalDateTime getClockIn() {
         return clockIn;
     }
 
-    public void setClockIn(Date clockIn) {
+    public void setClockIn(LocalDateTime clockIn) {
         this.clockIn = clockIn;
     }
 
-    public Date getClockOut() {
+    public LocalDateTime getClockOut() {
         return clockOut;
     }
 
-    public void setClockOut(Date clockOut) {
+    public void setClockOut(LocalDateTime clockOut) {
         this.clockOut = clockOut;
     }
 
