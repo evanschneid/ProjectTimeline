@@ -19,6 +19,9 @@ public class JdbcProjectDao implements ProjectDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
+
+
     @Override
     public List<Project> getAllProjects() {
         List<Project> projects = new ArrayList<>();
@@ -38,8 +41,6 @@ public class JdbcProjectDao implements ProjectDao {
         String sql = "INSERT INTO project (projecttitle, projectdescription, projectimg, projectiscompleted, projectduedate) VALUES (?,?,?,?,?)";
         jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate());
     }
-
-
     public List<Project> getProjectsByUserId(int userId) {
         List<Project> projects = new ArrayList<>();
         String sql = "select * from project where userid = ?";
@@ -52,6 +53,8 @@ public class JdbcProjectDao implements ProjectDao {
 
         return projects;
     }
+
+
 
 
     @Override
@@ -77,8 +80,10 @@ public class JdbcProjectDao implements ProjectDao {
 
     @Override
     public void deleteProject(int id) {
-
+        String sql = "DELETE FROM project WHERE projectid = ?";
+        jdbcTemplate.update(sql, id);
     }
+
 
     private Project mapRowToProject(SqlRowSet rs) {
         Project project = new Project();

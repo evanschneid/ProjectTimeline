@@ -105,6 +105,13 @@ public class AppService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/projects/{id}")
+    public ResponseEntity<Void> deleteProject(@PathVariable int id) {
+        projectDao.deleteProject(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
     @GetMapping("/tasks")
     public List<Task> getAllTasks() {
         return taskDao.getAllTasks();
