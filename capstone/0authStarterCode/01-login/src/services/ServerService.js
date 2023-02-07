@@ -5,12 +5,12 @@ const http = axios.create({
   
 export default {
 
-    verifyThroughEmail(data){
-        return http.post('http://localhost:9000/user', data)
+    verifyThroughEmail(email){
+        return http.post('http://localhost:9000/user', email)
     },
 
-    getUserByEmail(data){
-        return http.get(`http://localhost:9000/user?email=${data}`)
+    getUserByEmail(email){
+        return http.get(`http://localhost:9000/user?email=${email}`)
     },
 
     //Projects
@@ -42,11 +42,28 @@ export default {
 
     //Tasks
 
-    getAllTasksByUserId(id){
-        return http.get(`/tasks/${id}`)
-    },
     getAllTasks(){
         return http.get('/tasks')
+    },
+   
+    getAllTasksByUserId(userId){
+        return http.get(`/tasks/${userId}`)
+    },
+
+    getAllTasksByTaskId(taskId){
+        return http.get(`/task/${taskId}`)
+    },
+    
+    addTask(task){
+        return http.post('/task', task)
+    },
+
+    updateTask(task){
+        return http.put('task/', task)
+    },
+
+    deleteTask(taskId){
+        return null
     },
 
     //Worklogs
@@ -55,9 +72,23 @@ export default {
         return http.get('/worklog');
     },
 
-    
-    
+    getAllReportsByUser(userId){
+        return null
+    },
 
+    getAllReportsByReportId(reportId){
+        return null
+    },
 
-    
+    createReport(report){
+        return null
+    },
+
+    updateReport(reportId){
+        return null
+    },
+
+    deleteReport(reportId){
+        return null
+    },
 }

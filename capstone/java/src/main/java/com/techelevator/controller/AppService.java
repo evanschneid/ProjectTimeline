@@ -123,15 +123,46 @@ public class AppService {
 
     //Tasks *******************************************
 
-    @GetMapping("/tasks/{projectid}")
-    public List<Task> getAllTasksByProjectId(@PathVariable int projectid) {
-        return taskDao.getTaskByProjectId(projectid);
-    }
-
     @GetMapping("/tasks")
     public List<Task> getAllTasks() {
         return taskDao.getAllTasks();
     }
+
+//    @GetMapping("/tasks/{userId}/{projectId}/{taskId}")
+//    public ResponseEntity<Task> getAllTasksByTaskId(@PathVariable int userId, @PathVariable int projectId, @PathVariable int taskId) {
+//        Task task = taskDao.getAllTasksByTaskId(userId, projectId, taskId);
+//        return new ResponseEntity<>(task, HttpStatus.OK);
+//    }
+
+    @GetMapping("/task/{taskId}")
+    public ResponseEntity<Task> getAllTasksByTaskId(@PathVariable int taskId) {
+        Task task = taskDao.getAllTasksByTaskId(taskId);
+        return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
+    @PostMapping("/task")
+    public ResponseEntity<Void> addTask(@RequestBody Task task) {
+        taskDao.addTask(task);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/task")
+    public ResponseEntity<Void> updateTask(@RequestBody Task task) {
+        taskDao.updateTask(task);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/task/{taskId}")
+    public ResponseEntity<Void> deleteTask(@PathVariable int taskId) {
+        taskDao.deleteTask(taskId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+
+    //Worklog **********************************************************************
+
+
 
     @GetMapping("/worklog")
     public List<Report> getAllReports() {
