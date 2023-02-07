@@ -1,18 +1,21 @@
 <template>
   <div>
-      <div class="projTile-container">
-        <div class="projTile" 
-        v-for="project in projCard" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
-            <h4>{{project.projectTitle}}</h4>
-            <p>Due date: {{project.projectDueDate}}</p>
-        </div>
-      </div>
+    <div class="projTile-container">
+      <router-link v-bind:to="{name: 'project', params: {id: project.id}}" v-for="project in projCard" v-bind:key="project.id">
+          <div class="projTile" 
+          > <!-- need to add v-on:click -->
+              <h4>{{project.projectTitle}}</h4>
+              <p>Due date: {{project.projectDueDate}}</p>
+
+          </div>
+      </router-link>
       <!-- <form>
         {{projCard}}<br>
         Proj No.: <input type="text" v-model="projCard.projectID" /><br>
         Proj Title.: <input type="text" v-model="projCard.projectTitle" /><br>
         Due Date: <input type="text" v-model="projCard.projectDueDate" />
       </form> -->
+  </div>
   </div>
 </template>
 
@@ -21,6 +24,7 @@ import service from '../../services/ServerService.js'
 
 export default {
   name: "projTile",
+  
   data() {
     return {
       projCard:[] 
@@ -50,7 +54,8 @@ export default {
 
 
 .projTile {
-  display: inline-block;
+  display: inline-flex;
+  flex-wrap: wrap;
   padding: 10px;
   margin: 5px;
   border: 5px;
@@ -58,7 +63,7 @@ export default {
   border-color: #F2D678;
   border-radius: 10%;
   flex: 0 0 auto;
-  width: 45%;
+  width: 150px;
   height: 150px;
   background-color: #335974;
   color: white;

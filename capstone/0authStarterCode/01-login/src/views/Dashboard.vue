@@ -11,10 +11,10 @@
         <button class="sort-projects-btn">Upcoming</button>
         <button class="sort-projects-btn">Completed</button>
       </div>
-        <div>
-          <proj-tile />
-          <!-- <router-link v-bind:to="{name: 'project', params: {id: project.projectid}}">Link Button</router-link> -->
-        </div>
+          <!-- <router-link v-bind:to="{name: 'project', params: {id: project.projectid}}"> -->
+          <!-- <router-link v-for="project in projList" v-bind:key="project" v-bind:to="{name: 'project', params: {id: project.projectid}}"> -->
+            <proj-tile v-bind:project="project" />
+          <!-- </router-link> -->
       
       <h2>Tasks</h2>
         <task-tile />
@@ -185,10 +185,8 @@ export default {
     border-radius: 10px;
     border-color: #335974;
     background-color: #78B2C6;
-    transition-duration: 0.5s;
-    cursor: pointer;  
-    padding: 0px 7px 0px 7px;  
-    cursor: pointer;    
+    transition-duration: 0.5s; 
+    padding: 0px 7px 0px 7px;   
   }
 
   .test {

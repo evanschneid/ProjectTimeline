@@ -12,19 +12,22 @@ export default {
     getUserByEmail(data){
         return http.get(`http://localhost:9000/user?email=${data}`)
     },
-    
+
+    //Projects
+
     getAllProjects() {
         return http.get('/projects');
     },
-    
-    // getProject(id) {
-    //     return http.get(`/projects/${id}`);
-    // },
 
-    getAllReports(){
-        return http.get('/worklog');
+    getAllProjectsByUserId(id){
+        return http.get(`/projects/${id}`)
+        
     },
 
+    getAllProjectByProjectId(userid, projectid){
+        return http.get(`/projects/${userid}/${projectid}`)
+    },
+    
     addProject(project) {
         return http.post(`/projects`, project);
     },
@@ -32,15 +35,28 @@ export default {
     updateProject(project) {
         return http.put(`/editProject`, project);
     },
-    getAllProjectsByUserId(id){
-        return http.get(`/projects/${id}`)
+
+    deleteProject(id) {
+        return http.delete(`/projects/${id}`);
     },
+
+    //Tasks
+
     getAllTasksByUserId(id){
         return http.get(`/tasks/${id}`)
     },
     getAllTasks(){
         return http.get('/tasks')
-    }
+    },
+
+    //Worklogs
+    
+    getAllReports(){
+        return http.get('/worklog');
+    },
+
+    
+    
 
 
     

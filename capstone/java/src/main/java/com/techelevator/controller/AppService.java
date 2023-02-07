@@ -48,6 +48,9 @@ public class AppService {
     @Autowired
     private JdbcUserDao jdbcUserDao;
 
+
+    // User ****************************************************************
+
     @PostMapping("/user")
     public ResponseEntity<String> createUser(@RequestBody Map<String, String> payload) {
         String email = payload.get("email");
@@ -79,20 +82,46 @@ public class AppService {
         }
     }
 
+    //Projects ********************************************************************
+
     @GetMapping("/projects")
     public List<Project> getAllProjects() {
         return projectDao.getAllProjects();
     }
 
-//    @GetMapping("/projects/{id}")
-//    public Project getProjectById(@PathVariable int id) {
-//        return projectDao.getProjectById(id);
-//    }
     @CrossOrigin
     @GetMapping("/projects/{userid}")
     public List<Project> getProjectByUserId(@PathVariable int userid) {
         return projectDao.getProjectsByUserId(userid);
     }
+
+    @GetMapping("/projects/{userid}/{projectid}")
+    public ResponseEntity<List<Project>> getAllProjectByProjectId(@PathVariable int userid, @PathVariable int projectid) {
+        List<Project> projects = projectDao.getAllProjectsByProjectId(userid, projectid);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
+    @PostMapping("/projects")
+    public ResponseEntity<Object> addProject(@RequestBody Project project) {
+        projectDao.addProject(project);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/projects/{id}")
+    public ResponseEntity<Void> deleteProject(@PathVariable int id) {
+        projectDao.deleteProject(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/editProject")
+    public ResponseEntity<Void> updateProject(@RequestBody Project project) {
+        projectDao.updateProject(project);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+
+    //Tasks *******************************************
 
     @GetMapping("/tasks/{projectid}")
     public List<Task> getAllTasksByProjectId(@PathVariable int projectid) {
