@@ -34,6 +34,12 @@ public class JdbcProjectDao implements ProjectDao {
         return projects;
     }
 
+    public void addProject(Project project) {
+        String sql = "INSERT INTO project (projecttitle, projectdescription, projectimg, projectiscompleted, projectduedate) VALUES (?,?,?,?,?)";
+        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate());
+    }
+
+
     public List<Project> getProjectsByUserId(int userId) {
         List<Project> projects = new ArrayList<>();
         String sql = "select * from project where userid = ?";

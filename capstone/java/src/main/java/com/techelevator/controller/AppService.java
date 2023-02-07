@@ -99,6 +99,12 @@ public class AppService {
         return taskDao.getTaskByProjectId(projectid);
     }
 
+    @PostMapping("/projects")
+    public ResponseEntity<Object> addProject(@RequestBody Project project) {
+        projectDao.addProject(project);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @GetMapping("/tasks")
     public List<Task> getAllTasks() {
         return taskDao.getAllTasks();
