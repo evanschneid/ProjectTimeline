@@ -34,7 +34,11 @@
         >
         <td>{{ item.id }}</td>
         <td>{{ item.projectTitle }}</td>
+<<<<<<< HEAD
         <td>{{ item.totalTime/60 }} hours</td>
+=======
+        <td>{{ item.totalTime }}</td>
+>>>>>>> main
         </tr>
         
     </tbody>
