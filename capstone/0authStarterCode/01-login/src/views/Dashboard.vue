@@ -1,10 +1,11 @@
 <template>
   <div class="nav-container">
-    <!-- <hero /> -->
-    <!-- <hr /> -->
-    <main>
+    <div class="logo-container">
       <logo-image />
+    </div>
+    <main>
       <h2>Projects</h2>
+      <add-project />
       <div class="proj-sort-group">
         <button class="sort-projects-btn">All</button>
         <button class="sort-projects-btn">Upcoming</button>
@@ -32,7 +33,7 @@ import { useAuth0 } from '@auth0/auth0-vue';
 import router from 'vue-router'; 
 import { useRouter } from 'vue-router';
 import LogoImage from '../components/LogoImage.vue';
-
+import AddProject from '../components/AddProject.vue';
 import service from '../services/ServerService.js'
 import ServerService from '../services/ServerService.js';
 
@@ -150,7 +151,8 @@ export default {
     //HomeContent,
     projTile,
     TaskTile,
-    LogoImage
+    LogoImage,
+    AddProject
   },
 };
 </script>,
@@ -159,14 +161,19 @@ export default {
 
 @media only screen and (max-width: 767px) {
   .nav-container {
-    grid-template-columns: 1fr;
-    padding: 20px;
-    width: 100%;
-    margin: 0px;
+    padding: 0 6% 6% 6%;
   }
-  .main-logo {
-    width: 100%;
+  .logo-container {
+    display: flex;
+    justify-self: stretch;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding: 1em;
   }
+  /* .main-logo {
+    width: 100%;
+  } */
   .proj-sort-group {
     display: flex;
     justify-content: space-around;
@@ -183,8 +190,7 @@ export default {
 
   .test {
     display: flex;
-  
-  overflow-x: auto;
+    overflow-x: auto;
   }
     
 }
