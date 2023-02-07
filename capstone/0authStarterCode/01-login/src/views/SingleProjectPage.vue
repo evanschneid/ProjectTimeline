@@ -6,7 +6,7 @@
 
       {{currentProject}}
     <!-- <v-card> -->
-      <div class="current-project">Selected Project 2</div>
+      <div class="current-project">{{currentProject.id}}</div>
       <font-awesome-icon icon="fa-regular fa-star" />
       <div class="projDesc">
         <h2>DESCRIPTION</h2>
@@ -14,22 +14,13 @@
       <button variant="outlined" id="taskBtn">
         Project Tasks
       </button>
-    <!-- </v-card> -->
-    
-      <!-- <project-tile />
-      
-      <form>
-        {{projCard}}<br>
-        Proj No.: <input type="text" v-model="projCard.projectID" /><br>
-        Proj Title.: <input type="text" v-model="projCard.projectTitle" /><br>
-        Due Date: <input type="text" v-model="projCard.projectDueDate" />
-      </form> -->
+      <button>Update</button>
   </div>
 </template>
 
 <script>
 import LogoImage from '../components/LogoImage.vue';
-// import service from '../services/ServerService.js';
+import service from '../services/ServerService.js';
 
 export default {
   components: {
@@ -37,44 +28,33 @@ export default {
   },
 
   created() {
-     this.currentProject = this.$route.params.id;
-
-  // service.getProject(id).then(
-  //   (response) => {
-  //     this.currentProject = response.data;
-  //       }
-  // )
+    //  this.currentProject = this.$route.params.id;
+    const idPassed = this.$route.params.id;
+    service.getProject(idPassed).then(
+      (response) => {
+        this.currentProject = response.data;
+      }
+    )
   }, 
   
   data () {
     return {
-      projectID : -1,
-       currentProject: {}
+      // projectID : -1,
+      currentProject: {}
     }
+  },
+
+  methods: {
+    updateProject() {
+    service.updateProject(this.currentProject).then(
+      () => {
+        windwo.alert("Project info updated.");
+        this.$router.push({name : 'dashboard'})
+      }
+    )}
   }
 }
 
-// import ProjectTile from '../components/Dashboard/ProjectTile.vue';
-
-// export default {
-//   components: { ProjectTile },
-
-//   data() {
-//     return {
-//       currentProject: {}
-//     }
-//   },
-//   created () {
-//   this.projectID = this.$route.params.id;
-
-//   service.getProject(id).then(
-//     (response) => {
-//       this.currentProject = response.data;
-//         }
-//   )
-// }
-
-// }
 </script>
 
 <style>
