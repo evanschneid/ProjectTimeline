@@ -1,5 +1,7 @@
 package com.techelevator.dao;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,15 +55,17 @@ public class JdbcReportDao implements ReportDao {
 
     @Override
     public List<Report> getAllReports() {
-        String sql = "SELECT * FROM worklog";
+        String sql = "SELECT w.*, p.projecttitle FROM worklog w JOIN project p ON w.projectid = p.projectid";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         List<Report> reportList = new ArrayList<>();
         while (results.next()) {
             Report report = mapRowToWorkLog(results);
+            report.setProjectTitle(results.getString("projecttitle"));
             reportList.add(report);
         }
         return reportList;
     }
+
 
     @Override
     public void updateReport(Report report) {
@@ -80,9 +84,17 @@ public class JdbcReportDao implements ReportDao {
         workLog.setClockIn(results.getTimestamp("clockin").toLocalDateTime());
         workLog.setClockOut(results.getTimestamp("clockout").toLocalDateTime());
         workLog.setProjectID(results.getInt("projectid"));
-        //workLog.setTotalTime(results.getInt("totaltime"));
+
+        LocalDateTime clockIn = workLog.getClockIn();
+        LocalDateTime clockOut = workLog.getClockOut();
+        long hours = ChronoUnit.HOURS.between(clockIn, clockOut);
+        long minutes = ChronoUnit.MINUTES.between(clockIn, clockOut) - (hours * 60);
+        long totalTime = (hours * 60) + minutes;
+
+        workLog.setTotalTime(totalTime);
+
         return workLog;
     }
 
 
-}
+    }
