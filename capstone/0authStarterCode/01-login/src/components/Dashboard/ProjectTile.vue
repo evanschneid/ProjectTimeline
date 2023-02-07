@@ -30,6 +30,7 @@ export default {
     service.getAllProjects().then(
       (response) => {
         this.projCard = response.data;
+        console.log(response.data);
       }
     )
   }
@@ -60,7 +61,7 @@ export default {
   width: 45%;
   height: 150px;
   background-color: #335974;
-  color: #F2D678;
+  color: white;
 }
 
 
