@@ -83,7 +83,7 @@ export default {
       (response) => {
         this.worklogs = response.data;
       }
-    ),
+    )
     // ServerService.getAllReports().then(response => {
     //   if (response.data !== undefined) {
     //     this.worklogs = response.data; 
