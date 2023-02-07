@@ -72,19 +72,30 @@
 <script>
 import ServerService from '../../services/ServerService'
 export default {
-//   name: "worklogReports",
-//   data() {
-//     return {
-//       worklogs:[] 
-//     }
-//   },
-//   created () {
-//     service.getAllworklogs().then(
-//       (response) => {
-//         this.worklogs = response.data;
-//       }
-//     )
-//   }
+  name: "worklogReports",
+  data() {
+    return {
+      worklogs:[] 
+    }
+  },
+  created () {
+    service.getAllworklogs().then(
+      (response) => {
+        this.worklogs = response.data;
+      }
+    ),
+    // ServerService.getAllReports().then(response => {
+    //   if (response.data !== undefined) {
+    //     this.worklogs = response.data; 
+    //       console.log(response.data)
+    //     } else {
+    //       console.log("No Reports");
+    //     }
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
+  },
     computed: {
         filteredProjectList() {
             // switch this to filter thru dates once we have date coming thru
@@ -105,72 +116,6 @@ export default {
             const filteredItems = data.filter((item, index) => 
             item.start_date >= filterDate.start_date && item.end_date <= filterDate.end_date);
         }
-    },
-
-
-    data () {
-      return {
-        search: '',
-        // dates: ['2019-09-10', '2019-09-20'],
-        // worklogs: [
-        //   {
-        //     user: 'Manager 1',
-        //     project: 'Project 1',
-        //     hours: 15
-        //   },
-        //   {
-        //     user: 'Manager 1',
-        //     project: 'Project 2',
-        //     hours: 15
-        //   },
-        //   {
-        //     user: 'Manager 1',
-        //     project: 'Project 3',
-        //     hours: 10
-        //   },
-        //   {
-        //     user: 'User 1',
-        //     project: 'Project 1',
-        //     hours: 35
-        //   },
-        //   {
-        //     user: 'User 1',
-        //     project: 'Project 3',
-        //     hours: 5
-        //   },
-        //   {
-        //     user: 'User 2',
-        //     project: 'Project 2',
-        //     hours: 20
-        //   },
-        //   {
-        //     user: 'User 2',
-        //     project: 'Project 3',
-        //     hours: 20
-        //   },
-        //   {
-        //     user: 'User 3',
-        //     project: 'Project 1',
-        //     hours: 40
-        //   },
-        //   {
-        //     user: 'User 4',
-        //     project: 'Project 1',
-        //     hours: 10
-        //   },
-        //   {
-        //     user: 'User 4',
-        //     project: 'Project 2',
-        //     hours: 20
-        //   },
-        //   {
-        //     user: 'User 4',
-        //     project: 'Project 3',
-        //     hours: 10
-        //   }
-        // ],
-        worklogs: [],
-      }
     },
     created() {
       ServerService.getAllReports().then(response => {

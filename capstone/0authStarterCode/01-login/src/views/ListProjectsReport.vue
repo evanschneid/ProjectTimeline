@@ -21,6 +21,10 @@ export default {
 
 <style>
   .logo-container {
+    padding: 0 6% 6% 6%;
+  }
+
+  .logo-container {
     display: flex;
     justify-self: stretch;
     justify-content: space-around;

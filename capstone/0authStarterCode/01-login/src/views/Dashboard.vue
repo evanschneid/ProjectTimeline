@@ -1,7 +1,5 @@
 <template>
   <div class="nav-container">
-    <!-- <hero /> -->
-    <!-- <hr /> -->
     <div class="logo-container">
       <logo-image />
     </div>
@@ -163,10 +161,7 @@ export default {
 
 @media only screen and (max-width: 767px) {
   .nav-container {
-    grid-template-columns: 1fr;
-    padding: 20px;
-    width: 100%;
-    margin: 0px;
+    padding: 0 6% 6% 6%;
   }
   .logo-container {
     display: flex;
@@ -195,8 +190,7 @@ export default {
 
   .test {
     display: flex;
-  
-  overflow-x: auto;
+    overflow-x: auto;
   }
     
 }

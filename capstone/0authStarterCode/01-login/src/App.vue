@@ -15,9 +15,10 @@
         <a href="https://auth0.com">Auth0</a>
       </p>
     </footer> -->
-    <footer-nav-bar />
   </div>
+  <footer-nav-bar />
 </template>
+
 <script lang="ts">
 import { useAuth0 } from '@auth0/auth0-vue';
 import FooterNavBar from './components/FooterNavBar.vue';
@@ -38,6 +39,7 @@ export default {
   }
 };
 </script>
+
 <style>
 body, html {
   height: 100%;
@@ -47,7 +49,7 @@ body, html {
 
 #app {
   height: 100vh;
-  overflow: scroll;
+  overflow: auto;
   background-color: #78b2c6;
 }
 
