@@ -2,9 +2,10 @@
   <div>
     <div class="tile-container">
         <div class="taskTile" 
-        v-for="project in projCard" v-bind:key="project.projectid"> <!-- need to add v-on:click -->
-            <h4>{{project.projectTitle}}</h4>
-            <p>Due date: {{project.projectDueDate}}</p>
+        v-for="task in taskCard" 
+        v-bind:key="task.taskid"> <!-- need to add v-on:click -->
+            <h4>{{task.taskTitle}}</h4>
+            <p>Due date: {{task.taskDueDate}}</p>
       </div>
     </div>
       <!-- <form>
@@ -23,13 +24,14 @@ export default {
   name: "taskTile",
   data() {
     return {
-      projCard:[]       
+      taskCard:[]       
     }
   },
   created () {
-    service.getAllProjects().then(
+    service.getAllTasks().then(
       (response) => {
-        this.projCard = response.data;
+        this.taskCard = response.data;
+        console.log(response.data);
       }
     )
   }
