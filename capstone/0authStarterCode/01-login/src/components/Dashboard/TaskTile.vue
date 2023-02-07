@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="tile-container">
-        <div class="taskTile" 
-        v-for="task in taskCard" 
-        v-bind:key="task.taskid"> <!-- need to add v-on:click -->
+      <router-link v-bind:to="{name: 'tasks', params: {id: task.id}}" v-for="task in taskCard" v-bind:key="task.id">
+      <div class="taskTile" >
+       <!-- need to add v-on:click -->
             <h4>{{task.taskTitle}}</h4>
             <p>Due date: {{task.taskDueDate}}</p>
       </div>
+      </router-link>
     </div>
       <!-- <form>
         {{taskCard}}<br>
@@ -48,7 +49,8 @@ export default {
 }
 
 .taskTile {
-  display: inline-block;
+  display: inline-flex;
+  flex-wrap: wrap;
   padding: 10px;
   margin: 5px;
   border: 5px;
@@ -56,7 +58,7 @@ export default {
   border-color: #335974;
   border-radius: 10%;
   flex: 0 0 auto;
-  width: 45%;
+  width: 150px;
   height: 150px;
   background-color: #F2D678;
   color: #335974;
