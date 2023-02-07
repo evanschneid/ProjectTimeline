@@ -95,9 +95,9 @@ public class AppService {
         return projectDao.getProjectsByUserId(userid);
     }
 
-    @GetMapping("/projects/{userid}/{projectid}")
-    public ResponseEntity<List<Project>> getAllProjectByProjectId(@PathVariable int userid, @PathVariable int projectid) {
-        List<Project> projects = projectDao.getAllProjectsByProjectId(userid, projectid);
+    @GetMapping("/singleProject/{projectid}")
+    public ResponseEntity<List<Project>> getAllProjectByProjectId(@PathVariable int projectid) {
+        List<Project> projects = projectDao.getAllProjectsByProjectId(projectid);
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 

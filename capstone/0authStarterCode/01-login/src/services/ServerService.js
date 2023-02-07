@@ -15,17 +15,19 @@ export default {
 
     //Projects
 
+    //Manager
     getAllProjects() {
         return http.get('/projects');
     },
 
-    getAllProjectsByUserId(id){
-        return http.get(`/projects/${id}`)
-        
+    //Employee
+    getAllProjectsByUserId(userid){
+        return http.get(`/projects/${userid}`)
     },
 
-    getAllProjectByProjectId(userid, projectid){
-        return http.get(`/projects/${userid}/${projectid}`)
+    //Individual Project Page
+    getProjectByProjectId(projectid){
+        return http.get(`/singleProject/${projectid}`)
     },
     
     addProject(project) {
@@ -73,6 +75,10 @@ export default {
     },
 
     getAllReportsByUser(userId){
+        return null
+    },
+
+    getAllReportsForUserByProjectId(userId, projectid){
         return null
     },
 
