@@ -1,0 +1,26 @@
+<!-- <input type="text" v-model="search" placeholder="Search Project..." /> -->
+        <!-- <div class="searchBar" v-for="item in filteredList" :key="item.user"></div> -->
+
+        <!-- <v-row> testing date picker here. evan will clean this out once the date range is working 
+            <v-col
+            cols="12"
+            sm="6"
+            >
+            <v-date-picker
+                v-model="dates"
+                range
+            ></v-date-picker>
+            </v-col>
+            <v-col
+            cols="12"
+            sm="6"
+            >
+            <v-text-field
+                v-model="dateRangeText"
+                label="Date range"
+                prepend-icon="mdi-calendar"
+                readonly
+            ></v-text-field>
+            model: {{ dates }}
+            </v-col>
+        </v-row> -->
