@@ -48,6 +48,9 @@ public class AppService {
     @Autowired
     private JdbcUserDao jdbcUserDao;
 
+
+    // User ****************************************************************
+
     @PostMapping("/user")
     public ResponseEntity<String> createUser(@RequestBody Map<String, String> payload) {
         String email = payload.get("email");
@@ -79,19 +82,12 @@ public class AppService {
         }
     }
 
+    //Projects ********************************************************************
+
     @GetMapping("/projects")
     public List<Project> getAllProjects() {
         return projectDao.getAllProjects();
     }
-
-//    @GetMapping("/projects/{id}")
-//    public Project getProjectById(@PathVariable int id) {
-//        return projectDao.getProjectById(id);
-//    }
-
-
-
-    //Projects ********************************************************************
 
     @CrossOrigin
     @GetMapping("/projects/{userid}")
@@ -116,6 +112,14 @@ public class AppService {
         projectDao.deleteProject(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/editProject")
+    public ResponseEntity<Void> updateProject(@RequestBody Project project) {
+        projectDao.updateProject(project);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 
     //Tasks *******************************************
 
