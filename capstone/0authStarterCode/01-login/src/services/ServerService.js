@@ -75,26 +75,26 @@ export default {
     },
 
     getAllReportsByUser(userId){
-        return null
+        return http.get(`/worklog/user/${userId}`)
     },
 
     getAllReportsForUserByProjectId(userId, projectid){
-        return null
+        return http.get(`/worklog/${userId}/${projectid}`)
     },
 
-    getAllReportsByReportId(reportId){
-        return null
+    getReportByReportId(reportId){
+        return http.get(`/worklog/${reportId}`)
     },
 
     createReport(report){
-        return null
+        return http.post('/worklog', report)
     },
 
-    updateReport(reportId){
-        return null
+    updateReport(reportId, report){
+        return http.put(`/worklog/${reportId}`, report)
     },
 
     deleteReport(reportId){
-        return null
+        return http.delete(`/worklog/${reportId}`)
     },
 }

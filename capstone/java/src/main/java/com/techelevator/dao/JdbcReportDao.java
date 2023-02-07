@@ -24,8 +24,13 @@ public class JdbcReportDao implements ReportDao {
 
     //Temp method
 
-    @Override
     public void createReport(Report report) {
+
+
+
+        String sql = "INSERT INTO worklog (userid, clockin, clockout, projectid) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, report.getUserId(), report.getClockIn(), report.getClockOut(), report.getProjectId());
+
 
     }
 
@@ -37,8 +42,14 @@ public class JdbcReportDao implements ReportDao {
     }*/
 
     @Override
-    public Report getReportById(int id) {
-        return null;
+    public Report getReportById(int reportId) {
+        String sql = "SELECT * FROM worklog WHERE logid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, reportId);
+        if(results.next()) {
+            return mapRowToWorkLog(results);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -52,6 +63,31 @@ public class JdbcReportDao implements ReportDao {
         }
         return reports;
     }
+
+    public List<Report> getAllReportsByUser(int userId) {
+        String sql = "SELECT * FROM worklog WHERE userid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+
+        List<Report> workLogs = new ArrayList<>();
+        while (results.next()) {
+            workLogs.add(mapRowToWorkLog(results));
+        }
+
+        return workLogs;
+    }
+
+    public List<Report> getAllReportsForUserByProjectId(int userId, int projectId) {
+        List<Report> reports = new ArrayList<>();
+        String sql = "SELECT * FROM worklog WHERE userid = ? AND projectid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, projectId);
+        while (results.next()) {
+            reports.add(mapRowToWorkLog(results));
+        }
+        return reports;
+    }
+
+
+
 
     @Override
     public List<Report> getAllReports() {
@@ -67,15 +103,17 @@ public class JdbcReportDao implements ReportDao {
     }
 
 
-    @Override
-    public void updateReport(Report report) {
-
+    public void updateReport(int reportId, Report report) {
+        String sql = "UPDATE worklog SET clockin = ?, clockout = ?, projectid = ? WHERE logid = ?";
+        jdbcTemplate.update(sql, report.getClockIn(), report.getClockOut(), report.getProjectId(), reportId);
     }
 
-    @Override
-    public void deleteReport(int id) {
 
+    public void deleteReport(int reportId) {
+        String sql = "DELETE FROM worklog WHERE logid = ?";
+        jdbcTemplate.update(sql, reportId);
     }
+
 
     private Report mapRowToWorkLog(SqlRowSet results) {
         Report workLog = new Report();
