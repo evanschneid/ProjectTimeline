@@ -23,7 +23,6 @@
             >
                 <template v-slot:activator="{ on, attrs }">
                     <Datepicker
-                    class="date-picker-style"
                     placeholder="Due Date"
                     v-model="task.taskDueDate"
                     @input="menu1=false"
@@ -49,8 +48,9 @@
 </template>
 
 <script>
-
-
+import ServerService from '../services/ServerService';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 export default {
   name: 'create-task',
   //props: ["projectId"],
@@ -64,15 +64,26 @@ export default {
     
       },
       menu1: false,
-      dialog: false
+      dialog: false,
+
     };
   },
   methods: {
       submit(){
-
-      }
-    
+        ServerService.addTask(this.task);
+        console.log(this.task);
+        this.task.taskTitle='';
+        this.task.taskDescription='';
+        this.task.taskDueDate=''
+      },
   },
+  computed: {
+    dateFormatter(){
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let dateArray = this.task.taskDueDate.split(' ').slice(1,4);
+        return ""+dateArray[2]+ "-" + dateArray[1] + "-" + (months.indexOf(dateArray[0])+1)
+      }
+  }
 };
 </script>
 
