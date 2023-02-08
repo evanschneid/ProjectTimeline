@@ -159,6 +159,9 @@ export default {
 @media only screen and (max-width: 767px) {
   .nav-container {
     padding: 0 6% 6% 6%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
   .logo-container {
     display: flex;
@@ -174,20 +177,17 @@ export default {
   .proj-sort-group {
     display: flex;
     justify-content: space-around;
-    width: 100%; 
+    margin: 1em;
   }
   .sort-projects-btn {
-    border: solid;
+    /* border: solid;
     border-radius: 10px;
     border-color: #335974;
-    background-color: #78B2C6;
+    background-color: #78B2C6; */
+    color: #335974;
+
     transition-duration: 0.5s; 
     padding: 0px 7px 0px 7px;   
-  }
-
-  .test {
-    display: flex;
-    overflow-x: auto;
   }
     
 }

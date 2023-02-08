@@ -15,17 +15,19 @@ export default {
 
     //Projects
 
+    //Manager
     getAllProjects() {
         return http.get('/projects');
     },
 
-    getAllProjectsByUserId(id){
-        return http.get(`/projects/${id}`)
-        
+    //Employee
+    getAllProjectsByUserId(userid){
+        return http.get(`/projects/${userid}`)
     },
 
-    getAllProjectByProjectId(userid, projectid){
-        return http.get(`/projects/${userid}/${projectid}`)
+    //Individual Project Page
+    getProjectByProjectId(projectid){
+        return http.get(`/singleProject/${projectid}`)
     },
     
     addProject(project) {
@@ -63,7 +65,7 @@ export default {
     },
 
     deleteTask(taskId){
-        return http.delete(`task/{$taskId}`)
+        return http.delete(`task/${taskId}`)
     },
 
     //Worklogs
@@ -73,22 +75,26 @@ export default {
     },
 
     getAllReportsByUser(userId){
-        return null
+        return http.get(`/worklog/user/${userId}`)
     },
 
-    getAllReportsByReportId(reportId){
-        return null
+    getAllReportsForUserByProjectId(userId, projectid){
+        return http.get(`/worklog/${userId}/${projectid}`)
+    },
+
+    getReportByReportId(reportId){
+        return http.get(`/worklog/${reportId}`)
     },
 
     createReport(report){
-        return null
+        return http.post('/worklog', report)
     },
 
-    updateReport(reportId){
-        return null
+    updateReport(reportId, report){
+        return http.put(`/worklog/${reportId}`, report)
     },
 
     deleteReport(reportId){
-        return null
+        return http.delete(`/worklog/${reportId}`)
     },
 }

@@ -9,7 +9,7 @@ public class Report {
     private int userId;
     private LocalDateTime clockIn;
     private LocalDateTime clockOut;
-    private int projectID;
+    private int projectId;
     private long totalTime;
     private String addedComment;
 
@@ -20,12 +20,12 @@ public class Report {
     public Report() {
     }
 
-    public Report(int id, int userId, LocalDateTime clockIn, LocalDateTime clockOut, int projectID, long totalTime, String addedComment, String projectTitle) {
+    public Report(int id, int userId, LocalDateTime clockIn, LocalDateTime clockOut, int projectId, long totalTime, String addedComment, String projectTitle) {
         this.id = id;
         this.userId = userId;
         this.clockIn = clockIn;
         this.clockOut = clockOut;
-        this.projectID = projectID;
+        this.projectId = projectId;
         this.totalTime = totalTime;
         this.addedComment = addedComment;
         this.projectTitle = projectTitle;
@@ -74,12 +74,12 @@ public class Report {
         this.clockOut = clockOut;
     }
 
-    public int getProjectID() {
-        return projectID;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setProjectID(int projectID) {
-        this.projectID = projectID;
+    public void setProjectID(int projectId) {
+        this.projectId = projectId;
     }
 
     public long getTotalTime() {

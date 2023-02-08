@@ -50,10 +50,10 @@ public class JdbcProjectDao implements ProjectDao {
         return projects;
     }
 
-    public List<Project> getAllProjectsByProjectId(int userId, int projectId) {
+    public List<Project> getAllProjectsByProjectId(int projectId) {
         List<Project> projects = new ArrayList<>();
-        String sql = "SELECT * FROM project WHERE userid = ? AND projectid = ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, projectId);
+        String sql = "SELECT * FROM project WHERE projectid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, projectId);
 
         while (results.next()) {
             Project project = mapRowToProject(results);

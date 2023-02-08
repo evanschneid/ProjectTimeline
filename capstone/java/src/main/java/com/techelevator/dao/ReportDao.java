@@ -9,6 +9,5 @@ public interface ReportDao {
     Report getReportById(int id);
     List<Report> getReportsByProjectId(int projectId);
     List<Report> getAllReports();
-    void updateReport(Report report);
     void deleteReport(int id);
 }

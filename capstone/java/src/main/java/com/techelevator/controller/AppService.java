@@ -95,9 +95,9 @@ public class AppService {
         return projectDao.getProjectsByUserId(userid);
     }
 
-    @GetMapping("/projects/{userid}/{projectid}")
-    public ResponseEntity<List<Project>> getAllProjectByProjectId(@PathVariable int userid, @PathVariable int projectid) {
-        List<Project> projects = projectDao.getAllProjectsByProjectId(userid, projectid);
+    @GetMapping("/singleProject/{projectid}")
+    public ResponseEntity<List<Project>> getAllProjectByProjectId(@PathVariable int projectid) {
+        List<Project> projects = projectDao.getAllProjectsByProjectId(projectid);
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
@@ -172,6 +172,37 @@ public class AppService {
     @GetMapping("/worklog/{id}")
     public Report getWorklogById(@PathVariable int id) {
         return reportDao.getReportById(id);
+    }
+
+    @GetMapping("/worklog/user/{userId}")
+    public ResponseEntity<List<Report>> getAllReportsByUser(@PathVariable int userId) {
+        List<Report> reports = reportDao.getAllReportsByUser(userId);
+        return new ResponseEntity<>(reports, HttpStatus.OK);
+    }
+
+    @GetMapping("/worklog/{userId}/{projectId}")
+    public ResponseEntity<List<Report>> getAllReportsForUserByProjectId(@PathVariable int userId, @PathVariable int projectId) {
+        List<Report> reports = reportDao.getAllReportsForUserByProjectId(userId, projectId);
+        return new ResponseEntity<>(reports, HttpStatus.OK);
+    }
+
+    @PostMapping("/worklog")
+    public ResponseEntity<Report> createReport(@RequestBody Report report) {
+
+        reportDao.createReport(report);
+        return new ResponseEntity<>(report, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/worklog/{reportId}")
+    public ResponseEntity<Report> updateReport(@PathVariable int reportId, @RequestBody Report report) {
+        reportDao.updateReport(reportId, report);
+        return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/worklog/{reportId}")
+    public ResponseEntity<Void> deleteReport(@PathVariable int reportId) {
+        reportDao.deleteReport(reportId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     
