@@ -28,11 +28,11 @@
         <tr
         v-for="(item, i) in filteredWorkLogs"
         :key="i">
-        <!-- <router-link v-bind:to="{name: 'singleProjectTimeReport', params: {id: item.id}}"> -->
+        <router-link v-bind:to="{name: 'singleProjectTimeReport', params: {id: item.id}}">
         <td>{{ item.id }}</td>
         <td>{{ item.projectTitle }}</td>
-        <td>{{ item.totalTime }} hours</td>
-        <!-- </router-link> -->
+        <td>{{ item.totalTime/60 }} hours</td>
+        </router-link>
         </tr>
 
     </tbody>
