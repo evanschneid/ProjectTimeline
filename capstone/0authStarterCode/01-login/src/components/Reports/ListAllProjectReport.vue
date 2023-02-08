@@ -139,4 +139,5 @@ export default {
   .searchBar {
     border: black;
   }
+  
 </style>
