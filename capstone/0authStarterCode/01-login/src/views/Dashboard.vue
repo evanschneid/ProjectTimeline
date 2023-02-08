@@ -11,13 +11,9 @@
         <button class="sort-projects-btn">Upcoming</button>
         <button class="sort-projects-btn">Completed</button>
       </div>
-          <!-- <router-link v-bind:to="{name: 'project', params: {id: project.projectid}}"> -->
-          <!-- <router-link v-for="project in projList" v-bind:key="project" v-bind:to="{name: 'project', params: {id: project.projectid}}"> -->
-            <proj-tile v-bind:project="project" />
-          <!-- </router-link> -->
-      
+        <proj-tile v-bind:project="project" />
       <h2>Tasks</h2>
-        <task-tile />
+        <task-tile v-bind="tasks"/>
     </main>
        
     <!-- <home-content /> -->

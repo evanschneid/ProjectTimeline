@@ -92,6 +92,7 @@ export default {
     submit() {
         // call the addProject method to add the new project
         ServerService.addProject(this.project);
+        console.log(this.project);
         // reset the form after successful submission
         this.project = {
           projectTitle: '',

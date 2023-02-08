@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div v-for="project in projList" v-bind:key="project.id">
-
-
-    </div>
+    <!-- <div v-for="project in projList" v-bind:key="project.id"> -->
+      <h1>hi</h1>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -12,7 +11,7 @@ import ProjectTile from '../Dashboard/ProjectTile.vue';
 
 export default {
   components: { ProjectTile },
-  name: "projDetails",
+  name: "single-project-details",
   data() {
     return {
       projList: []   
