@@ -2,11 +2,12 @@
   <div>
     <div id="app">
       <div class="container flex-grow-1">
-      <error />
-      <div class="mt-5"> 
-        <router-view />
-      </div>   
-    </div>    
+        <error />
+        <div class="mt-5"> 
+          <router-view />
+          <footer-nav-bar />
+        </div>   
+      </div>    
     </div>
     <!-- <footer class="bg-light text-center p-3">
       <div class="logo"></div>
@@ -16,7 +17,7 @@
       </p>
     </footer> -->
   </div>
-  <footer-nav-bar />
+  
 </template>
 
 <script lang="ts">
@@ -43,9 +44,9 @@ export default {
 <style>
 body, html {
   height: 100%;
+  overflow: hidden;
   margin: 0;
 }
-
 
 #app {
   height: 100vh;
@@ -53,8 +54,8 @@ body, html {
   background-color: #78b2c6;
 }
 
-
 .mt-5 {
   margin-top: 0%;
-}
+  /* height: 100vh; */
+} 
 </style>

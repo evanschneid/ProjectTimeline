@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav-container">
     <div class="logo-container">
       <logo-image />
     </div>
@@ -60,6 +60,12 @@ export default {
 </script>
 
 <style>
+  .nav-container {
+    padding: 0 6% 6% 6%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
   .logo-container {
     display: flex;
     justify-self: stretch;

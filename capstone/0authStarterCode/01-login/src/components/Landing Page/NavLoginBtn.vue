@@ -35,19 +35,9 @@ export default {
 </script>
 
 <style>
-
-/* @media only screen and (min-width: 768px){
-    .nav-container {
-        overflow: hidden;
-        position: sticky;
-        top: 0;
-        width: 100%;
-    }
-} */
-
 @media only screen and (max-width: 767px){
     #footer {
-        overflow: hidden;
+        /* overflow: hidden; */
         position: sticky;
         bottom: 0;
         width: 100%;
