@@ -26,8 +26,6 @@ public class JdbcReportDao implements ReportDao {
 
     public void createReport(Report report) {
 
-
-
         String sql = "INSERT INTO worklog (userid, clockin, clockout, projectid) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, report.getUserId(), report.getClockIn(), report.getClockOut(), report.getProjectId());
 

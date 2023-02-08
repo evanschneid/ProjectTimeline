@@ -140,6 +140,12 @@ public class AppService {
         return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
+    @GetMapping("/singletask/{projectId}")
+    public ResponseEntity<List<Task>> getAllTasksByProjectId(@PathVariable int projectId) {
+        List<Task> tasks = taskDao.getAllTasksByProjectId(projectId);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
     @PostMapping("/task")
     public ResponseEntity<Void> addTask(@RequestBody Task task) {
         taskDao.addTask(task);

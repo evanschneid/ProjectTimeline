@@ -32,7 +32,11 @@
         <td>{{ item.id }}</td>
         <td>{{ item.projectTitle }}</td>
         <td>{{ item.totalTime/60 }} hours</td>
+<<<<<<< HEAD
         </router-link>
+=======
+        <!-- </router-link> -->
+>>>>>>> main
         </tr>
 
     </tbody>
@@ -139,4 +143,5 @@ export default {
   .searchBar {
     border: black;
   }
+  
 </style>
