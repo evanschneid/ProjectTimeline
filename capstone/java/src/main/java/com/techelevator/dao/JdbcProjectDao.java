@@ -19,6 +19,9 @@ public class JdbcProjectDao implements ProjectDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
+
+
     @Override
     public List<Project> getAllProjects() {
         List<Project> projects = new ArrayList<>();
@@ -34,12 +37,6 @@ public class JdbcProjectDao implements ProjectDao {
         return projects;
     }
 
-    public void addProject(Project project) {
-        String sql = "INSERT INTO project (projecttitle, projectdescription, projectimg, projectiscompleted, projectduedate) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate());
-    }
-
-
     public List<Project> getProjectsByUserId(int userId) {
         List<Project> projects = new ArrayList<>();
         String sql = "select * from project where userid = ?";
@@ -53,6 +50,23 @@ public class JdbcProjectDao implements ProjectDao {
         return projects;
     }
 
+    public List<Project> getAllProjectsByProjectId(int userId, int projectId) {
+        List<Project> projects = new ArrayList<>();
+        String sql = "SELECT * FROM project WHERE userid = ? AND projectid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, projectId);
+
+        while (results.next()) {
+            Project project = mapRowToProject(results);
+            projects.add(project);
+        }
+
+        return projects;
+    }
+
+    public void addProject(Project project) {
+        String sql = "INSERT INTO project (projecttitle, projectdescription, projectimg, projectiscompleted, projectduedate) VALUES (?,?,?,?,?)";
+        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate());
+    }
 
     @Override
     public Project getProjectById(int id) {
@@ -66,18 +80,15 @@ public class JdbcProjectDao implements ProjectDao {
     }
 
     @Override
-    public void insertProject(Project project) {
-
+    public void deleteProject(int id) {
+        String sql = "DELETE FROM project WHERE projectid = ?";
+        jdbcTemplate.update(sql, id);
     }
-
     @Override
     public void updateProject(Project project) {
 
-    }
-
-    @Override
-    public void deleteProject(int id) {
-
+        String sql = "UPDATE project SET projecttitle = ?, projectdescription = ?, projectimg = ?, projectiscompleted = ?, projectduedate = ?, projectcompletiondate = ? WHERE projectid = ?";
+        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate(), project.getProjectCompletionDate(), project.getId());
     }
 
     private Project mapRowToProject(SqlRowSet rs) {

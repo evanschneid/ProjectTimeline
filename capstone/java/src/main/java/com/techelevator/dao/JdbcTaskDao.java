@@ -50,20 +50,53 @@ public class JdbcTaskDao implements TaskDao {
         }
         return taskList;
     }
-
-    @Override
-    public void insertTask(Task task) {
-
+    public Task getAllTasksByTaskId(int taskId) {
+        String sql = "SELECT * FROM task WHERE taskid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, taskId);
+        if (results.next()) {
+            return mapRowToTask(results);
+        } else {
+            return null;
+        }
     }
+
+    public List<Task> getTasksForUserByProjectId(int userId, int projectId) {
+        String sql = "SELECT task.* FROM task JOIN project ON task.projectid = project.projectid WHERE project.userid = ? AND project.projectid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, projectId);
+        List<Task> tasks = new ArrayList<>();
+        while (results.next()) {
+            Task task = mapRowToTask(results);
+            tasks.add(task);
+        }
+        return tasks;
+    }
+
+    public void addTask(Task task) {
+        String sql = "INSERT INTO task (tasktitle, taskdescription, taskiscompleted, taskduedate, taskcompletiondate, projectid) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, task.getTaskTitle(), task.getTaskDescription(), task.isTaskIsCompleted(), task.getTaskDueDate(), task.getTaskCompletionDate(), task.getProjectID());
+    }
+
+//    public Task getAllTasksByTaskId(int userId, int projectId, int taskId) {
+//        String sql = "SELECT * FROM tasks WHERE userid = ? AND projectid = ? AND taskid = ?";
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, projectId, taskId);
+//        if (results.next()) {
+//            return mapRowToTask(results);
+//        } else {
+//            return null;
+//        }
+//    }
+
 
     @Override
     public void updateTask(Task task) {
-
+        String sql = "UPDATE task SET tasktitle = ?, taskdescription = ?, taskiscompleted = ?, taskduedate = ?, taskcompletiondate = ? WHERE taskid = ?";
+        jdbcTemplate.update(sql, task.getTaskTitle(), task.getTaskDescription(), task.isTaskIsCompleted(), task.getTaskDueDate(), task.getTaskCompletionDate(), task.getId());
     }
 
     @Override
-    public void deleteTask(int id) {
-
+    public void deleteTask(int taskId) {
+        String sql = "DELETE FROM task WHERE taskid = ?";
+        jdbcTemplate.update(sql, taskId);
     }
 
     private Task mapRowToTask(SqlRowSet result) {

@@ -48,6 +48,9 @@ public class AppService {
     @Autowired
     private JdbcUserDao jdbcUserDao;
 
+
+    // User ****************************************************************
+
     @PostMapping("/user")
     public ResponseEntity<String> createUser(@RequestBody Map<String, String> payload) {
         String email = payload.get("email");
@@ -79,24 +82,23 @@ public class AppService {
         }
     }
 
+    //Projects ********************************************************************
+
     @GetMapping("/projects")
     public List<Project> getAllProjects() {
         return projectDao.getAllProjects();
     }
 
-//    @GetMapping("/projects/{id}")
-//    public Project getProjectById(@PathVariable int id) {
-//        return projectDao.getProjectById(id);
-//    }
     @CrossOrigin
     @GetMapping("/projects/{userid}")
     public List<Project> getProjectByUserId(@PathVariable int userid) {
         return projectDao.getProjectsByUserId(userid);
     }
 
-    @GetMapping("/tasks/{projectid}")
-    public List<Task> getAllTasksByProjectId(@PathVariable int projectid) {
-        return taskDao.getTaskByProjectId(projectid);
+    @GetMapping("/projects/{userid}/{projectid}")
+    public ResponseEntity<List<Project>> getAllProjectByProjectId(@PathVariable int userid, @PathVariable int projectid) {
+        List<Project> projects = projectDao.getAllProjectsByProjectId(userid, projectid);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
     @PostMapping("/projects")
@@ -105,10 +107,62 @@ public class AppService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/projects/{id}")
+    public ResponseEntity<Void> deleteProject(@PathVariable int id) {
+        projectDao.deleteProject(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/editProject")
+    public ResponseEntity<Void> updateProject(@RequestBody Project project) {
+        projectDao.updateProject(project);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+
+    //Tasks *******************************************
+
     @GetMapping("/tasks")
     public List<Task> getAllTasks() {
         return taskDao.getAllTasks();
     }
+
+//    @GetMapping("/tasks/{userId}/{projectId}/{taskId}")
+//    public ResponseEntity<Task> getAllTasksByTaskId(@PathVariable int userId, @PathVariable int projectId, @PathVariable int taskId) {
+//        Task task = taskDao.getAllTasksByTaskId(userId, projectId, taskId);
+//        return new ResponseEntity<>(task, HttpStatus.OK);
+//    }
+
+    @GetMapping("/task/{taskId}")
+    public ResponseEntity<Task> getAllTasksByTaskId(@PathVariable int taskId) {
+        Task task = taskDao.getAllTasksByTaskId(taskId);
+        return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
+    @PostMapping("/task")
+    public ResponseEntity<Void> addTask(@RequestBody Task task) {
+        taskDao.addTask(task);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/task")
+    public ResponseEntity<Void> updateTask(@RequestBody Task task) {
+        taskDao.updateTask(task);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/task/{taskId}")
+    public ResponseEntity<Void> deleteTask(@PathVariable int taskId) {
+        taskDao.deleteTask(taskId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+
+    //Worklog **********************************************************************
+
+
 
     @GetMapping("/worklog")
     public List<Report> getAllReports() {
