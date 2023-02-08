@@ -4,11 +4,6 @@
     <v-card-title>
         Time Reports
     <v-spacer></v-spacer>
-        <!-- {{ date }}<br><br>
-        <h3>Debug</h3>
-        {{worklogs}}<br>
-        <h3>Debug</h3>
-        {{filteredWorkLogs2}} -->
     <Datepicker class="calender" v-model="date" range :partial-range="false" />
 
     <v-text-field
@@ -16,34 +11,30 @@
         v-model="search"
         label="Search Projects..."
         single-line
-        hide-details
-    ></v-text-field>
+        hide-details>
+    </v-text-field>
   </v-card-title>
   <v-table>
     <template v-slot:default>
     <thead>
         <tr>
-        <th class="text-left">
-            User
-        </th>
-        <th class="text-left">
-            Project Name
-        </th>
-        <th class="text-left">
-            Total Hours
-        </th>
+        <th class="text-left">User</th>
+        <th class="text-left">Project Name</th>
+        <th class="text-left">Total Hours</th>
         </tr>
     </thead>
     <tbody>
+
         <tr
         v-for="(item, i) in filteredWorkLogs"
-        :key="i"
-        >
+        :key="i">
+        <!-- <router-link v-bind:to="{name: 'singleProjectTimeReport', params: {id: item.id}}"> -->
         <td>{{ item.id }}</td>
         <td>{{ item.projectTitle }}</td>
         <td>{{ item.totalTime }} hours</td>
+        <!-- </router-link> -->
         </tr>
-        
+
     </tbody>
     </template>
   </v-table>
@@ -57,13 +48,6 @@ import Datepicker from '@vuepic/vue-datepicker';
 import ServerService from '../../services/ServerService'
 
 export default {
-
-  // setup() {
-  //       const date = ref(new Date());
-  //       const format = (date)=> {return date.getDate()}
-
-  //       return {date, format}
-  // },
   name: "worklogReports",
   components: {
     Datepicker
@@ -99,20 +83,8 @@ export default {
       console.error(error);
     });
   },
-  methods: {
-    // dateFormat(dateAndTime){
-    //   let date1 = dateAndTime[0].split('T');
-    //   let date2 = dateAndTime[1].split('T');
-    //   let dateArray1 = date1.split('-');
-    //   let dateArray2 = date2.split('-');
-    //   return date1[0].concat(' ', date2[0]));
-    // },
-  },
-  
   computed: {
-
     filteredWorkLogs() {
-
         let curatedLogs = this.worklogs;
 
         if(this.date != undefined) {
@@ -124,7 +96,7 @@ export default {
                 let dateFromPicker = String(this.date[0].getFullYear());
                 console.log(`Comparison:' + ${dateFromPicker} + " " + ${item.clockIn} + " " + ${dateFromPicker < item.clockIn} `);
                 return dateFromPicker < item.clockIn
-                // return this.date[0].localeCompare(item.clockIn) < 0;
+                // look into a way to add months and days to get the closest comparison possible since it is only dates currently
               });
         }
         if(this.worklogs.projectTitle != "") {

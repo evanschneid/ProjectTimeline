@@ -45,8 +45,11 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  
 }
+
+.tile-container::-webkit-scrollbar {
+  display: none;
+} 
 
 .taskTile {
   display: inline-flex;

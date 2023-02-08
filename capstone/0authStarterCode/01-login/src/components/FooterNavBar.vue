@@ -6,7 +6,8 @@
       <div class="main-btn-container" v-if="isAuthenticated"> 
           <div class="navbar-nav d-md-none" v-if="isAuthenticated">
                 <a id="qsLogoutBtn" href="#" class="dropdown-item" @click.prevent="logout">
-                <font-awesome-icon class="mr-3" icon="power-off" />Log out {{ user ? user.name : "" }}
+                <font-awesome-icon class="mr-3" icon="power-off" />
+                    Log out {{ user ? user.name : "" }}
                 </a>
           </div>
           <div class="main-btn-list">
@@ -50,9 +51,10 @@ export default {
 }
 </script>
 <style>
+
 #footer {
     background-color: #78b2c6;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: sticky;
     bottom: 0;
     width: 100%;
@@ -63,6 +65,7 @@ export default {
 .main-btn-container {
     width: 100%;
 }
+
 
 .main-btn-list {
     display: flex;

@@ -47,8 +47,11 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  
 }
+
+.projTile-container::-webkit-scrollbar {
+  display: none;
+} 
 
 /* .projTile-container::-webkit-scrollbar {width: 0;} */
 
@@ -60,7 +63,7 @@ export default {
   margin: 5px;
   border: 5px;
   border-style: solid;
-  border-color: #F2D678;
+  border-color: black;
   border-radius: 10%;
   flex: 0 0 auto;
   width: 150px;

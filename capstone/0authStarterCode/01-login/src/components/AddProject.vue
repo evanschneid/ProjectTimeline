@@ -4,7 +4,7 @@
   <div>
     <v-dialog v-model="dialog" max-width= "600">
       <template v-slot:activator="{ on, attrs }">
-      <v-btn v-bind="attrs" v-on="on" style="background-color: #78B2C6; color: #fff;" @click="dialog=true">Add Project</v-btn> <!-- -->
+      <v-btn v-bind="attrs" v-on="on" style="background-color: #335974; color: #fff;" @click="dialog=true">Add Project</v-btn> <!-- -->
       </template>
       <v-card>
  
@@ -40,25 +40,17 @@
             </v-menu>
              <v-btn
                 class="mt-4"
-                @click="submit">Add</v-btn>
+                @click="submit()">Add</v-btn>
           </v-form>
         </v-card-text>
       </v-card>
-   
-   
     </v-dialog>
-   
  </div>
-
-
-
-
 </template>
 
 
 <script>
-
-
+import ServerService from '../services/ServerService';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -68,8 +60,6 @@ export default {
    components: {
     Datepicker
   },
-
-
   data() {
     return {
       //Initial time values, timer, started boolean, timeLog
@@ -98,9 +88,21 @@ export default {
       let date = dateAndTime.split(' ');
       let dateArray = date.split('/');
       return dateArray[2].concat(' ', dateArray[1].concat(' ', dateArray[0]));
-
-    }
-
+    },
+    submit() {
+        // call the addProject method to add the new project
+        ServerService.addProject(this.project);
+        // reset the form after successful submission
+        this.project = {
+          projectTitle: '',
+          projectDescription: '',
+          projectImage: '',
+          projectDeadline: null
+        };
+        this.selectedImage = null;
+        this.imageData = null;
+        this.dialog = false;
+    },
   },
 };
 </script>

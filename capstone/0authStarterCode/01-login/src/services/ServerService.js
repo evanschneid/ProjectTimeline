@@ -63,7 +63,7 @@ export default {
     },
 
     deleteTask(taskId){
-        return http.delete(`task/{$taskId}`)
+        return http.delete(`task/${taskId}`)
     },
 
     //Worklogs

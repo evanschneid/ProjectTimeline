@@ -16,7 +16,7 @@ export default {
 
     .nav-container {
         background-color: white;
-        overflow: hidden;
+        /* overflow: hidden; */
         position: sticky;
         bottom: 0;
         width: 100%;

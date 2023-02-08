@@ -1,38 +1,24 @@
 <template>
-  <div>
+  <div class="nav-container">
     <div class="logo-container">
       <logo-image />
     </div>
-      
-        <add-task/>
+      <add-task/>
         <v-col
           cols="12"
           sm="6"
-          class="pyx-1 text-center"
-        
-        >
+          class="pyx-1 text-center">
           <v-btn-toggle v-model="timeFilter">
-            <v-btn>
-              All
-            </v-btn>
-
-            <v-btn>
-              Today
-            </v-btn>
-
-            <v-btn>
-              Week
-            </v-btn>
-
-            <v-btn>
-              Done
-            </v-btn>
-
+            <v-btn>All</v-btn>
+            <v-btn>Today</v-btn>
+            <v-btn>Week</v-btn>
+            <v-btn>Done</v-btn>
           </v-btn-toggle>
-          
         </v-col>
-
-
+        <v-card>
+          <v-card-title>
+            Tasks
+          </v-card-title>
           <table>
             <thead>
               <tr>
@@ -46,8 +32,7 @@
               <tr
                 v-for="task in filteredList"
                 v-bind:key="task.id"
-                v-bind:class="{ disabled: task.isCompleted===false}"
-            >
+                v-bind:class="{ disabled: task.isCompleted===false}">
                 <td>{{ task.taskTitle }}</td>
                 <td>{{ task.taskDescription }}</td>
                 <td>{{ task.taskDueDate }}</td>
@@ -57,7 +42,7 @@
               </tr>
             </tbody>
           </table>
-      
+        </v-card>
   </div>
 </template>
 
@@ -194,6 +179,13 @@ export default {
 </script>,
 
 <style>
+  .nav-container {
+    padding: 0 6% 6% 6%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
   .logo-container {
     display: flex;
     justify-self: stretch;
@@ -225,6 +217,5 @@ export default {
   border-color: black;
   border-radius: 5px;
   padding: 5px;;
-
   }
 </style>
