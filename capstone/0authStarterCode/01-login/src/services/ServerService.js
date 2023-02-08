@@ -52,6 +52,10 @@ export default {
         return http.get(`/tasks/${userId}`)
     },
 
+    getAllTasksByProjectId(projectId){
+        return http.get(`/singletask/${projectId}`)
+    },
+
     getAllTasksByTaskId(taskId){
         return http.get(`/task/${taskId}`)
     },

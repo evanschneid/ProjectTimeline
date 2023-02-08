@@ -31,7 +31,7 @@
         <!-- <router-link v-bind:to="{name: 'singleProjectTimeReport', params: {id: item.id}}"> -->
         <td>{{ item.id }}</td>
         <td>{{ item.projectTitle }}</td>
-        <td>{{ item.totalTime }} hours</td>
+        <td>{{ item.totalTime/60 }} hours</td>
         <!-- </router-link> -->
         </tr>
 
