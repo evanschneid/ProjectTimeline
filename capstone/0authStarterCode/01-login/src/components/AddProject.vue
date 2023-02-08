@@ -98,7 +98,7 @@ export default {
           projectTitle: '',
           projectDescription: '',
           projectImage: '',
-          projectDeadline: null
+          projectDeadline: ''
         };
         this.selectedImage = null;
         this.imageData = null;

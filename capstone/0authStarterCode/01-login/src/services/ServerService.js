@@ -65,7 +65,7 @@ export default {
     },
 
     updateTask(task){
-        return http.put('task/', task)
+        return http.put(`/task`, task)
     },
 
     deleteTask(taskId){
