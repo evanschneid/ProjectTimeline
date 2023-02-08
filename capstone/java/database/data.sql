@@ -22,6 +22,8 @@ INSERT INTO WorkLog (clockIn, clockOut, projectID, totalTime, addedComment)
 VALUES
     ('2022-12-31 08:00:00', '2022-12-31 17:00:00', 1, INTERVAL '9 hours', 'Worked on Project 1'),
     ('2022-12-31 08:00:00', '2022-12-31 12:00:00', 2, INTERVAL '4 hours', 'Worked on Project 2'),
-    ('2022-12-31 08:00:00', '2022-12-31 17:00:00', 3, INTERVAL '9 hours', 'Worked on Project 3');
+    ('2022-12-31 08:00:00', '2022-12-31 17:00:00', 3, INTERVAL '9 hours', 'Worked on Project 3'),
+    ('2023-02-01 08:00:00', '2023-02-07 17:00:00', 1, INTERVAL '9 hours', 'Worked on Project 4'),
+    ('2023-02-01 08:00:00', '2023-02-07 17:00:00', 1, INTERVAL '9 hours', 'Worked on Project 5');
 
 COMMIT TRANSACTION;

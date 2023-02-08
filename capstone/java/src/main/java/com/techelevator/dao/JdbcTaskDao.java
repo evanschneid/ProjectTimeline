@@ -60,6 +60,17 @@ public class JdbcTaskDao implements TaskDao {
         }
     }
 
+    public List<Task> getAllTasksByProjectId(int projectId) {
+        String sql = "SELECT * FROM task WHERE projectid = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, projectId);
+        List<Task> tasks = new ArrayList<>();
+        while (results.next()) {
+            Task task = mapRowToTask(results);
+            tasks.add(task);
+        }
+        return tasks;
+    }
+
     public List<Task> getTasksForUserByProjectId(int userId, int projectId) {
         String sql = "SELECT task.* FROM task JOIN project ON task.projectid = project.projectid WHERE project.userid = ? AND project.projectid = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, projectId);

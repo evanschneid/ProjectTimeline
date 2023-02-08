@@ -30,7 +30,7 @@
                 :key="i">
                 <td>{{ item.clockIn }}</td>
                 <td>{{ item.clockOut }}</td>
-                <td>{{ item.totalTime }} hours</td>
+                <td>{{ item.totalTime/60 }} hours</td>
                 </tr>
             </tbody>
             </template>
