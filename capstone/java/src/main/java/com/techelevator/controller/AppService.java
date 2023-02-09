@@ -115,6 +115,7 @@ public class AppService {
 
     @PutMapping("/editProject/{id}")
     public ResponseEntity<Void> updateProject(@RequestBody Project project, @PathVariable int id) {
+
         projectDao.updateProject(project, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

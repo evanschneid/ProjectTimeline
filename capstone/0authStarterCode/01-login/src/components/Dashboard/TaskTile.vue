@@ -4,8 +4,8 @@
       <router-link v-bind:to="{name: 'tasks', params: {id: task.id}}" v-for="task in filteredList" v-bind:key="task.id">
       <div class="taskTile" >
        <!-- need to add v-on:click -->
-            <h4>{{task.taskTitle}}</h4>
-            <p>Due date: {{task.taskDueDate}}</p>
+            <h4>{{task.tasktitle}}</h4>
+            <p>Due date: {{task.taskduedate}}</p>
       </div>
       </router-link>
     </div>
@@ -43,13 +43,13 @@ export default {
             let filteredTasks = this.taskCard;
             if(this.sort===1){
               filteredTasks = filteredTasks.filter( (task) => 
-                 !task.taskIsCompleted
+                 !task.tasksscompleted
 
               )
             }
             if(this.sort===2){
               filteredTasks = filteredTasks.filter( (task) => 
-                task.taskIsCompleted
+                task.tasksscompleted
               )
             }
 
