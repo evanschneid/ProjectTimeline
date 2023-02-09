@@ -12,7 +12,7 @@ VALUES
     ('Project 2', 'Description for Project 2', 'project2.jpg', false, '2023-03-15', null, 2, false),
     ('Project 3', 'Description for Project 3', 'project3.jpg', true, '2022-12-31', '2022-12-31', 3, true);
 
-INSERT INTO Task (taskTitle, taskDescription, taskisCompleted, taskDueDate, taskCompletionDate, projectID)
+INSERT INTO Task (tasktitle, taskdescription, taskiscompleted, taskduedate, taskcompletiondate, projectid)
 VALUES
     ('Task 1', 'Description for Task 1', false, '2023-03-01', null, 1),
     ('Task 2', 'Description for Task 2', true, '2023-03-15', '2023-03-15', 2),

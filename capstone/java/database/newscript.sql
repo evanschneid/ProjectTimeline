@@ -29,8 +29,8 @@ CREATE TABLE Task (
     tasktitle varchar(255),
     taskdescription varchar(255),
     taskiscompleted boolean,
-    taskduedate date,
-    taskcompletiondate date,
+    taskduedate varchar(255),
+    taskcompletiondate varchar(255),
     projectid integer REFERENCES Project(projectID)
 );
 
