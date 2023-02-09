@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tile-container">
-      <router-link v-bind:to="{name: 'tasks', params: {id: task.id}}" v-for="task in taskCard" v-bind:key="task.id">
+      <router-link v-bind:to="{name: 'tasks', params: {id: task.id}}" v-for="task in filteredList" v-bind:key="task.id">
       <div class="taskTile" >
        <!-- need to add v-on:click -->
             <h4>{{task.taskTitle}}</h4>
@@ -23,9 +23,11 @@ import service from '../../services/ServerService.js';
 
 export default {
   name: "taskTile",
+  props: ['sort'],
   data() {
     return {
-      taskCard:[]       
+      taskCard:[],
+      
     }
   },
   created () {
@@ -35,6 +37,24 @@ export default {
         console.log(response.data);
       }
     )
+  },
+    computed:{
+    filteredList() {
+            let filteredTasks = this.taskCard;
+            if(this.sort===1){
+              filteredTasks = filteredTasks.filter( (task) => 
+                 !task.taskIsCompleted
+
+              )
+            }
+            if(this.sort===2){
+              filteredTasks = filteredTasks.filter( (task) => 
+                task.taskIsCompleted
+              )
+            }
+
+            return filteredTasks;
+        }
   }
 }
 </script>
