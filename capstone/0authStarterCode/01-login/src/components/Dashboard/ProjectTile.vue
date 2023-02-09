@@ -5,7 +5,7 @@
           <div class="projTile" 
           > <!-- need to add v-on:click -->
               <h4>{{project.projectTitle}}</h4>
-              <p>Due date: {{project.projectDueDate}}</p>
+              <p>Due date: {{ new Date(project.projectDueDate).toLocaleDateString() }}</p>
 
           </div>
       </router-link>
