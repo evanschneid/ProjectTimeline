@@ -33,7 +33,7 @@
 
              <v-btn
                 class="mt-4"
-                @click="submit()">Add</v-btn>
+                @click="submit(idPassed)">Add</v-btn>
           </v-form>
 
         </v-card-text>
@@ -52,7 +52,7 @@ import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 export default {
   name: 'create-task',
-  //props: ["projectId"],
+  props: ["idPassed"],
   data() {
     return {
       //Initial time values, timer, started boolean, timeLog
@@ -61,7 +61,7 @@ export default {
           taskdescription: '',
           taskduedate: '',
           tasksscompleted: false,
-          projectid:1
+          projectid: null
           //make sure to bind this according to project
           
     
@@ -72,8 +72,11 @@ export default {
     };
   },
   methods: {
-      submit(){
+      submit(id){
         this.dialog= false;
+        this.task.projectid=id;
+        console.log(this.task.projectid);
+        console.log(this.idPassed);
         ServerService.addTask(this.task)
         console.log(this.task);
         this.task = {
