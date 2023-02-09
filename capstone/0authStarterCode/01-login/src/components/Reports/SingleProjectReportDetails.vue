@@ -3,12 +3,13 @@
     <v-card>
         <v-card-title>
             title: 
-            {{ projectTitle }}
+            <div>{{ project.projectTitle }}</div>
+            
             <!-- <v-spacer></v-spacer> -->
             
             <!-- <Datepicker class="calender" v-model="date" range :partial-range="false" /> -->
             <div class="timer">
-                <timer-button />
+                <timer-button v-bind:projectId="this.$route.params.projectId" :userId="this.$route.params.userId" />
             </div>
 
         </v-card-title>
@@ -45,7 +46,7 @@ import TimerButton from '../../components/TimerButton.vue';
 import ServerService from '../../services/ServerService'
 
 export default {
-    props: ["projectTitle"],
+    // props: ["projectTitle"],
     components: {
         Datepicker,
         TimerButton
@@ -57,6 +58,9 @@ export default {
         date,
         worklogs:[], 
         search: "",
+        project: {
+            projectTitle: ''
+        }
         }
     },
     created () {
@@ -72,7 +76,20 @@ export default {
         .catch(error => {
             console.error(error);
         });
+        ServerService.getProjectByProjectId(this.$route.params.projectId).then(response => {
+        if (response.data !== undefined) {
+            let test = response.data;
+            this.project = test; 
+            console.log(response.data)
+        } else {
+            console.log("No Reports");
+        }
+        })
+        .catch(error => {
+            console.error(error);
+        });
     },
+
 }
 </script>
 
