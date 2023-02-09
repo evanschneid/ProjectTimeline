@@ -34,8 +34,8 @@ export default {
         return http.post(`/projects`, project);
     },
     
-    updateProject(projectid, project) {
-        return http.put(`/editProject/${projectid}`, project);
+    updateProject(id, project) {
+        return http.put(`/editProject/${id}`, project);
     },
 
     deleteProject(id) {

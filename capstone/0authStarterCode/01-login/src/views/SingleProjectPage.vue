@@ -12,7 +12,7 @@
         m4
         lg3
         v-for="project in currentProject"
-        v-bind:key="project.projectid"
+        v-bind:key="project.id"
       >
       
         <v-card-text >
@@ -21,8 +21,8 @@
                     {{project.projectTitle}}
               </v-text>
             </v-card>
-          <v-text-field class="text--primary" v-model="newProjectTitle"  filled :placeholder="project.projectTitle">
             
+          <v-text-field class="text--primary" v-model="newProjectTitle" :placeholder="project.projectTitle">
           </v-text-field>
           <!-- <font-awesome-icon icon="fa-pencil" size="x" /> -->
           <v-container fluid>
@@ -34,13 +34,12 @@
               <v-col cols="8" class="pa-0">
                 
                 <v-textarea class="text--primary" :placeholder="project.projectDescription"
-                  outlined v-model="newProjectDescription"></v-textarea>
+                v-model="newProjectDescription"></v-textarea>
               </v-col>
             </v-row>
           </v-container>
         </v-card-text>
 
-        <!-- {{ currentProject }} -->
         <v-card class="current-project"><h2>Project Tasks</h2></v-card>
 
         <v-col cols="12" sm="6" class="pyx-1 text-center">
@@ -105,7 +104,6 @@ export default {
 
   data() {
     return {
-      // projectID : -1,
       currentProject: [],
       newProjectTitle: "",
       newProjectDescription: "",
@@ -180,11 +178,13 @@ export default {
   },
 
   methods: {
+
     updateProject() {
       const newProject = {projectTitle: this.newProjectTitle, projectDescription: this.newProjectDescription};
       console.log(newProject);
-      service.updateProject(this.$router.params.projectid, newProject).then(() => {
-        window.alert("Project info updated.");
+      console.log(newProject.id);
+      service.updateProject(this.$route.params.id, newProject).then(() => {
+        // window.alert("Project info updated.");
         this.$router.push({ name: "dashboard" });
       });
     },
@@ -200,6 +200,8 @@ export default {
       });
     },
     dateDifference(today, due) {
+
+      
       let t1 = today.getTime();
       let t2 = due.getTime();
 
