@@ -3,7 +3,7 @@
     <div class="logo-container">
       <logo-image />
     </div>
-      <add-task/>
+      <!-- <add-task v-bind:projectid="this.$route.params.id"/> -->
       <v-col
     cols="12"
     sm="6"
