@@ -1,16 +1,10 @@
 <template>
 <div>
     <v-card>
-        <v-card-title>
-            title: 
-            {{ projectTitle }}
-            <!-- <v-spacer></v-spacer> -->
-            
-            <!-- <Datepicker class="calender" v-model="date" range :partial-range="false" /> -->
+        <v-card-title >
             <div class="timer">
-                <timer-button />
+                <timer-button v-bind:projectid="this.$route.params.projectid" :userid="this.$route.params.userid" />
             </div>
-
         </v-card-title>
         <v-table>
             <template v-slot:default>
@@ -26,10 +20,10 @@
                 <tr
                 v-for="(item, i) in worklogs"
                 :key="i">
-                <td>{{ new Date(item.clockOut).toLocaleDateString() }}</td>
-                <td>{{ new Date(item.clockIn).toLocaleTimeString() }}</td>
-                <td>{{ new Date(item.clockOut).toLocaleTimeString() }}</td>
-                <td>{{ (item.totalTime/60).toFixed(2) }} hours</td>
+                <td>{{ new Date(item.clockout).toLocaleDateString() }}</td>
+                <td>{{ new Date(item.clockin).toLocaleTimeString() }}</td>
+                <td>{{ new Date(item.clockout).toLocaleTimeString() }}</td>
+                <td>{{ (item.totaltime/60).toFixed(2) }} hours</td>
                 </tr>
             </tbody>
             </template>
@@ -45,7 +39,7 @@ import TimerButton from '../../components/TimerButton.vue';
 import ServerService from '../../services/ServerService'
 
 export default {
-    props: ["projectTitle"],
+    // props: ["projectTitle"],
     components: {
         Datepicker,
         TimerButton
@@ -56,12 +50,12 @@ export default {
         return {
         date,
         worklogs:[], 
-        search: "",
+        search: ""
         }
     },
     created () {
-        console.log({userId: this.$route.params.userId, projectid: this.$route.params.projectId})
-        ServerService.getAllReportsForUserByProjectId(this.$route.params.userId, this.$route.params.projectId).then(response => {
+        console.log({userId: this.$route.params.userid, projectid: this.$route.params.projectid})
+        ServerService.getAllReportsForUserByProjectId(this.$route.params.userid, this.$route.params.projectid).then(response => {
         if (response.data !== undefined) {
             this.worklogs = response.data; 
             console.log(response.data)
@@ -73,6 +67,7 @@ export default {
             console.error(error);
         });
     },
+
 }
 </script>
 

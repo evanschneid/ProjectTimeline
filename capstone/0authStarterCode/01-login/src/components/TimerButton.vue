@@ -17,13 +17,13 @@
           <h2> Add New Work Log</h2>
         </v-card-title>
         <v-card-text>
-          Time Started: {{this.workLog.clockIn}}
+          Time Started: {{this.workLog.clockin}}
         </v-card-text>
         <v-card-text>
-          Time Ended: {{this.workLog.clockOut}}
+          Time Ended: {{this.workLog.clockout}}
         </v-card-text>
         <v-card-text>
-          Time Worked: {{this.workLog.totalTime}} hours
+          Time Worked: {{this.workLog.totaltime}} hours
         </v-card-text>
         <!-- <v-card-text>
           <v-form class="px-3">
@@ -48,7 +48,7 @@ import workLogService from "../services/ServerService.js";
 
 export default {
   name: 'create-workLog',
-  props: ["projectId", "userId"],
+  props: ["projectid", "userid"],
   data() {
     return {
       //Initial time values, timer, started boolean, timeLog
@@ -60,22 +60,22 @@ export default {
       started: false,
       workLog : 
       {
-        clockIn: '',
-        clockOut: '',
-        totalTime:0,
-        addedComment: '',
-        projectId: this.projectId,
-        userId: this.userId
+        clockin: '',
+        clockout: '',
+        totaltime:0,
+        addedcomment: '',
+        projectid: this.projectid,
+        userid: this.userid,
       }
     };
   },
   methods: {
     //method used to start the timer when a user presses the button
     startTimer() {
-      console.log('userId:' + this.userId)
-      console.log('projectId:' + this.projectId)
+      console.log('userId:' + this.userid)
+      console.log('projectId:' + this.projectid)
       //started boolean changed to true in order to use v-if in template section
-      this.workLog.clockIn = this.getTime();
+      this.workLog.clockin = this.getTime();
       this.started = true;  
       //set interval used to repeatedly run the function in 1000 milisecond intervals
       this.timer = setInterval(() => {
@@ -106,11 +106,11 @@ export default {
     //all time variables are set back to 0 and a timeLog that saves the length time worked
     //to the nearest quater of an hour
     submitTimer() {
-      this.workLog.clockOut = this.getTime();
+      this.workLog.clockout = this.getTime();
       this.started = false;
       this.dialog = true;
       clearInterval(this.timer);
-      this.workLog.totalTime = this.hours + (this.minutes - (this.minutes % 15) + (this.minutes % 15 >= 8 ? 15 : 0))/60;
+      this.workLog.totaltime = this.hours + (this.minutes - (this.minutes % 15) + (this.minutes % 15 >= 8 ? 15 : 0))/60;
       this.hours = 0;
       this.minutes = 0;
       this.seconds = 0;
@@ -131,7 +131,8 @@ export default {
         console.log(response.data);
         this.dialog = false;
         // this is not working since a page refresh goes back to our home apge everytime. look into this a little bit
-        this.$router.push({ name: "singleProjectTimeReport", params: { userId: this.$route.params.userId, projectId: this.$route.params.projectId }});
+        // this.$router.go(0)
+        this.$router.push({ name: "singleProjectTimeReport", params: { userid: this.$route.params.userid, projectid: this.$route.params.projectid }});
       })
       .catch(error => {
         console.error(error);

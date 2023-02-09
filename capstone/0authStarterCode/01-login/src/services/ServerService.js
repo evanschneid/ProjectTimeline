@@ -82,8 +82,8 @@ export default {
         return http.get(`/worklog/user/${userId}`)
     },
 
-    getAllReportsForUserByProjectId(userId, projectid){
-        return http.get(`/worklog/${userId}/${projectid}`)
+    getAllReportsForUserByProjectId(userid, projectid){
+        return http.get(`/worklog/${userid}/${projectid}`)
     },
 
     getReportByReportId(reportId){
