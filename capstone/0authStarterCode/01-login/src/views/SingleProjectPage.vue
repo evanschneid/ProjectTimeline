@@ -15,7 +15,7 @@
         v-bind:key="project.id"
       >
       
-        <v-card-text >
+        <v-card-text class="pa-0">
             <v-card >
               <v-text class="h2 d-flex justify-center single-line">
                     {{project.projectTitle}}
@@ -28,8 +28,8 @@
           <v-container fluid>
             <v-row>
               <v-col cols="4" class="pa-0">
-                <v-img class="pa-2 mt-">{{ project.projectImg }}</v-img>
-                <v-btn outlined class="mt-10" @click="updateProject()">UPDATE</v-btn>
+                <!-- <v-img class="pa-2 mt-">{{ project.projectimg }}</v-img> -->
+                <v-btn  class="mt-10" @click="updateProject()">UPDATE</v-btn>
               </v-col>
               <v-col cols="8" class="pa-0">
                 
