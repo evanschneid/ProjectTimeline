@@ -10,8 +10,8 @@
  
         <v-card-text>
           <v-form class="px-3">
-            <v-text-field label="Task Title" v-model="task.taskTitle"/>
-            <v-textarea label="Task Desciption" v-model="task.taskDescription"></v-textarea>
+            <v-text-field label="Task Title" v-model="task.tasktitle"/>
+            <v-textarea label="Task Desciption" v-model="task.taskdescription"></v-textarea>
             <v-menu
                 ref="menu1"
                 v-model="menu1"
@@ -23,7 +23,7 @@
                 <template v-slot:activator="{ on, attrs }">
                     <Datepicker
                     placeholder="Due Date"
-                    v-model="task.taskDueDate"
+                    v-model="task.taskduedate"
                     @input="menu1=false"
                     v-bind="attrs" v-on="on"
                  ></Datepicker>
@@ -57,11 +57,13 @@ export default {
     return {
       //Initial time values, timer, started boolean, timeLog
       task: {
-          taskTitle: '',
-          taskDescription: '',
-          taskDueDate: '',
+          tasktitle: '',
+          taskdescription: '',
+          taskduedate: '',
+          tasksscompleted: false,
+          projectid:1
           //make sure to bind this according to project
-          projectID: 1
+          
     
       },
       menu1: false,
@@ -72,21 +74,12 @@ export default {
   methods: {
       submit(){
         this.dialog= false;
-        ServerService.addTask(this.task).then(response => {
-        if(response.status===201){
-          location.reload();
-          this.$router.push("/tasks");
-        }
-      })
-      .catch(error => {
-        
-      })
-;
+        ServerService.addTask(this.task)
         console.log(this.task);
         this.task = {
-          taskTitle: '',
-          taskDescription: '',
-          taskDueDate: '',
+          tasktitle: '',
+          taskdescription: '',
+          taskduedate: '',
 
         }
         
@@ -98,7 +91,7 @@ export default {
   computed: {
     dateFormatter(){
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let dateArray = this.task.taskDueDate.split(' ').slice(1,4);
+        let dateArray = this.task.taskduedate.split(' ').slice(1,4);
         return ""+dateArray[2]+ "-" + dateArray[1] + "-" + (months.indexOf(dateArray[0])+1)
       }
   }
