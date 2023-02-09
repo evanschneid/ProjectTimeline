@@ -138,7 +138,7 @@ export default {
       .then((response) => {
         const { ismanager, isactivated, userid } = response.data;
         if (response.data == null) {
-          window.location.reload();
+          .location.reload();
         }
 
         console.log(response.data);
