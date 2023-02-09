@@ -1,7 +1,7 @@
 <template>
 <div>
     <v-card>
-        <v-card-title>
+        <v-card-title >
             <div class="timer">
                 <timer-button v-bind:projectid="this.$route.params.projectid" :userid="this.$route.params.userid" />
             </div>
@@ -50,8 +50,7 @@ export default {
         return {
         date,
         worklogs:[], 
-        search: "",
-        project: {}
+        search: ""
         }
     },
     created () {
