@@ -26,8 +26,8 @@ public class JdbcReportDao implements ReportDao {
 
     public void createReport(Report report) {
 
-        String sql = "INSERT INTO worklog (userid, clockin, clockout, projectid) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, report.getUserId(), report.getClockIn(), report.getClockOut(), report.getProjectId());
+        String sql = "INSERT INTO worklog (userid, clockin, clockout, projectid, totaltime, addedcomment) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, report.getUserid(), report.getClockin(), report.getClockout(), report.getProjectid(), report.getTotaltime(), report.getAddedcomment());
 
 
     }
@@ -94,7 +94,7 @@ public class JdbcReportDao implements ReportDao {
         List<Report> reportList = new ArrayList<>();
         while (results.next()) {
             Report report = mapRowToWorkLog(results);
-            report.setProjectTitle(results.getString("projecttitle"));
+            report.setProjecttitle(results.getString("projecttitle"));
             reportList.add(report);
         }
         return reportList;
@@ -103,7 +103,7 @@ public class JdbcReportDao implements ReportDao {
 
     public void updateReport(int reportId, Report report) {
         String sql = "UPDATE worklog SET clockin = ?, clockout = ?, projectid = ? WHERE logid = ?";
-        jdbcTemplate.update(sql, report.getClockIn(), report.getClockOut(), report.getProjectId(), reportId);
+        jdbcTemplate.update(sql, report.getClockin(), report.getClockout(), report.getProjectid(), reportId);
     }
 
 
@@ -116,18 +116,19 @@ public class JdbcReportDao implements ReportDao {
     private Report mapRowToWorkLog(SqlRowSet results) {
         Report workLog = new Report();
         workLog.setId(results.getInt("logid"));
-        workLog.setUserId(results.getInt("userid"));
-        workLog.setClockIn(results.getTimestamp("clockin").toLocalDateTime());
-        workLog.setClockOut(results.getTimestamp("clockout").toLocalDateTime());
-        workLog.setProjectID(results.getInt("projectid"));
+        workLog.setUserid(results.getInt("userid"));
+        workLog.setClockin(results.getString("clockin"));
+        workLog.setClockout(results.getString("clockout"));
+        workLog.setProjectid(results.getInt("projectid"));
+        workLog.setTotaltime(results.getInt("totaltime"));
 
-        LocalDateTime clockIn = workLog.getClockIn();
-        LocalDateTime clockOut = workLog.getClockOut();
-        long hours = ChronoUnit.HOURS.between(clockIn, clockOut);
-        long minutes = ChronoUnit.MINUTES.between(clockIn, clockOut) - (hours * 60);
-        long totalTime = (hours * 60) + minutes;
+//        LocalDateTime clockIn = workLog.getClockIn();
+//        LocalDateTime clockOut = workLog.getClockOut();
+//        long hours = ChronoUnit.HOURS.between(clockIn, clockOut);
+//        long minutes = ChronoUnit.MINUTES.between(clockIn, clockOut) - (hours * 60);
+//        long totalTime = (hours * 60) + minutes;
 
-        workLog.setTotalTime(totalTime);
+        //workLog.setTotalTime(totalTime);
 
         return workLog;
     }
