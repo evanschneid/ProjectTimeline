@@ -24,7 +24,7 @@ import service from '../../services/ServerService.js'
 
 export default {
   name: "projTile",
-  prop:['sort'],
+  props: ['sort'],
   data() {
     return {
       projCard:[] 
@@ -49,7 +49,7 @@ export default {
             }
             if(this.sort===2){
               filteredProjects = filteredProjects.filter( (project) => 
-                proj.projectIsCompleted
+                project.projectIsCompleted
               )
             }
 
