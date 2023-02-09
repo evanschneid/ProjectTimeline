@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Task {
     private int id;
-    private String taskTitle;
-    private String taskDescription;
-    private boolean taskIsCompleted;
-    private Date taskDueDate;
-    private Date taskCompletionDate;
-    private int projectID;
+    private String tasktitle;
+    private String taskdescription;
+    private boolean tasksscompleted;
+    private String taskduedate;
+    private String taskcompletiondate;
+    private int projectid;
 
     // Constructors
 
@@ -17,17 +17,15 @@ public class Task {
 
     }
 
-    public Task(int id, String taskTitle, String taskDescription, boolean taskIsCompleted, Date taskDueDate, Date taskCompletionDate, int projectID) {
+    public Task(int id, String tasktitle, String taskdescription, boolean tasksscompleted, String taskduedate, String taskcompletiondate, int projectid) {
         this.id = id;
-        this.taskTitle = taskTitle;
-        this.taskDescription = taskDescription;
-        this.taskIsCompleted = taskIsCompleted;
-        this.taskDueDate = taskDueDate;
-        this.taskCompletionDate = taskCompletionDate;
-        this.projectID = projectID;
+        this.tasktitle = tasktitle;
+        this.taskdescription = taskdescription;
+        this.tasksscompleted = tasksscompleted;
+        this.taskduedate = taskduedate;
+        this.taskcompletiondate = taskcompletiondate;
+        this.projectid = projectid;
     }
-
-    // Getters and Setters
 
     public int getId() {
         return id;
@@ -37,51 +35,51 @@ public class Task {
         this.id = id;
     }
 
-    public String getTaskTitle() {
-        return taskTitle;
+    public String getTasktitle() {
+        return tasktitle;
     }
 
-    public void setTaskTitle(String taskTitle) {
-        this.taskTitle = taskTitle;
+    public void setTasktitle(String tasktitle) {
+        this.tasktitle = tasktitle;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public String getTaskdescription() {
+        return taskdescription;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setTaskdescription(String taskdescription) {
+        this.taskdescription = taskdescription;
     }
 
-    public boolean isTaskIsCompleted() {
-        return taskIsCompleted;
+    public boolean isTasksscompleted() {
+        return tasksscompleted;
     }
 
-    public void setTaskIsCompleted(boolean taskIsCompleted) {
-        this.taskIsCompleted = taskIsCompleted;
+    public void setTasksscompleted(boolean tasksscompleted) {
+        this.tasksscompleted = tasksscompleted;
     }
 
-    public Date getTaskDueDate() {
-        return taskDueDate;
+    public String getTaskduedate() {
+        return taskduedate;
     }
 
-    public void setTaskDueDate(Date taskDueDate) {
-        this.taskDueDate = taskDueDate;
+    public void setTaskduedate(String taskduedate) {
+        this.taskduedate = taskduedate;
     }
 
-    public Date getTaskCompletionDate() {
-        return taskCompletionDate;
+    public String getTaskcompletiondate() {
+        return taskcompletiondate;
     }
 
-    public void setTaskCompletionDate(Date taskCompletionDate) {
-        this.taskCompletionDate = taskCompletionDate;
+    public void setTaskcompletiondate(String taskcompletiondate) {
+        this.taskcompletiondate = taskcompletiondate;
     }
 
-    public int getProjectID() {
-        return projectID;
+    public int getProjectid() {
+        return projectid;
     }
 
-    public void setProjectID(int projectID) {
-        this.projectID = projectID;
+    public void setProjectid(int projectid) {
+        this.projectid = projectid;
     }
 }
