@@ -12,35 +12,34 @@
         m4
         lg3
         v-for="project in currentProject"
-        v-bind:key="project.projectid"
+        v-bind:key="project.id"
       >
       
-        <v-card class="current-project">
-          <v-text-field class="text-h4" v-model="projectTitle" label="Project Title" filled>{{
-            project.projectTitle
-          }}</v-text-field>
+        <v-card-text >
+            <v-card >
+              <v-text class="h2 d-flex justify-center single-line">
+                    {{project.projectTitle}}
+              </v-text>
+            </v-card>
+            
+          <v-text-field class="text--primary" v-model="newProjectTitle" :placeholder="project.projectTitle">
+          </v-text-field>
           <!-- <font-awesome-icon icon="fa-pencil" size="x" /> -->
           <v-container fluid>
             <v-row>
-              <v-col cols="4">
-                <v-img class="p-1">{{ project.projectImg }}</v-img>
-                <v-btn outlined @click="updateProject()">UPDATE</v-btn>
+              <v-col cols="4" class="pa-0">
+                <v-img class="pa-2 mt-">{{ project.projectImg }}</v-img>
+                <v-btn outlined class="mt-10" @click="updateProject()">UPDATE</v-btn>
               </v-col>
-              <v-col cols="8">
-                <v-text-field
-                  class="p-0"
-                  label="hi"
-                  outlined
-                  dense
-                  v-model="newProjectDescription"
-                  >{{ project.projectDescription }}</v-text-field
-                >
+              <v-col cols="8" class="pa-0">
+                
+                <v-textarea class="text--primary" :placeholder="project.projectDescription"
+                v-model="newProjectDescription"></v-textarea>
               </v-col>
             </v-row>
           </v-container>
-        </v-card>
+        </v-card-text>
 
-        <!-- {{ currentProject }} -->
         <v-card class="current-project"><h2>Project Tasks</h2></v-card>
 
         <v-col cols="12" sm="6" class="pyx-1 text-center">
@@ -105,7 +104,6 @@ export default {
 
   data() {
     return {
-      // projectID : -1,
       currentProject: [],
       newProjectTitle: "",
       newProjectDescription: "",
@@ -115,6 +113,7 @@ export default {
         DueDate: "",
       },
       timeFilter: null,
+      
     };
   },
 
@@ -179,11 +178,13 @@ export default {
   },
 
   methods: {
+
     updateProject() {
-      const newProject = { projectTitle: this.newProjectTitle, projectDescription: this.newProjectDescription};
+      const newProject = {projectTitle: this.newProjectTitle, projectDescription: this.newProjectDescription};
       console.log(newProject);
-      service.updateProject(this.$router.params.projectid, newProject).then(() => {
-        window.alert("Project info updated.");
+      console.log(newProject.id);
+      service.updateProject(this.$route.params.id, newProject).then(() => {
+        // window.alert("Project info updated.");
         this.$router.push({ name: "dashboard" });
       });
     },
@@ -199,6 +200,8 @@ export default {
       });
     },
     dateDifference(today, due) {
+
+      
       let t1 = today.getTime();
       let t2 = due.getTime();
 
@@ -253,6 +256,7 @@ export default {
   }
   .current-project {
     display: inline-flex;
+    
     width: 75vw;
     margin: 5px;
     border: 2px solid;

@@ -88,7 +88,7 @@ public class JdbcProjectDao implements ProjectDao {
     public void updateProject(Project project, int id) {
 
         String sql = "UPDATE project SET projecttitle = ?, projectdescription = ?, projectimg = ?, projectiscompleted = ?, projectduedate = ?, projectcompletiondate = ? WHERE projectid = ?";
-        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate(), project.getProjectCompletionDate(), project.getId());
+        jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate(), project.getProjectCompletionDate(), id);
     }
 
     private Project mapRowToProject(SqlRowSet rs) {
