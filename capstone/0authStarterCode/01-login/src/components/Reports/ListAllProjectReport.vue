@@ -28,15 +28,9 @@
         <tr
         v-for="(item, i) in filteredWorkLogs"
         :key="i">
-        <router-link v-bind:to="{name: 'singleProjectTimeReport', params: {id: item.id}}">
-        <td>{{ item.id }}</td>
-        <td>{{ item.projectTitle }}</td>
-        <td>{{ item.totalTime/60 }} hours</td>
-<<<<<<< HEAD
-        </router-link>
-=======
-        <!-- </router-link> -->
->>>>>>> main
+        <td v-on:click="clickRow(item)">{{ item.userId }}</td>
+        <td v-on:click="clickRow(item)">{{ item.projectTitle }}</td>
+        <td v-on:click="clickRow(item)">{{ (item.totalTime/60).toFixed(2) }} hours</td>
         </tr>
 
     </tbody>
@@ -87,6 +81,12 @@ export default {
       console.error(error);
     });
   },
+  methods: {
+    clickRow(item) {
+      // navigate to a singleProjectTimeReport, passing the required parameters
+      this.$router.push({ name: 'singleProjectTimeReport', params: { userId: item.userId, projectId: item.projectId } });
+    }
+  },
   computed: {
     filteredWorkLogs() {
         let curatedLogs = this.worklogs;
@@ -110,28 +110,6 @@ export default {
         }     
         return curatedLogs;
     },
-    // filteredWorklogs() {
-    //   let filteredList = this.worklogs;
-
-    //   if(this.worklogs.projectTitle != "") {
-    //     filteredList.filter(item => {
-    //       return item.projectTitle.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-    //       });
-    //   }
-    //   // this one might need to be removed since it is only good for managers techincally....
-    //   if(this.worklogs.userId != "") {
-    //     filteredList.filter(item => {
-    //       return item.userId.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-    //       });
-    //   }
-      
-    //   if(this.date != "") {
-    //     filteredList.filter((item) => {
-    //       return item.clockIn <= this.date[0] && item.clockOut >= this.date[1]
-    //       });
-    //   }
-    //   return filteredList;
-    // },
   }
 }
 </script>

@@ -3,21 +3,18 @@
     <div class="logo-container">
       <logo-image />
     </div>
-    <!-- <timer-button /> -->
-      <single-project-report-details />
+    <single-project-report-details />
   </div>
 </template>
 
 <script>
 import SingleProjectReportDetails from '../components/Reports/SingleProjectReportDetails.vue'
 import LogoImage from '../components/LogoImage.vue';
-// import TimerButton from '../components/TimerButton.vue';
 
 export default {
   components: { 
       SingleProjectReportDetails, 
       LogoImage,
-      // TimerButton
     },
 
 }

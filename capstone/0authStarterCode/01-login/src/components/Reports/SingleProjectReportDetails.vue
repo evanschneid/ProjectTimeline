@@ -1,26 +1,22 @@
 <template>
-<div class="nav-container">
+<div>
     <v-card>
         <v-card-title>
-            {{ worklogs.projectTitle }}
-            <v-spacer></v-spacer>
+            title: 
+            {{ projectTitle }}
+            <!-- <v-spacer></v-spacer> -->
             
-            <Datepicker class="calender" v-model="date" range :partial-range="false" />
+            <!-- <Datepicker class="calender" v-model="date" range :partial-range="false" /> -->
             <div class="timer">
                 <timer-button />
             </div>
-            <v-text-field
-                class="seachBar"
-                v-model="search"
-                label="Search Date..."
-                single-line
-                hide-details>
-            </v-text-field>
+
         </v-card-title>
         <v-table>
             <template v-slot:default>
             <thead>
                 <tr>
+                <th class="text-left">Date</th>
                 <th class="text-left">Start Time</th>
                 <th class="text-left">End Time</th>
                 <th class="text-left">Total Hours</th>
@@ -28,11 +24,12 @@
             </thead>
             <tbody>
                 <tr
-                v-for="(item, i) in filteredWorklogs"
+                v-for="(item, i) in worklogs"
                 :key="i">
-                <td>{{ item.clockIn }}</td>
-                <td>{{ item.clockOut }}</td>
-                <td>{{ item.totalTime/60 }} hours</td>
+                <td>{{ new Date(item.clockOut).toLocaleDateString() }}</td>
+                <td>{{ new Date(item.clockIn).toLocaleTimeString() }}</td>
+                <td>{{ new Date(item.clockOut).toLocaleTimeString() }}</td>
+                <td>{{ (item.totalTime/60).toFixed(2) }} hours</td>
                 </tr>
             </tbody>
             </template>
@@ -48,6 +45,7 @@ import TimerButton from '../../components/TimerButton.vue';
 import ServerService from '../../services/ServerService'
 
 export default {
+    props: ["projectTitle"],
     components: {
         Datepicker,
         TimerButton
@@ -62,26 +60,30 @@ export default {
         }
     },
     created () {
-        const userReport = { userId: this.worklogs.userId, projectid: this.worklogs.projectid };
-        ServerService.getAllReportsForUserByProjectId(1,1)
-        // .then(response => {
-        // if (response.data !== undefined) {
-        //     this.worklogs = response.data; 
-        //     console.log(response.data)
-        // } else {
-        //     console.log("No Reports");
-        // }
-        // })
-        // .catch(error => {
-        //     console.error(error);
-        // });
+        console.log({userId: this.$route.params.userId, projectid: this.$route.params.projectId})
+        ServerService.getAllReportsForUserByProjectId(this.$route.params.userId, this.$route.params.projectId).then(response => {
+        if (response.data !== undefined) {
+            this.worklogs = response.data; 
+            console.log(response.data)
+        } else {
+            console.log("No Reports");
+        }
+        })
+        .catch(error => {
+            console.error(error);
+        });
     },
 }
 </script>
 
 <style>
 .timer {
-
+    display: flex;
+    justify-self: stretch;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding: 1em;
 }
 .calender {
     margin: 1em;
