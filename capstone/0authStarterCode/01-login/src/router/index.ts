@@ -50,7 +50,7 @@ export function createRouter(app: App): Router {
         beforeEnter: createAuthGuard(app)
       },
       {
-        path: "/worklog/:id",
+        path: "/:userId/worklog/:projectId",
         name: "singleProjectTimeReport",
         component: SingleProjectTimeReport,
         beforeEnter: createAuthGuard(app)

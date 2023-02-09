@@ -7,13 +7,13 @@
       <h2>Projects</h2>
       <add-project />
       <div class="proj-sort-group">
-        <button class="sort-projects-btn">All</button>
-        <button class="sort-projects-btn">Upcoming</button>
-        <button class="sort-projects-btn">Completed</button>
+        <button class="sort-projects-btn" @click="sort=0">All</button>
+        <button class="sort-projects-btn" @click="sort=1">Open</button>
+        <button class="sort-projects-btn" @click="sort=2">Completed</button>
       </div>
-        <proj-tile v-bind:project="project" />
+      <proj-tile v-bind="project" v-bind:sort="sort"/>
       <h2>Tasks</h2>
-        <task-tile v-bind="tasks"/>
+      <task-tile v-bind="tasks" v-bind:sort="sort"/>
     </main>
        
     <!-- <home-content /> -->
@@ -40,7 +40,8 @@ export default {
   data() {
     return {
       projList: [],
-      taskList: []
+      taskList: [],
+      sort:''
     }
   },
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="projTile-container">
-      <router-link v-bind:to="{name: 'project', params: {id: project.id}}" v-for="project in projCard" v-bind:key="project.id">
+      <router-link v-bind:to="{name: 'project', params: {id: project.id}}" v-for="project in filteredList" v-bind:key="project.id">
           <div class="projTile" 
           > <!-- need to add v-on:click -->
               <h4>{{project.projectTitle}}</h4>
@@ -24,7 +24,7 @@ import service from '../../services/ServerService.js'
 
 export default {
   name: "projTile",
-  
+  prop:['sort'],
   data() {
     return {
       projCard:[] 
@@ -37,39 +37,60 @@ export default {
         console.log(response.data);
       }
     )
+  },
+  computed:{
+    filteredList() {
+            let filteredProjects = this.projCard;
+            if(this.sort===1){
+              filteredProjects = filteredProjects.filter( (project) => 
+                 !project.projectIsCompleted
+
+              )
+            }
+            if(this.sort===2){
+              filteredProjects = filteredProjects.filter( (project) => 
+                proj.projectIsCompleted
+              )
+            }
+
+            return filteredProjects;
+        }
   }
 }
 </script>
 
-<style>
+<style lang="css" scoped>
 
 .projTile-container {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+
 }
 
 .projTile-container::-webkit-scrollbar {
   display: none;
+
 } 
 
 /* .projTile-container::-webkit-scrollbar {width: 0;} */
 
 
 .projTile {
+  background-color: #335974;
+  color: #FFFFFF;
   display: inline-flex;
   flex-wrap: wrap;
   padding: 10px;
   margin: 5px;
   border: 5px;
   border-style: solid;
-  border-color: black;
+  border-color: #78B2C6;
   border-radius: 10%;
   flex: 0 0 auto;
   width: 150px;
   height: 150px;
-  background-color: #335974;
-  color: white;
+
 }
 
 

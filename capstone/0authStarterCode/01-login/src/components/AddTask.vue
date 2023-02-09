@@ -16,14 +16,12 @@
                 ref="menu1"
                 v-model="menu1"
                 :close-on-content-click="false"
-                :return-value.sync="task.taskDueDate"
                 transition="scale-transition"
                 offset-y
                 min-width="auto"
             >
                 <template v-slot:activator="{ on, attrs }">
                     <Datepicker
-                    class="date-picker-style"
                     placeholder="Due Date"
                     v-model="task.taskDueDate"
                     @input="menu1=false"
@@ -35,7 +33,7 @@
 
              <v-btn
                 class="mt-4"
-                @click="submit">Add</v-btn>
+                @click="submit()">Add</v-btn>
           </v-form>
 
         </v-card-text>
@@ -49,8 +47,9 @@
 </template>
 
 <script>
-
-
+import ServerService from '../services/ServerService';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 export default {
   name: 'create-task',
   //props: ["projectId"],
@@ -61,18 +60,48 @@ export default {
           taskTitle: '',
           taskDescription: '',
           taskDueDate: '',
+          //make sure to bind this according to project
+          projectID: 1
     
       },
       menu1: false,
-      dialog: false
+      dialog: false,
+
     };
   },
   methods: {
       submit(){
+        this.dialog= false;
+        ServerService.addTask(this.task).then(response => {
+        if(response.status===201){
+          location.reload();
+          this.$router.push("/tasks");
+        }
+      })
+      .catch(error => {
+        
+      })
+;
+        console.log(this.task);
+        this.task = {
+          taskTitle: '',
+          taskDescription: '',
+          taskDueDate: '',
 
-      }
-    
+        }
+        
+        //this.$router.push('/tasks')
+        
+
+      },
   },
+  computed: {
+    dateFormatter(){
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let dateArray = this.task.taskDueDate.split(' ').slice(1,4);
+        return ""+dateArray[2]+ "-" + dateArray[1] + "-" + (months.indexOf(dateArray[0])+1)
+      }
+  }
 };
 </script>
 
