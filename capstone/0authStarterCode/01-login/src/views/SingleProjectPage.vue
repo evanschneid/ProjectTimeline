@@ -28,7 +28,7 @@
           <v-container fluid>
             <v-row>
               <v-col cols="4" class="pa-0">
-                <v-img class="pa-2 mt-">{{ project.projectImg }}</v-img>
+                <!-- <v-img class="pa-2 mt-">{{ project.projectImg }}</v-img> -->
                 <v-btn outlined class="mt-10" style="background-color: #335974; color: #fff;"
                  @click="updateProject()">UPDATE</v-btn>
               </v-col>

@@ -4,7 +4,7 @@
       <router-link v-bind:to="{name: 'project', params: {id: project.id}}" v-for="project in filteredList" v-bind:key="project.id">
           <div class="projTile" 
           > <!-- need to add v-on:click -->
-              <h4>{{project.projectTitle}}</h4>
+              <h5>{{project.projectTitle}}</h5>
               <p>Due date: {{ new Date(project.projectDueDate).toLocaleDateString() }}</p>
 
           </div>
@@ -92,8 +92,6 @@ export default {
   height: 150px;
 
 }
-
-
 
 #titleText {
   color: #78B2C6;

@@ -12,7 +12,7 @@
           <v-form class="px-3">
             <v-text-field label="Untitled Project" v-model="project.projectTitle"/>
             <!-- Add image icon if needed-->
-            <v-file-input label="Project Image" v-model="selectedImage" @change="readImage"></v-file-input>
+            <!-- <v-file-input label="Project Image" v-model="selectedImage" @change="readImage"></v-file-input> -->
             <img style="max-width: 50%;
                 max-height: 50%;
                 object-fit: contain;" v-if="imageData" :src="imageData"/>

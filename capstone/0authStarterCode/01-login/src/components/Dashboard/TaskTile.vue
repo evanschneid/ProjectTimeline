@@ -4,7 +4,7 @@
       <router-link v-bind:to="{name: 'tasks', params: {id: task.id}}" v-for="task in filteredList" v-bind:key="task.id">
       <div class="taskTile" >
        <!-- need to add v-on:click -->
-            <h4>{{task.tasktitle}}</h4>
+            <h5>{{task.tasktitle}}</h5>
             <p>Due date: {{ new Date(task.taskduedate).toLocaleDateString() }}</p>
       </div>
       </router-link>
