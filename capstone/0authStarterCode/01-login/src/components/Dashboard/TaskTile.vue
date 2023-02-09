@@ -5,7 +5,7 @@
       <div class="taskTile" >
        <!-- need to add v-on:click -->
             <h4>{{task.tasktitle}}</h4>
-            <p>Due date: {{task.taskduedate}}</p>
+            <p>Due date: {{ new Date(task.taskduedate).toLocaleDateString() }}</p>
       </div>
       </router-link>
     </div>

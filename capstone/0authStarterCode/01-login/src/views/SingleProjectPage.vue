@@ -28,8 +28,9 @@
           <v-container fluid>
             <v-row>
               <v-col cols="4" class="pa-0">
-                <!-- <v-img class="pa-2 mt-">{{ project.projectimg }}</v-img> -->
-                <v-btn  class="mt-10" @click="updateProject()">UPDATE</v-btn>
+                <v-img class="pa-2 mt-">{{ project.projectImg }}</v-img>
+                <v-btn outlined class="mt-10" style="background-color: #335974; color: #fff;"
+                 @click="updateProject()">UPDATE</v-btn>
               </v-col>
               <v-col cols="8" class="pa-0">
                 
@@ -41,7 +42,7 @@
         </v-card-text>
 
         <v-card class="current-project"><h2>Project Tasks</h2></v-card>
-
+        <add-task v-bind:idPassed="this.$route.params.id"/>
         <v-col cols="12" sm="6" class="pyx-1 text-center">
           <v-btn-toggle v-model="timeFilter">
             <v-btn>All</v-btn>
@@ -66,14 +67,14 @@
                 v-bind:key="task.id"
                 v-bind:class="{ disabled: task.isCompleted === false }"
               >
-                <td>{{ task.taskTitle }}</td>
-                <td>{{ task.taskDescription }}</td>
-                <td>{{ task.taskDueDate }}</td>
+                <td>{{ task.tasktitle }}</td>
+                <td>{{ task.taskdescription }}</td>
+                <td>{{ new Date(task.taskduedate).toLocaleDateString() }}</td>
                 <td>
                   <button
                     v-on:click="flipStatus(task.id)"
                     class="btnEComplete"
-                    v-if="!task.taskIsCompleted"
+                    v-if="!task.tasksscompleted"
                   >
                     Complete
                   </button>
@@ -94,12 +95,13 @@ import LogoImage from "../components/LogoImage.vue";
 import SingleProjectDetails from "../components/Single Project Page/SingleProjectDetails.vue";
 import service from "../services/ServerService.js";
 import { useAuth0 } from "@auth0/auth0-vue";
-
+import AddTask from "../components/AddTask.vue"
 export default {
   components: {
     LogoImage,
     SingleProjectDetails,
     TaskTile,
+    AddTask
   },
 
   data() {
@@ -113,6 +115,8 @@ export default {
         DueDate: "",
       },
       timeFilter: null,
+      projectId:''
+      
       
     };
   },
@@ -162,7 +166,7 @@ export default {
           //Get All Tasks
           console.log("Getting ALL Tasks");
           service
-            .getAllTasks()
+            . getAllTasksByProjectId(idPassed)
             .then((response) => {
               this.taskList = response.data;
               console.log(response.data);
@@ -191,11 +195,11 @@ export default {
     flipStatus(id) {
       this.taskList.forEach((task) => {
         if (task.id == id) {
-          if (!task.taskIsCompleted) {
-            task.taskIsCompleted = true;
-          } else {
-            task.taskIsCompleted = false;
-          }
+          if (!task.tasksscompleted) {
+            task.tasksscompleted = true;
+            service.updateTask(task);
+          } 
+
         }
       });
     },
@@ -212,24 +216,24 @@ export default {
     filteredList() {
       let filteredTasks = this.taskList;
       if (!this.filter.taskIsCompleted && this.timeFilter === 0) {
-        filteredTasks = filteredTasks.filter((task) => !task.taskIsCompleted);
+        filteredTasks = filteredTasks.filter((task) => !task.tasksscompleted);
       }
       if (!this.filter.taskIsCompleted && this.timeFilter === 1) {
         filteredTasks = filteredTasks.filter(
           (task) =>
-            this.dateDifference(new Date(), new Date(task.taskDueDate)) == 0
+            this.dateDifference(new Date(), new Date(task.taskduedate)) === -1
         );
       }
       if (!this.filter.taskIsCompleted && this.timeFilter === 2) {
         filteredTasks = filteredTasks.filter(
           (task) =>
-            this.dateDifference(new Date(), new Date(task.taskDueDate)) <= 7 &&
-            this.dateDifference(new Date(), new Date(task.taskDueDate)) > 0 &&
-            !task.taskIsCompleted
+            this.dateDifference(new Date(), new Date(task.taskduedate)) <7 &&
+            this.dateDifference(new Date(), new Date(task.taskduedate)) >= -1 &&
+            !task.tasksscompleted
         );
       }
       if (this.timeFilter === 3) {
-        filteredTasks = filteredTasks.filter((task) => task.taskIsCompleted);
+        filteredTasks = filteredTasks.filter((task) => task.tasksscompleted);
       }
 
       return filteredTasks;
@@ -285,7 +289,7 @@ export default {
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: white;
     margin-top: 5px;
-    width: 100%;
+    
   }
   th {
     text-transform: uppercase;
