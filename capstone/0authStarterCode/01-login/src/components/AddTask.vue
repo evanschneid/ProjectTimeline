@@ -16,7 +16,6 @@
                 ref="menu1"
                 v-model="menu1"
                 :close-on-content-click="false"
-                :return-value.sync="task.taskDueDate"
                 transition="scale-transition"
                 offset-y
                 min-width="auto"
@@ -34,7 +33,7 @@
 
              <v-btn
                 class="mt-4"
-                @click="submit">Add</v-btn>
+                @click="submit()">Add</v-btn>
           </v-form>
 
         </v-card-text>
@@ -61,6 +60,8 @@ export default {
           taskTitle: '',
           taskDescription: '',
           taskDueDate: '',
+          //make sure to bind this according to project
+          projectID: 1
     
       },
       menu1: false,
@@ -70,11 +71,28 @@ export default {
   },
   methods: {
       submit(){
-        ServerService.addTask(this.task);
+        this.dialog= false;
+        ServerService.addTask(this.task).then(response => {
+        if(response.status===201){
+          location.reload();
+          this.$router.push("/tasks");
+        }
+      })
+      .catch(error => {
+        
+      })
+;
         console.log(this.task);
-        this.task.taskTitle='';
-        this.task.taskDescription='';
-        this.task.taskDueDate=''
+        this.task = {
+          taskTitle: '',
+          taskDescription: '',
+          taskDueDate: '',
+
+        }
+        
+        //this.$router.push('/tasks')
+        
+
       },
   },
   computed: {

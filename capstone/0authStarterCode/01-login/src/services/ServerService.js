@@ -34,8 +34,8 @@ export default {
         return http.post(`/projects`, project);
     },
     
-    updateProject(project) {
-        return http.put(`/editProject`, project);
+    updateProject(projectid, project) {
+        return http.put(`/editProject/${projectid}`, project);
     },
 
     deleteProject(id) {
@@ -65,7 +65,7 @@ export default {
     },
 
     updateTask(task){
-        return http.put('task/', task)
+        return http.put(`/task`, task)
     },
 
     deleteTask(taskId){

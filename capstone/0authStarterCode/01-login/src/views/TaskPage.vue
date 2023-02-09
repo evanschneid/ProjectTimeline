@@ -124,16 +124,22 @@ export default {
   },
   methods: {
         flipStatus(id) {
-            this.taskList.forEach( (task) => {
-                if(task.id==id){
-                    if(!task.taskIsCompleted){
-                        task.taskIsCompleted=true;;
-                    }else{
-                        task.taskIsCompleted=false;
-                    }
-                }
-            }
-            )
+            // this.taskList.forEach( (task) => {
+            //     if(task.id==id){
+            //         if(!task.taskIsCompleted){
+            //             task.taskIsCompleted=true;;
+            //         }else{
+            //             task.taskIsCompleted=false;
+            //         }
+            //     }
+            // }
+            // )
+
+          let currentTask = ServerService.getAllTasksByTaskId(id);
+          currentTask.taskIsCompleted = !currentTask.taskIsCompleted;
+          ServerService.updateTask(currentTask);
+
+
         },
         dateDifference(today, due){
           let t1 = today.getTime();
@@ -152,13 +158,15 @@ export default {
             }
             if(!this.filter.taskIsCompleted&&this.timeFilter===1){
               filteredTasks = filteredTasks.filter( (task) => 
-                this.dateDifference(new Date(), new Date(task.taskDueDate))==0
+                this.dateDifference(new Date(), new Date(task.taskDueDate))===-1 
+                && !task.taskIsCompleted
+
               )
             }
             if(!this.filter.taskIsCompleted&&this.timeFilter===2){
               filteredTasks = filteredTasks.filter( (task) => 
-                this.dateDifference(new Date(), new Date(task.taskDueDate))<=7 
-                &&this.dateDifference(new Date(), new Date(task.taskDueDate))>0
+                this.dateDifference(new Date(), new Date(task.taskDueDate))<=7
+                && this.dateDifference(new Date(), new Date(task.taskDueDate))>=-1  
                 && !task.taskIsCompleted
               )
             }

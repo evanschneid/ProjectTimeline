@@ -3,7 +3,7 @@
     <div class="logo-container">
       <logo-image />
     </div>
-      <single-project-report-details />
+    <single-project-report-details />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import LogoImage from '../components/LogoImage.vue';
 export default {
   components: { 
       SingleProjectReportDetails, 
-      LogoImage 
+      LogoImage,
     },
 
 }
