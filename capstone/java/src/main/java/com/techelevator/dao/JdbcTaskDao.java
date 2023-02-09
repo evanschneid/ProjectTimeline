@@ -84,7 +84,7 @@ public class JdbcTaskDao implements TaskDao {
 
     public void addTask(Task task) {
         String sql = "INSERT INTO task (tasktitle, taskdescription, taskiscompleted, taskduedate, taskcompletiondate, projectid) VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, task.getTaskTitle(), task.getTaskDescription(), task.isTaskIsCompleted(), task.getTaskDueDate(), task.getTaskCompletionDate(), task.getProjectID());
+        jdbcTemplate.update(sql, task.getTasktitle(), task.getTaskdescription(), task.isTasksscompleted(), task.getTaskduedate(), task.getTaskcompletiondate(), task.getProjectid());
     }
 
 //    public Task getAllTasksByTaskId(int userId, int projectId, int taskId) {
@@ -100,8 +100,9 @@ public class JdbcTaskDao implements TaskDao {
 
     @Override
     public void updateTask(Task task) {
+        System.out.println(task.getId());
         String sql = "UPDATE task SET tasktitle = ?, taskdescription = ?, taskiscompleted = ?, taskduedate = ?, taskcompletiondate = ? WHERE taskid = ?";
-        jdbcTemplate.update(sql, task.getTaskTitle(), task.getTaskDescription(), task.isTaskIsCompleted(), task.getTaskDueDate(), task.getTaskCompletionDate(), task.getId());
+        jdbcTemplate.update(sql, task.getTasktitle(), task.getTaskdescription(), task.isTasksscompleted(), task.getTaskduedate(), task.getTaskcompletiondate(), task.getId());
     }
 
     @Override
@@ -113,12 +114,12 @@ public class JdbcTaskDao implements TaskDao {
     private Task mapRowToTask(SqlRowSet result) {
         Task task = new Task();
         task.setId(result.getInt("taskid"));
-        task.setTaskTitle(result.getString("tasktitle"));
-        task.setTaskDescription(result.getString("taskdescription"));
-        task.setTaskIsCompleted(result.getBoolean("taskiscompleted"));
-        task.setTaskDueDate(result.getDate("taskduedate"));
-        task.setTaskCompletionDate(result.getDate("taskcompletiondate"));
-        task.setProjectID(result.getInt("projectid"));
+        task.setTasktitle(result.getString("tasktitle"));
+        task.setTaskdescription(result.getString("taskdescription"));
+        task.setTasksscompleted(result.getBoolean("taskiscompleted"));
+        task.setTaskduedate(result.getString("taskduedate"));
+        task.setTaskcompletiondate(result.getString("taskcompletiondate"));
+        task.setProjectid(result.getInt("projectid"));
         return task;
     }
 }

@@ -1,45 +1,37 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
 public class Report {
     private int id;
-    private int userId;
-    private LocalDateTime clockIn;
-    private LocalDateTime clockOut;
-    private int projectId;
-    private long totalTime;
-    private String addedComment;
+    private int userid;
+    private String clockin;
+    private String clockout;
+    private int projectid;
+    private int totaltime;
+    private String addedcomment;
 
-    private String projectTitle;
+    private String projecttitle;
 
     // Constructors
 
     public Report() {
     }
 
-    public Report(int id, int userId, LocalDateTime clockIn, LocalDateTime clockOut, int projectId, long totalTime, String addedComment, String projectTitle) {
+    public Report(int id, int userid, String clockin, String clockout, int projectid, int totaltime, String addedcomment, String projecttitle) {
         this.id = id;
-        this.userId = userId;
-        this.clockIn = clockIn;
-        this.clockOut = clockOut;
-        this.projectId = projectId;
-        this.totalTime = totalTime;
-        this.addedComment = addedComment;
-        this.projectTitle = projectTitle;
-    }
-
-    // Getters and Setters
-
-
-    public String getProjectTitle() {
-        return projectTitle;
-    }
-
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
+        this.userid = userid;
+        this.clockin = clockin;
+        this.clockout = clockout;
+        this.projectid = projectid;
+        this.totaltime = totaltime;
+        this.addedcomment = addedcomment;
+        this.projecttitle = projecttitle;
     }
 
     public int getId() {
@@ -50,51 +42,60 @@ public class Report {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
-    public LocalDateTime getClockIn() {
-        return clockIn;
+    public String getClockin() {
+        return clockin;
     }
 
-    public void setClockIn(LocalDateTime clockIn) {
-        this.clockIn = clockIn;
+    public void setClockin(String clockin) {
+        this.clockin = clockin;
     }
 
-    public LocalDateTime getClockOut() {
-        return clockOut;
+    public String getClockout() {
+        return clockout;
     }
 
-    public void setClockOut(LocalDateTime clockOut) {
-        this.clockOut = clockOut;
+    public void setClockout(String clockout) {
+        this.clockout = clockout;
     }
 
-    public int getProjectId() {
-        return projectId;
+    public int getProjectid() {
+        return projectid;
     }
 
-    public void setProjectID(int projectId) {
-        this.projectId = projectId;
+    public void setProjectid(int projectid) {
+        this.projectid = projectid;
     }
 
-    public long getTotalTime() {
-        return totalTime;
+    public int getTotaltime() {
+        return totaltime;
     }
 
-    public void setTotalTime(long totalTime) {
-        this.totalTime = totalTime;
+    public void setTotaltime(int totaltime) {
+        this.totaltime = totaltime;
     }
 
-    public String getAddedComment() {
-        return addedComment;
+    public String getAddedcomment() {
+        return addedcomment;
     }
 
-    public void setAddedComment(String addedComment) {
-        this.addedComment = addedComment;
+    public void setAddedcomment(String addedcomment) {
+        this.addedcomment = addedcomment;
+    }
+
+    public String getProjecttitle() {
+        return projecttitle;
+    }
+
+    public void setProjecttitle(String projecttitle) {
+        this.projecttitle = projecttitle;
     }
 }
+

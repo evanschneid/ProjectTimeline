@@ -113,9 +113,9 @@ public class AppService {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/editProject")
-    public ResponseEntity<Void> updateProject(@RequestBody Project project) {
-        projectDao.updateProject(project);
+    @PutMapping("/editProject/{id}")
+    public ResponseEntity<Void> updateProject(@RequestBody Project project, @PathVariable int id) {
+        projectDao.updateProject(project, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

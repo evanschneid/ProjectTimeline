@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <p class="stop-watch" style="font-family: -apple-system,system-ui,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji';">{{leadingZero(hours)}} : {{ leadingZero(minutes)}} : {{ leadingZero(seconds) }}</p>
+    <p class="stop-watch" style="font-family: -apple-system,system-ui,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji';" v-if="started">{{leadingZero(hours)}} : {{ leadingZero(minutes)}} : {{ leadingZero(seconds) }}</p>
     <!-- v-if added if we want to have the timer running on top of the button-->
     <v-btn style="background-color: #335974; color: white" @click="startTimer" v-if ="!started">Start</v-btn>
     <!-- Stop can be used as a break for the user, does not reset timer, just stops so the user can do non project related things -->
@@ -17,22 +17,22 @@
           <h2> Add New Work Log</h2>
         </v-card-title>
         <v-card-text>
-          Time Started: {{this.workLog.startTime}}
+          Time Started: {{this.workLog.clockIn}}
         </v-card-text>
         <v-card-text>
-          Time Ended: {{this.workLog.endTime}}
+          Time Ended: {{this.workLog.clockOut}}
         </v-card-text>
         <v-card-text>
           Time Worked: {{this.workLog.totalTime}} hours
         </v-card-text>
-        <v-card-text>
+        <!-- <v-card-text>
           <v-form class="px-3">
-              <v-textarea label="Comments" v-model="workLog.comments"></v-textarea>
+              <v-textarea label="Comments" v-model="workLog.addedComment"></v-textarea>
           </v-form>
-        </v-card-text>
+        </v-card-text> -->
         <v-btn
           class="my-4 mx-4"
-          @click="addLog">Add</v-btn>
+          @click="addLog()">Add</v-btn>
       </v-card>
     
     
@@ -44,32 +44,38 @@
 </template>
 
 <script>
-// import workLogService from "../services/WorkLogService.js";
+import workLogService from "../services/ServerService.js";
 
 export default {
   name: 'create-workLog',
-  //props: ["projectId"],
+  props: ["projectId", "userId"],
   data() {
     return {
       //Initial time values, timer, started boolean, timeLog
+      dialog: false, 
       hours: 0,  
       minutes: 0,
       seconds: 0,
       timer: null,
       started: false,
-      workLog : {
-        startTime:'',
-        endTime:'',
+      workLog : 
+      {
+        clockIn: '',
+        clockOut: '',
         totalTime:0,
-        comments:''
+        addedComment: '',
+        projectId: this.projectId,
+        userId: this.userId
       }
     };
   },
   methods: {
     //method used to start the timer when a user presses the button
     startTimer() {
+      console.log('userId:' + this.userId)
+      console.log('projectId:' + this.projectId)
       //started boolean changed to true in order to use v-if in template section
-      this.workLog.startTime = this.getTime();
+      this.workLog.clockIn = this.getTime();
       this.started = true;  
       //set interval used to repeatedly run the function in 1000 milisecond intervals
       this.timer = setInterval(() => {
@@ -92,7 +98,7 @@ export default {
     // method is used when the button is pressed again to pause the timer
     stopTimer() {
       //changes the started boolean to false in order to use the v-else statement and change the styling of the button
-      this.started = false;  
+      this.started = false; 
       //stops the timer from continually running
       clearInterval(this.timer);
     },
@@ -100,8 +106,9 @@ export default {
     //all time variables are set back to 0 and a timeLog that saves the length time worked
     //to the nearest quater of an hour
     submitTimer() {
-      this.workLog.endTime = this.getTime();
+      this.workLog.clockOut = this.getTime();
       this.started = false;
+      this.dialog = true;
       clearInterval(this.timer);
       this.workLog.totalTime = this.hours + (this.minutes - (this.minutes % 15) + (this.minutes % 15 >= 8 ? 15 : 0))/60;
       this.hours = 0;
@@ -115,25 +122,32 @@ export default {
       return value < 10 ? `0${value}` : value;
     },
     getTime() {
-      return new Date().toLocaleString();
+      return new Date().toISOString();
+      // return new Date().toLocaleString();
     },
-    saveMessage() {
-      workLogService.create(this.workLog).then(response=> {
-        if(response.status===201){
-          this.$router.push(`/${this.message.topicId}`);
-        }
+    addLog(){
+      workLogService.createReport(this.workLog)
+      .then(response => {
+        console.log(response.data);
+        this.dialog = false;
+        // this is not working since a page refresh goes back to our home apge everytime. look into this a little bit
+        this.$router.push({ name: "singleProjectTimeReport", params: { userId: this.$route.params.userId, projectId: this.$route.params.projectId }});
       })
-    },
-    // addLog(){
-    //   workLogService.create(this.workLog).then(response => {
-    //     if(response.status===201){
-    //       this.$router.push("/");
-    //     }
-    //   })
-    //   .catch(error => {
-        
-    //   })
-    // }
+      .catch(error => {
+        console.error(error);
+      });
+    }
   },
 };
-</script>,
+</script>
+
+<style>
+.stop-watch {
+    display: flex;
+    justify-self: stretch;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding: 1em;
+}
+</style>

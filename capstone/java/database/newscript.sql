@@ -25,23 +25,23 @@ CREATE TABLE Project (
 );
 
 CREATE TABLE Task (
-    taskID serial PRIMARY KEY,
-    taskTitle varchar(255),
-    taskDescription varchar(255),
-    taskisCompleted boolean,
-    taskDueDate date,
-    taskCompletionDate date,
-    projectID integer REFERENCES Project(projectID)
+    taskid serial PRIMARY KEY,
+    tasktitle varchar(255),
+    taskdescription varchar(255),
+    taskiscompleted boolean,
+    taskduedate varchar(255),
+    taskcompletiondate varchar(255),
+    projectid integer REFERENCES Project(projectID)
 );
 
 CREATE TABLE WorkLog (
-    logID serial PRIMARY KEY,
-    userId integer REFERENCES Users(userId),
-    clockIn timestamp,
-    clockOut timestamp,
-    projectID integer REFERENCES Project(projectID),
-    totalTime interval,
-    addedComment varchar(255)
+    logid serial PRIMARY KEY,
+    userid integer REFERENCES Users(userId),
+    clockin varchar(255),
+    clockout varchar(255),
+    projectid integer REFERENCES Project(projectID),
+    totaltime integer,
+    addedcomment varchar(255)
 );
 
 COMMIT;
