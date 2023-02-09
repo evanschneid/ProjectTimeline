@@ -85,7 +85,7 @@ public class JdbcProjectDao implements ProjectDao {
         jdbcTemplate.update(sql, id);
     }
     @Override
-    public void updateProject(Project project) {
+    public void updateProject(Project project, int id) {
 
         String sql = "UPDATE project SET projecttitle = ?, projectdescription = ?, projectimg = ?, projectiscompleted = ?, projectduedate = ?, projectcompletiondate = ? WHERE projectid = ?";
         jdbcTemplate.update(sql, project.getProjectTitle(), project.getProjectDescription(), project.getProjectImg(), project.isProjectIsCompleted(), project.getProjectDueDate(), project.getProjectCompletionDate(), project.getId());
