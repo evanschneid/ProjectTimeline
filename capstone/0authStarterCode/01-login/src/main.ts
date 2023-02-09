@@ -14,7 +14,7 @@ import 'vuetify/styles'
 import { createVuetify } from "vuetify"
 import * as components from "vuetify/components"
 import * as directives from "vuetify/directives"
-import { faHouse, faList, faTable, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faList, faTable, faStar, faPencil } from '@fortawesome/free-solid-svg-icons';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -31,7 +31,7 @@ const vuetify = createVuetify({
   directives,
 })
 
-library.add(faLink, faUser, faPowerOff, faHouse, faList, faTable);
+library.add(faLink, faUser, faPowerOff, faHouse, faList, faTable, faPencil);
 library.add(faLink, faUser, faPowerOff, faHouse, faList, faTable, faStar);
 
 app
